@@ -1,0 +1,49 @@
+#setup {
+	font-family: Arial, Helvitica, sans-serif;
+}
+.grid {
+	position: absolute;
+	left: 100px;
+	top: 100px;
+}
+table { border-collapse: collapse }
+td {
+	width: 100px;
+	font: bold 50px Arial, Helvetica, sans-serif;
+	text-align: center;
+	padding: 20px 0 20px 0;
+}
+#cell1 {
+	border-left: 2px solid black;
+}
+#cell2 {
+	border-left: 2px solid black;
+}
+#cell3 {
+	border-top: 2px solid black;
+}
+#cell4 {
+	border-top: 2px solid black;
+	border-left: 2px solid black;
+}
+#cell5 {
+	border-top: 2px solid black;
+	border-left: 2px solid black;
+}
+#cell6 {
+	border-top: 2px solid black;
+}
+#cell7 {
+	border-top: 2px solid black;
+	border-left: 2px solid black;
+}
+#cell8 {
+	border-top: 2px solid black;
+	border-left: 2px solid black;
+}
+.tokenNormal {
+	color: black;
+}
+.tokenWin {
+	color: red;
+}
