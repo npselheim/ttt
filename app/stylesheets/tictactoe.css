@@ -1,10 +1,24 @@
+#demo_header {
+	padding: 50px;
+	font-size: 1.5em;
+}
 #setup {
-	font-family: Arial, Helvitica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+#ttt {
+	width: 800px;
+	height: 400px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding-left: 100px;
+	padding-right: 40px;
+}
+#ttt p {
+	font-family: Arial, Helvetica, sans-serif;
 }
 .grid {
-	position: absolute;
-	left: 100px;
-	top: 100px;
+	float: right;
 }
 table { border-collapse: collapse }
 td {
@@ -14,32 +28,32 @@ td {
 	padding: 20px 0 20px 0;
 }
 #cell1 {
-	border-left: 2px solid black;
+	border-left: 3px solid black;
 }
 #cell2 {
-	border-left: 2px solid black;
+	border-left: 3px solid black;
 }
 #cell3 {
-	border-top: 2px solid black;
+	border-top: 3px solid black;
 }
 #cell4 {
-	border-top: 2px solid black;
-	border-left: 2px solid black;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
 }
 #cell5 {
-	border-top: 2px solid black;
-	border-left: 2px solid black;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
 }
 #cell6 {
-	border-top: 2px solid black;
+	border-top: 3px solid black;
 }
 #cell7 {
-	border-top: 2px solid black;
-	border-left: 2px solid black;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
 }
 #cell8 {
-	border-top: 2px solid black;
-	border-left: 2px solid black;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
 }
 .tokenNormal {
 	color: black;

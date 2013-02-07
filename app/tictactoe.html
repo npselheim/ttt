@@ -4,33 +4,45 @@
 		<link rel="stylesheet" type="text/css" href="stylesheets/tictactoe.css" />
 	</head>
 	<body>
-		<div id="setup">
-			<form name="xoForm" id="xoForm">
-				Choose X or O (X gets first move):<br>
-				<input id="X" name="xoGroup" type="radio" value="X" checked >X</input><br/>
-				<input id="O" name="xoGroup" type="radio" value="O">O</input>
-			</form>
+		<div id="demo_header">
+			<p>This page is for practicing and showing off Javascript demos</p>
 		</div>
-		<input type="button" value="Start new game" name="startBtn" id="startBtn" />
-		<div id="grid" class="grid">
-			<table>
-				<tr>
-					<td id="cell0">&nbsp;</td>
-					<td id="cell1">&nbsp;</td>
-					<td id="cell2">&nbsp;</td>
-				</tr>
-				<tr>
-					<td id="cell3">&nbsp;</td>
-					<td id="cell4">&nbsp;</td>
-					<td id="cell5">&nbsp;</td>
-				</tr>
-				<tr>
-					<td id="cell6">&nbsp;</td>
-					<td id="cell7">&nbsp;</td>
-					<td id="cell8">&nbsp;</td>
-				</tr>
-			</table>
+		<div id="ttt">
+			<h2>Tic Tac Toe demo</h2>
+			<div id="grid" class="grid">
+				<table>
+					<tr>
+						<td id="cell0">&nbsp;</td>
+						<td id="cell1">&nbsp;</td>
+						<td id="cell2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td id="cell3">&nbsp;</td>
+						<td id="cell4">&nbsp;</td>
+						<td id="cell5">&nbsp;</td>
+					</tr>
+					<tr>
+						<td id="cell6">&nbsp;</td>
+						<td id="cell7">&nbsp;</td>
+						<td id="cell8">&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+			<p>
+				For now, all you can do is play with yourself, or two people can play if they
+				want to hand off the mouse. Eventually I want to implement a program player that will never lose, so users can try their skill against the computer.
+			</p>
+			<div id="setup">
+				<form name="xoForm" id="xoForm">
+					Choose X or O (X always goes first):<br>
+					<input id="X" name="xoGroup" type="radio" value="X" checked >X</input><br/>
+					<input id="O" name="xoGroup" type="radio" value="O">O</input>
+				</form>
+			</div>
+			<div>
+				<input type="button" value="Start" name="startBtn" id="startBtn" />		
+			</div>
+			<script type="text/javascript" src="javascripts/src/ttt/tictactoe.js"></script>
 		</div>
-		<script type="text/javascript" src="javascripts/src/ttt/tictactoe.js"></script>
 	</body>	
 </html>

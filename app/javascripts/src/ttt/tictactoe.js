@@ -161,11 +161,12 @@ MYAPP.ttt = (function () {
             },
             programMove = function () {
                 var myToken = currentPlayer.getToken();
-
-            };
+            },
+            startBtn = document.getElementById('startBtn');
         return {
             start: function (e) {
                 function startWork(src) {
+                    startBtn.value = "Reset Game";
                     myGrid.clear();
                     currentPlayer = 0;
                     utils.addListener(gridDiv, 'click', gridClickHandler);
