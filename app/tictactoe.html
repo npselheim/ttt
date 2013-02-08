@@ -8,7 +8,6 @@
 			<p>This page is for practicing and showing off Javascript demos</p>
 		</div>
 		<div id="ttt">
-			<h2>Tic Tac Toe demo</h2>
 			<div id="grid" class="grid">
 				<table>
 					<tr>
@@ -28,10 +27,13 @@
 					</tr>
 				</table>
 			</div>
+			<h2>Tic Tac Toe demo</h2>
 			<p>
 				For now, all you can do is play with yourself, or two people can play if they
-				want to hand off the mouse. Eventually I want to implement a program player that will never lose, so users can try their skill against the computer.
+				want to hand off the mouse. Eventually I will implement a program player that will never lose, so users can try their skill against the computer.
 			</p>
+			<p>
+				Programming a Tic Tac Toe game is not difficult and is generally considered to be a high school level exercise. My objective here is to learn the JavaScript language and to try out  some best practices with respect to JavaScript design. 
 			<div id="setup">
 				<form name="xoForm" id="xoForm">
 					Choose X or O (X always goes first):<br>
@@ -42,6 +44,9 @@
 			<div>
 				<input type="button" value="Start" name="startBtn" id="startBtn" />		
 			</div>
+			<script type="text/javascript" src="javascripts/src/ttt/clickUtils.js"></script>
+			<script type="text/javascript" src="javascripts/src/ttt/token.js"></script>
+			<script type="text/javascript" src="javascripts/src/ttt/cell.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/tictactoe.js"></script>
 		</div>
 	</body>	

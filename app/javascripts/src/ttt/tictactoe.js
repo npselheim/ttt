@@ -3,6 +3,7 @@ var MYAPP = {};
 MYAPP.ttt = (function () {
     'use strict';
 
+/**
     var utils = {
             addListener: null,
             removeListener: null,
@@ -33,10 +34,12 @@ MYAPP.ttt = (function () {
                 }
             }
         },
-        startBtn = document.getElementById('startBtn'),
+**/
+    var startBtn = document.getElementById('startBtn'),
         gridDiv = document.getElementById('grid'),
         myGame = null;
 
+/**
     function token(char) {
         return {
             getText: function () {
@@ -79,6 +82,7 @@ MYAPP.ttt = (function () {
             }
         };
     }
+**/
 
     function grid() {
         var cells = [
@@ -157,7 +161,7 @@ MYAPP.ttt = (function () {
                     var index = src.id.charAt(4);
                     myGame.moveTo(index);
                 }
-                utils.clickHandler(e, moveWork);
+                clickUtils.clickHandler(e, moveWork);
             },
             programMove = function () {
                 var myToken = currentPlayer.getToken();
@@ -169,13 +173,13 @@ MYAPP.ttt = (function () {
                     startBtn.value = "Reset Game";
                     myGrid.clear();
                     currentPlayer = 0;
-                    utils.addListener(gridDiv, 'click', gridClickHandler);
+                    clickUtils.addListener(gridDiv, 'click', gridClickHandler);
                 }
-                utils.clickHandler(e, startWork);
+                clickUtils.clickHandler(e, startWork);
             },
             finish: function (row) {
                 myGrid.showWin(row);
-                utils.removeListener(gridDiv, 'click', gridClickHandler);
+                clickUtils.removeListener(gridDiv, 'click', gridClickHandler);
             },
             moveTo: function (index) {
                 if (myGrid.isOpen(index)) {
@@ -195,32 +199,38 @@ MYAPP.ttt = (function () {
         };
     }
 
+    console.log(clickUtils);
+    for (var key in clickUtils) {
+        console.log(key);
+    }
+    console.log(clickUtils);
+
     // set up utility functions
     if (typeof window.addEventListener === 'function') {
-        utils.addListener = function (el, type, fn) {
+        clickUtils.addListener = function (el, type, fn) {
             el.addEventListener(type, fn, false);
         };
-        utils.removeListener = function (el, type, fn) {
+        clickUtils.removeListener = function (el, type, fn) {
             el.removeEventListener(type, fn, false);
         };
     } else if (typeof document.attachEvent === 'function') {    // IE
-        utils.addListener = function (el, type, fn) {
+        clickUtils.addListener = function (el, type, fn) {
             el.attachEvent('on' + type, fn);
         };
-        utils.removeListener = function (el, type, fn) {
+        clickUtils.removeListener = function (el, type, fn) {
             el.detachEvent('on' + type, fn);
         };
     } else {    // older browsers
-        utils.addListener = function (el, type, fn) {
+        clickUtils.addListener = function (el, type, fn) {
             el['on' + type] = fn;
         };
-        utils.removeListener = function (el, type, fn) {
+        clickUtils.removeListener = function (el, type, fn) {
             el['on' + type] = null;
         };
     }
 
     // set click event for the start button
     myGame = game();
-    utils.addListener(startBtn, 'click', myGame.start);
+    clickUtils.addListener(startBtn, 'click', myGame.start);
 
 }());
