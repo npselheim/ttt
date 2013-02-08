@@ -5,15 +5,14 @@ function game() {
         token = null,
         isWon = false,
         gridDiv = document.getElementById('grid'),
-        // getHandler = function(myGame) {
-        //     return function (e) {            
-        //         function(src) {
-        //             var index = src.id.charAt(4);
-        //             myGame.moveTo(index);
-        //         }
-        //         clickUtils.clickHandler(e, moveWork);
-        //     };
-        // },
+        that = this;
+        gridClickHandler = function (e) {
+            function moveWork(src) {
+                var index = src.id.charAt(4);
+                that.moveTo(index);
+            }
+            clickUtils.clickHandler(e, moveWork);
+        },
         programMove = function () {
             var myToken = currentPlayer.getToken();
         },
@@ -25,7 +24,7 @@ function game() {
                 startBtn.value = "Reset Game";
                 myGrid.clear();
                 currentPlayer = 0;
-                clickUtils.addListener(gridDiv, 'click', handler(this));
+                clickUtils.addListener(gridDiv, 'click', gridClickHandler);
             }
             clickUtils.clickHandler(e, startWork);
         },
