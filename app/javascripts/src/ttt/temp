@@ -1,7 +1,0 @@
-            gridClickHandler = function (e) {
-                function moveWork(src) {
-                    var index = src.id.charAt(4);
-                    myGame.moveTo(index);
-                }
-                clickUtils.clickHandler(e, moveWork);
-            },

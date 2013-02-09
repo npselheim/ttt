@@ -9,6 +9,7 @@ function game() {
         gridClickHandler = function (e) {
             function moveWork(src) {
                 var index = src.id.charAt(4);
+                console.log(that);
                 that.moveTo(index);
             }
             clickUtils.clickHandler(e, moveWork);
