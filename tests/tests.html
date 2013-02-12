@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cell Unit Tests</title>
+		<link rel="stylesheet" href="../lib/qunit-1.11.0.css">
+		<script src="../lib/jquery-1.8.2.js"></script>
+		<script src="../lib/qunit-1.11.0.js"></script>
+		<script src="../app/javascripts/src/ttt/cell.js"></script>
+		<script src="../app/javascripts/src/ttt/player.js"></script>
+		<script src="../app/javascripts/src/ttt/grid.js"></script>
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture"></div>
+		<script>
+			var cell,
+				fakePlayer = {};
+
+			module( "Cell Tests", {
+				setup: function() {
+					cell = new Cell( 4 );
+				},
+				teardown: function() {
+					cell = null;
+				}
+			});
+			test( "Cell can be created", function() {
+				expect( 1 );
+				ok( cell instanceof Cell, "Verify the cell was created" );
+			});
+			test( "New cell object is not marked", function() {
+				expect( 2 );
+				ok( !cell.isMarked, "new cell should not be marked" );
+				deepEqual( cell.player, null, "player should be null" );
+			});
+			test( "setting the player marks the cell", function() {
+				expect( 2 );
+				cell.setPlayer(fakePlayer);
+				ok( cell.isMarked, "cell should be marked after player is set" );
+				deepEqual( cell.player, fakePlayer, "can retrieve the player" );
+			});
+			test( "reset clears the player and unmarks the cell", function() {
+				expect( 3 );
+				cell.setPlayer(fakePlayer);
+				ok( cell.isMarked, "cell is marked when player is set" );
+				cell.reset();
+				ok( !cell.isMarked, "new cell should not be marked" );
+				deepEqual( cell.player, null, "player should be reset, too" );
+			});
+			test( "index outside 0-8 throws error", function() {
+				expect( 1 );
+				throws( function() {
+					var cell9 = new Cell( 9 );
+				}, "index out of 0-8 range throws Error exception");
+			});
+
+			module( "Player Tests" );
+			test( "Player can be created", function() {
+				expect( 1 );
+				var playerX = new Player( 'X' );
+				ok (playerX instanceof Player, 'object', "verify the player is created" );
+			});
+			test( "creating a player with an illegal mark throws an error", function() {
+				expect( 1 );
+				throws( function() {
+					var playerA = new Player( 'A' );
+				}, "throw an error if not 'X' or 'O'");
+			});
+			test( "can get player's token", function() {
+				expect( 1 );
+				var playerX = new Player( 'X' );
+				deepEqual( playerX.mark, 'X', "player's mark should be X" );
+			});
+			test( "player instances return correct values", function() {
+				expect( 4 );
+				var playerX = new Player( 'X' );
+				var playerO = new Player( 'O' );
+				deepEqual( 88, playerX.markValue, "value of X is 88" );
+				deepEqual( 79, playerO.markValue, "value of O is 79" );
+				deepEqual( 88 * 3, playerX.winValue, "winning total for X is 264" );
+				deepEqual( 79 * 3, playerO.winValue, "winning total for O is 237" );
+			});
+
+			module( "Grid Tests" );
+			test( "Can create a new Grid object", function() {
+				expect (1);
+				var grid = new Grid();
+				ok( grid instanceof Grid, "can create a new grid");
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,12 +1,11 @@
-function game() {
-    var players = [player("X"), player("O")],
-        myGrid = grid(),
-        currentPlayer = 0,
-        token = null,
-        isWon = false,
+function game(grid, players, status) {
+    'use strict';
+
+    var currentPlayer = 0,
+        token, isWon,
         gridDiv = document.getElementById('grid'),
-        that = this;
         gridClickHandler = function (e) {
+            var that = this;
             function moveWork(src) {
                 var index = src.id.charAt(4);
                 console.log(that);
@@ -14,30 +13,35 @@ function game() {
             }
             clickUtils.clickHandler(e, moveWork);
         },
-        programMove = function () {
-            var myToken = currentPlayer.getToken();
-        },
+        // programMove = function () {
+        //     var myToken = currentPlayer.getToken();
+        // },
         startBtn = document.getElementById('startBtn');
 
     return {
-        start: function (e) {
-            function startWork(src) {
-                startBtn.value = "Reset Game";
-                myGrid.clear();
-                currentPlayer = 0;
-                clickUtils.addListener(gridDiv, 'click', gridClickHandler);
-            }
-            clickUtils.clickHandler(e, startWork);
+         start: function(startBtn) {
+            clickUtils.addListener(startBtn, 'click', startButtonHandler);
         },
+        //  function (e) {
+
+        //     function startWork(src) {
+        //         startBtn.value = "Reset Game";
+        //         grid.clear();
+        //         currentPlayer = 0;
+        //         clickUtils.addListener(gridDiv, 'click', gridClickHandler);
+        //     }
+
+        //     clickUtils.clickHandler(e, startWork);
+        // },
         finish: function (row) {
-            myGrid.showWin(row);
+            grid.showWin(row);
             clickUtils.removeListener(gridDiv, 'click', gridClickHandler);
         },
         moveTo: function (index) {
-            if (myGrid.isOpen(index)) {
+            if (grid.isOpen(index)) {
                 token = players[currentPlayer].getToken();
-                myGrid.mark(index, token.getText());
-                isWon = myGrid.checkForWin(token.getWinValue());
+                grid.mark(index, token.getText());
+                isWon = grid.checkForWin(token.getWinValue());
                 if (isWon) {
                     this.finish(isWon);
                     return;
@@ -46,7 +50,7 @@ function game() {
                 return;
             }
             currentPlayer = currentPlayer === 0 ? 1 : 0;
-            players[currentPlayer].move();
+            players[currentPlayer].move(status);
         },
         handler: function (e) {            
             function mmm(src) {

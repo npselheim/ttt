@@ -8,7 +8,7 @@
 }
 #ttt {
 	width: 800px;
-	height: 400px;
+	height: 450px;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	padding-left: 100px;
@@ -54,6 +54,14 @@ td {
 #cell8 {
 	border-top: 3px solid black;
 	border-left: 3px solid black;
+}
+#status {
+	background-color: lightblue;
+	font-weight: normal;
+	font-style: italic;
+	font-size: 1em;
+	padding: 10px;
+	text-align: left;
 }
 .tokenNormal {
 	color: black;
