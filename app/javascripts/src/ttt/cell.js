@@ -1,23 +1,29 @@
-/** 
-  * @namespace
-  * @param {Number} index the index of the cell in the grid, 0-8
-  * @throws {Error} if index is out of range
-  */
+/**
+    Creates new Cell objects
+    @constructor 
+    */
 MyApp.Cell = (function () {
+
     /** 
-      * a reference to the cell in the document
-      * @type {Element}
-      * @private
-      */
+        a reference to the cell in the document
+        @type {Element}
+        @private
+        */
     var cellRef,
-    /** 
-      * the mark in this cell
-      * @type {Player}
-      * @private
-      */
+
+        /** 
+            the mark in this cell
+            @type {String}
+            @private
+            */
         mark = '',
 
-        Constr;
+        /** 
+            the constructor for creating Cell instances
+            @function
+            @private
+            */
+        Constr = null;
 
     Constr = function (index) {
         // verify that index is in range 0-8
@@ -27,12 +33,16 @@ MyApp.Cell = (function () {
         this.cellRef = $('cell' + index);
     };
 
-    Constr.prototype = {
+   
+   Constr.prototype = 
+        /** @lends MyApp.Cell.prototype */
+        {
+        
         constructor: MyApp.Cell,
+
         /**
-          * Indicates that a cell is is claimed by a player,
-          * i.e. records the player's move.
-          * @ param {Player} player the player that moved on this cell
+          * Marks the cell to record a player's move
+          * @ param {String} value the mark to show in this cell, 'X' or 'O'
           */
         setMark: function (value) {
             if ( value !== 'X' && value !== 'O' ) {
@@ -40,30 +50,34 @@ MyApp.Cell = (function () {
             };
             this.mark = value;
         },
+
         /**
-          * Retrieves a reference to the player who marked this cell
-          * @return {Player} the player who marked this cell
+          * Retrieves the mark in this cell this cell
+          * @returns {String} the mark in this cell
           */
         getMark: function() {
             return this.mark;
         },
+
         /**
           * Indicates the state of the cell, marked or not
-          * @return {Boolean} true if the cell has been marked
+          * @returns {Boolean} true if the cell has been marked
           */
         isMarked: function () {
             return this.mark ? true : false;
         },
+
         /**
           * Show that this cell is included in the winning 3-in-a-row.
-          * @return nothing
+          * @returns nothing
           */
         showWin: function () {
             this.cellRef.attr("class", "tokenWin");
         },
+
         /**
           * Reset this this cell back to the initial unused state.
-          * @return nothing
+          * @returns nothing
           */
         reset: function () {
             this.mark = '';
@@ -71,6 +85,7 @@ MyApp.Cell = (function () {
         }
     };
 
+    /** @scope MyApp.Cell */
     return Constr;
     
-}());
+}());    
