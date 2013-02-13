@@ -16,8 +16,7 @@
 		<div id="qunit"></div>
 		<div id="qunit-fixture"></div>
 		<script>
-			var cell,
-				fakePlayer = {};
+			var cell;
 
 			module( "Cell Tests", {
 				setup: function() {
@@ -35,28 +34,39 @@
 				expect( 1 );
 				ok( !cell.isMarked(), "new cell should not be marked" );
 			});
-			test( "setting the player marks the cell", function() {
+			test( "setting a mark marks the cell", function() {
 				expect( 1 );
-				cell.setPlayer(fakePlayer);
-				ok( cell.isMarked(), "cell should be marked after player is set" );
+				cell.setMark('X');
+				ok( cell.isMarked(), "cell should be marked after mark is set" );
 			});
-			test( "reset clears the player and unmarks the cell", function() {
+			test( "reset unmarks the cell", function() {
 				expect( 2 );
-				cell.setPlayer(fakePlayer);
-				ok( cell.isMarked(), "cell is marked when player is set" );
+				cell.setMark( 'O' );
+				ok( cell.isMarked(), "cell is marked when mark is set" );
 				cell.reset();
 				ok( !cell.isMarked(), "cell should not be marked after reset" );
 			});
-			test( "get the player who marked the cell", function() {
+			test( "get the mark from the cell", function() {
 				expect( 1 );
-				cell.setPlayer(fakePlayer);
-				deepEqual( fakePlayer, cell.getPlayer(), "should get back the same player");
+				cell.setMark( 'X' );
+				deepEqual( 'X', cell.getMark(), "should get back the same mark" );
 			})
-			test( "index outside 0-8 throws error", function() {
+			test( "cannot access the mark directly", function() {
+				expect(1);
+				cell.setMark( 'O' );
+				deepEqual( typeof cell._mark, 'undefined', "should not see the private variable" );
+			})
+			test( "index outside 0-8 throws an error", function() {
 				expect( 1 );
 				throws( function() {
 					var cell9 = new Cell( 9 );
 				}, "index out of 0-8 range throws Error exception");
+			});
+			test( "illegal mark throws an error", function() {
+				expect( 1 );
+				throws( function() {
+					cell.setMark( 'A' );
+				}, "throw an error if not 'X' or 'O'" );
 			});
 
 			module( "Player Tests" );
