@@ -6,9 +6,11 @@
 		<link rel="stylesheet" href="../lib/qunit-1.11.0.css">
 		<script src="../lib/jquery-1.8.2.js"></script>
 		<script src="../lib/qunit-1.11.0.js"></script>
+		<script src="../app/javascripts/src/ttt/main.js"></script>
 		<script src="../app/javascripts/src/ttt/cell.js"></script>
 		<script src="../app/javascripts/src/ttt/player.js"></script>
 		<script src="../app/javascripts/src/ttt/grid.js"></script>
+
 	</head>
 	<body>
 		<div id="qunit"></div>
@@ -19,7 +21,7 @@
 
 			module( "Cell Tests", {
 				setup: function() {
-					cell = new Cell( 4 );
+					cell = MyApp.cell( 4 );
 				},
 				teardown: function() {
 					cell = null;
@@ -27,27 +29,29 @@
 			});
 			test( "Cell can be created", function() {
 				expect( 1 );
-				ok( cell instanceof Cell, "Verify the cell was created" );
+				ok( cell, "Verify that cell is truthy (not null or undefined)" );
 			});
 			test( "New cell object is not marked", function() {
-				expect( 2 );
-				ok( !cell.isMarked, "new cell should not be marked" );
-				deepEqual( cell.player, null, "player should be null" );
+				expect( 1 );
+				ok( !cell.isMarked(), "new cell should not be marked" );
 			});
 			test( "setting the player marks the cell", function() {
-				expect( 2 );
+				expect( 1 );
 				cell.setPlayer(fakePlayer);
-				ok( cell.isMarked, "cell should be marked after player is set" );
-				deepEqual( cell.player, fakePlayer, "can retrieve the player" );
+				ok( cell.isMarked(), "cell should be marked after player is set" );
 			});
 			test( "reset clears the player and unmarks the cell", function() {
-				expect( 3 );
+				expect( 2 );
 				cell.setPlayer(fakePlayer);
-				ok( cell.isMarked, "cell is marked when player is set" );
+				ok( cell.isMarked(), "cell is marked when player is set" );
 				cell.reset();
-				ok( !cell.isMarked, "new cell should not be marked" );
-				deepEqual( cell.player, null, "player should be reset, too" );
+				ok( !cell.isMarked(), "cell should not be marked after reset" );
 			});
+			test( "get the player who marked the cell", function() {
+				expect( 1 );
+				cell.setPlayer(fakePlayer);
+				deepEqual( fakePlayer, cell.getPlayer(), "should get back the same player");
+			})
 			test( "index outside 0-8 throws error", function() {
 				expect( 1 );
 				throws( function() {

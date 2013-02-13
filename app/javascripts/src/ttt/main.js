@@ -1,6 +1,6 @@
-var MYAPP = MYAPP || {};
+var MyApp = MyApp || {};
 
-MYAPP.ttt = (function () {
+MyApp.ttt = function () {
     'use strict';
 
     var startBtn = $('startBtn'),
@@ -39,4 +39,4 @@ MYAPP.ttt = (function () {
     // // clickUtils.addListener(startBtn, 'click', myGame.start);
     // myGame.start();
     // status.innerHTML = "Ready to start";
-}());
+};
