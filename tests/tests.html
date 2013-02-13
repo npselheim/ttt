@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Cell Unit Tests</title>
+		<title>cell4 Unit Tests</title>
 		<link rel="stylesheet" href="../lib/qunit-1.11.0.css">
 		<script src="../lib/jquery-1.8.2.js"></script>
 		<script src="../lib/qunit-1.11.0.js"></script>
@@ -16,58 +16,74 @@
 		<div id="qunit"></div>
 		<div id="qunit-fixture"></div>
 		<script>
-			var cell;
+			var cell4, cell5;
 
 			module( "Cell Tests", {
 				setup: function() {
-					cell = MyApp.cell( 4 );
+					cell4 = new MyApp.Cell( 4 );
 				},
 				teardown: function() {
-					cell = null;
+					cell4 = null;
+					cell5 = null;
 				}
 			});
-			test( "Cell can be created", function() {
+			test( "cell can be created", function() {
 				expect( 1 );
-				ok( cell, "Verify that cell is truthy (not null or undefined)" );
+				ok( cell4, "Verify that cell is truthy (not null or undefined)" );
 			});
 			test( "New cell object is not marked", function() {
 				expect( 1 );
-				ok( !cell.isMarked(), "new cell should not be marked" );
+				ok( !cell4.isMarked(), "new cell should not be marked" );
 			});
 			test( "setting a mark marks the cell", function() {
 				expect( 1 );
-				cell.setMark('X');
-				ok( cell.isMarked(), "cell should be marked after mark is set" );
+				cell4.setMark('X');
+				ok( cell4.isMarked(), "cell should be marked after mark is set" );
 			});
 			test( "reset unmarks the cell", function() {
 				expect( 2 );
-				cell.setMark( 'O' );
-				ok( cell.isMarked(), "cell is marked when mark is set" );
-				cell.reset();
-				ok( !cell.isMarked(), "cell should not be marked after reset" );
+				cell4.setMark( 'O' );
+				ok( cell4.isMarked(), "cell is marked when mark is set" );
+				cell4.reset();
+				ok( !cell4.isMarked(), "cell should not be marked after reset" );
 			});
 			test( "get the mark from the cell", function() {
 				expect( 1 );
-				cell.setMark( 'X' );
-				deepEqual( 'X', cell.getMark(), "should get back the same mark" );
+				cell4.setMark( 'X' );
+				deepEqual( 'X', cell4.getMark(), "should get back the same mark" );
 			})
 			test( "cannot access the mark directly", function() {
 				expect(1);
-				cell.setMark( 'O' );
-				deepEqual( typeof cell._mark, 'undefined', "should not see the private variable" );
+				cell4.setMark( 'O' );
+				deepEqual( typeof cell4._mark, 'undefined', "should not see the private variable" );
 			})
 			test( "index outside 0-8 throws an error", function() {
 				expect( 1 );
 				throws( function() {
-					var cell9 = new Cell( 9 );
+					var cell9 = new MyApp.Cell( 9 );
 				}, "index out of 0-8 range throws Error exception");
 			});
 			test( "illegal mark throws an error", function() {
 				expect( 1 );
 				throws( function() {
-					cell.setMark( 'A' );
+					cell4.setMark( 'A' );
 				}, "throw an error if not 'X' or 'O'" );
 			});
+			test( "cell instances are independent", function() {
+				expect( 3 );
+				cell5 = new MyApp.Cell( 5 );
+				cell4.setMark( 'X' );
+				cell5.setMark( 'O' );
+				deepEqual( cell4.getMark(), 'X', "cell4 is still X" );
+				cell4.reset();
+				ok( !cell4.isMarked(), "cell4 has been reset" );
+				deepEqual( cell5.getMark(), 'O', "cell5 is still O");
+			})
+
+			// module( "cells Tests" );
+			// test( "cells collection can be created", function() {
+
+			// })
 
 			module( "Player Tests" );
 			test( "Player can be created", function() {
