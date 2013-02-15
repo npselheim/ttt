@@ -15,7 +15,7 @@ MyApp.grid = (function() {
             [2, 4, 6]
         ],
         isOpen = function ( index ) {
-            console.log( cells[index] );
+            // console.log( cells[index] );
             return cells[index].isMarked();
         };
         // mark: function (index, mark) {
@@ -23,7 +23,7 @@ MyApp.grid = (function() {
         // },
 
     for ( i = 0; i < 9; i++ ) {
-        cells[i] = new MyApp.Cell( i );
+        this.cells[i] = MyApp.cell( i );
     };
 
     /** @scope MyApp.grid */
@@ -33,11 +33,11 @@ MyApp.grid = (function() {
 
         checkForWin: function ( winSum ) {
             var i, j, sum, row;
-            for (i = 0; i < winRows.length; i += 1) {
+            for (i = 0; i < this.winRows.length; i += 1) {
                 sum = 0;
                 row = winRows[i];
                 for (j = 0; j < row.length; j += 1) {
-                    sum += cells[row[j]].getValue();
+                    sum += this.cells[row[j]].getValue();
                 }
                 if (sum === winSum) {
                     return row;
@@ -46,7 +46,7 @@ MyApp.grid = (function() {
         },
         clear: function () {
             var i;
-            for (i = 0; i < cells.length; i += 1) {
+            for (i = 0; i < this.cells.length; i += 1) {
                 this.cells[i].clear();
             }
         },
@@ -57,10 +57,10 @@ MyApp.grid = (function() {
             }
         },
         update: function( cellIndex, mark ) {
-            console.log( isOpen( cellIndex ) );
+            // console.log( isOpen( cellIndex ) );
             if ( !isOpen( cellIndex ) ) return;
-            console.log( "cell " + cellIndex + " is open");
-            cells[cellIndex].setMark(mark);
+            // console.log( "cell " + cellIndex + " is open");
+            this.cells[cellIndex].setMark(mark);
         }
     };
 }());

@@ -1,47 +1,31 @@
 /**
-    Creates new Cell objects
-    @constructor 
+    Creates cell objects. A cell is one square on the 
+    tic-tac-toe board that starts out blank and can be
+    marked with either an 'X' or an 'O'
+    @class 
     */
-MyApp.Cell = (function () {
+MyApp.cell = function ( index ) {
 
     /** 
-        a reference to the cell in the document
+        a reference to the cell element in the document
         @type {Element}
         @private
         */
-    // var cellRef,
+    var $cellRef,
 
-        /** 
-            the mark in this cell
-            @type {String}
-            @private
-            */
-        // mark = '',
+    /** 
+        the mark in this cell
+        @type {String}
+        @private
+        */
+        mark = '';
 
-        /** 
-            the constructor for creating Cell instances
-            @function
-            @private
-            */
-        // Constr = null;
-
-    var Constr = function (index) {
-        // verify that index is in range 0-8
-        if ( index < 0 || index > 8 ) {
-            throw new Error( "index must be in range 0-8" );
-        }
-        this.cellRef = $('cell' + index);
-        this.mark = '';
-    };
+    if ( index < 0 || index > 8 ) {
+        throw new Error( "index must be in range 0-8" );
+    }
+    $cellRef = $("td#cell" + index);
    
-   Constr.prototype = 
-        /** @lends MyApp.Cell.prototype */
-        {
-        
-        constructor: MyApp.Cell,
-        // mark: '',
-        // cellRef: null,
-
+    return {
         /**
           * Marks the cell to record a player's move
           * @ param {String} value the mark to show in this cell, 'X' or 'O'
@@ -66,8 +50,7 @@ MyApp.Cell = (function () {
           * @returns {Boolean} true if the cell has been marked
           */
         isMarked: function () {
-            console.log( mark.length );
-            return (mark ? true : false);
+            return mark ? true : false;
         },
 
         /**
@@ -75,20 +58,16 @@ MyApp.Cell = (function () {
           * @returns nothing
           */
         showWin: function () {
-            cellRef.attr("class", "tokenWin");
+            $cellRef.removeClass().addClass("tokenWin");
         },
 
         /**
-          * Reset this this cell back to the initial unused state.
+          * Reset this cell back to the initial unused state.
           * @returns nothing
           */
         reset: function () {
             mark = '';
-            cellRef.attr("class", "tokenNormal");
+            $cellRef.removeClass().addClass("tokenNormal");
         }
     };
-
-    /** @scope MyApp.Cell */
-    return Constr;
-    
-}());    
+};
