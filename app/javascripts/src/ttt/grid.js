@@ -29,6 +29,8 @@ MyApp.grid = (function () {
     /** @scope MyApp.grid */
     return {
 
+        cells: cells,
+
         checkForWin: function ( winSum ) {
             var i, j, sum, row;
             for ( i = 0; i < this.winRows.length; i += 1 ) {
