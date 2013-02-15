@@ -9,36 +9,38 @@ MyApp.Cell = (function () {
         @type {Element}
         @private
         */
-    var cellRef,
+    // var cellRef,
 
         /** 
             the mark in this cell
             @type {String}
             @private
             */
-        mark = '',
+        // mark = '',
 
         /** 
             the constructor for creating Cell instances
             @function
             @private
             */
-        Constr = null;
+        // Constr = null;
 
-    Constr = function (index) {
+    var Constr = function (index) {
         // verify that index is in range 0-8
         if ( index < 0 || index > 8 ) {
             throw new Error( "index must be in range 0-8" );
         }
         this.cellRef = $('cell' + index);
+        this.mark = '';
     };
-
    
    Constr.prototype = 
         /** @lends MyApp.Cell.prototype */
         {
         
         constructor: MyApp.Cell,
+        // mark: '',
+        // cellRef: null,
 
         /**
           * Marks the cell to record a player's move
@@ -48,15 +50,15 @@ MyApp.Cell = (function () {
             if ( value !== 'X' && value !== 'O' ) {
                 throw new Error( "mark must be 'X' or 'O'" );
             };
-            this.mark = value;
+            mark = value;
         },
 
         /**
-          * Retrieves the mark in this cell this cell
+          * Retrieves the mark in this cell
           * @returns {String} the mark in this cell
           */
         getMark: function() {
-            return this.mark;
+            return mark;
         },
 
         /**
@@ -64,7 +66,8 @@ MyApp.Cell = (function () {
           * @returns {Boolean} true if the cell has been marked
           */
         isMarked: function () {
-            return this.mark ? true : false;
+            console.log( mark.length );
+            return (mark ? true : false);
         },
 
         /**
@@ -72,7 +75,7 @@ MyApp.Cell = (function () {
           * @returns nothing
           */
         showWin: function () {
-            this.cellRef.attr("class", "tokenWin");
+            cellRef.attr("class", "tokenWin");
         },
 
         /**
@@ -80,8 +83,8 @@ MyApp.Cell = (function () {
           * @returns nothing
           */
         reset: function () {
-            this.mark = '';
-            this.cellRef.attr("class", "tokenNormal");
+            mark = '';
+            cellRef.attr("class", "tokenNormal");
         }
     };
 
