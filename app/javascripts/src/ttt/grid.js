@@ -1,6 +1,6 @@
 
 /** @namespace */
-MyApp.grid = (function() {
+MyApp.grid = (function () {
 
     var cells = [],
         i = 0,
@@ -16,51 +16,49 @@ MyApp.grid = (function() {
         ],
         isOpen = function ( index ) {
             // console.log( cells[index] );
-            return cells[index].isMarked();
+            return cells[ index ].isMarked();
         };
         // mark: function (index, mark) {
         //     cells[index].setMark(mark);
         // },
 
-    for ( i = 0; i < 9; i++ ) {
-        this.cells[i] = MyApp.cell( i );
+    for ( i = 0; i < 9; i += 1 ) {
+        this.cells[ i ] = MyApp.cell( i );
     };
 
     /** @scope MyApp.grid */
     return {
 
-        cells: cells,
-
         checkForWin: function ( winSum ) {
             var i, j, sum, row;
             for (i = 0; i < this.winRows.length; i += 1) {
                 sum = 0;
-                row = winRows[i];
-                for (j = 0; j < row.length; j += 1) {
-                    sum += this.cells[row[j]].getValue();
+                row = winRows[ i ];
+                for ( j = 0; j < row.length; j += 1 ) {
+                    sum += this.cells[ row[ j ] ].getValue();
                 }
                 if (sum === winSum) {
                     return row;
                 }
             }
         },
-        clear: function () {
+        reset: function () {
             var i;
-            for (i = 0; i < this.cells.length; i += 1) {
-                this.cells[i].clear();
+            for ( i = 0; i < this.cells.length; i += 1 ) {
+                this.cells[ i ].reset();
             }
         },
         showWin: function ( row ) {
             var i;
-            for (i = 0; i < row.length; i += 1) {
-                this.cells[row[i]].showWin();
+            for ( i = 0; i < row.length; i += 1 ) {
+                this.cells[ row[ i ] ].showWin();
             }
         },
         update: function( cellIndex, mark ) {
             // console.log( isOpen( cellIndex ) );
             if ( !isOpen( cellIndex ) ) return;
             // console.log( "cell " + cellIndex + " is open");
-            this.cells[cellIndex].setMark(mark);
+            this.cells[ cellIndex ].setMark( mark );
         }
     };
 }());
