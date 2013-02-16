@@ -28,13 +28,12 @@ MyApp.createCell = function ( index ) {
     return {
         /**
           * Marks the cell to record a player's move
-          * @ param {String} value the mark to show in this cell, 'X' or 'O'
+          * @ param {string} value of the mark to show in this cell
           */
         setMark: function (value) {
-            if ( value !== 'X' && value !== 'O' ) {
-                throw new Error( "mark must be 'X' or 'O'" );
-            };
-            mark = value;
+            if ( typeof value !== "string" ) return;
+
+            mark = value[0];
         },
 
         /**

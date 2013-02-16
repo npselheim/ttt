@@ -58,7 +58,15 @@ MyApp.grid = (function (  ) {
         },
 
         update: function( cellIndex, mark ) {
+
+            // if the cell is alreay marked, do nothing
             if ( cells[ cellIndex ].isMarked() ) return;
+
+            // allow only "X" or "O"
+            if ( mark !== 'X' && mark !== 'O' ) {
+                throw new Error( "mark must be 'X' or 'O'" );
+            };
+
             cells[ cellIndex ].setMark( mark );
         }
     };

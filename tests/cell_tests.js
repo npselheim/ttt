@@ -26,8 +26,14 @@ test( "New cell object is not marked", function() {
 
 test( "setting a mark marks the cell", function() {
 	expect( 1 );
-	cell4.setMark( 'X' );
+	cell4.setMark( "A" );
 	deepEqual( cell4.isMarked(), true, "cell should be marked after mark is set" );
+});
+
+test( "non-string mark does not set the cell", function() {
+	expect( 1 );
+	cell4.setMark( 1 );
+	deepEqual( cell4.isMarked(), false, "cell should not be marked by numeric value" );
 });
 
 test( "can call showWin", function() {
@@ -35,7 +41,7 @@ test( "can call showWin", function() {
 	cell4.showWin();
 	deepEqual( $cell4.hasClass( "tokenNormal" ), false, "cell should not have tokenNormal class" );
 	deepEqual( $cell4.hasClass( "tokenWin" ), true, "cell should have tokenWin class" );
-})
+});
 
 test( "reset unmarks the cell", function() {
 	expect( 3 );
@@ -59,18 +65,21 @@ test( "cannot access the mark directly", function() {
 	deepEqual( cell4.getMark(), 'O', "but can retrieve the value from the private variable")
 })
 
+test( "cell is marked with only the first character", function() {
+	expect( 2 );
+	var mark, result;
+	mark = "ABC";
+	cell4.setMark( mark );
+	result = cell4.getMark();
+	deepEqual( result.length, 1, "should be only one character" );
+	deepEqual( result, mark[ 0 ], "should be the first character" );
+})
+
 test( "index outside 0-8 throws an error", function() {
 	expect( 1 );
 	throws( function() {
 		var cell9 = MyApp.createCell( 9 );
 	}, "index out of 0-8 range throws Error exception");
-});
-
-test( "illegal mark throws an error", function() {
-	expect( 1 );
-	throws( function() {
-		cell4.setMark( 'A' );
-	}, "throw an error if not 'X' or 'O'" );
 });
 
 test( "cell instances are independent", function() {

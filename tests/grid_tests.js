@@ -49,3 +49,9 @@ test( "cannot modify the cells in the grid", function() {
 	deepEqual( grid.getCells()[ 1 ].getMark(), "", "cell1 should be empty, not 'A'" );
 });
 
+test( "cannot update cell with illegal mark", function() {
+	expect( 1 );
+	throws( function() {
+		grid.update( 3, "A" )
+		}, "throws an exception if not 'X' or 'O'" );
+});
