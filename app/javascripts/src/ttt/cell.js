@@ -4,7 +4,7 @@
     marked with either an 'X' or an 'O'
     @class 
     */
-MyApp.cell = function ( index ) {
+MyApp.createCell = function ( index ) {
 
     /** 
         a reference to the cell element in the document

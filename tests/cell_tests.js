@@ -5,7 +5,7 @@ module( "Cell Tests", {
 	setup: function() {
 		$fixture.append( '<table><tr><td id="cell4"></td><td id="cell5"></td></tr></table>' );
 		$cell4 = $( "td#cell4" );
-		cell4 = MyApp.cell( 4 );
+		cell4 = MyApp.createCell( 4 );
 	},
 	teardown: function() {
 		cell4 = null;
@@ -62,7 +62,7 @@ test( "cannot access the mark directly", function() {
 test( "index outside 0-8 throws an error", function() {
 	expect( 1 );
 	throws( function() {
-		var cell9 = MyApp.cell( 9 );
+		var cell9 = MyApp.createCell( 9 );
 	}, "index out of 0-8 range throws Error exception");
 });
 
@@ -75,7 +75,7 @@ test( "illegal mark throws an error", function() {
 
 test( "cell instances are independent", function() {
 	expect( 3 );
-	cell5 = MyApp.cell( 5 );
+	cell5 = MyApp.createCell( 5 );
 	cell4.setMark( 'X' );
 	cell5.setMark( 'O' );
 	deepEqual( cell4.getMark(), 'X', "cell4 is still X" );

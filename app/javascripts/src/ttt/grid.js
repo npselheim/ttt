@@ -1,6 +1,6 @@
 
 /** @namespace */
-MyApp.grid = (function () {
+MyApp.grid = (function (  ) {
 
     var cells = [],
         i = 0,
@@ -23,7 +23,7 @@ MyApp.grid = (function () {
         // },
 
     for ( i = 0; i < 9; i += 1 ) {
-        cells[ i ] = MyApp.cell( i );
+        cells[ i ] = MyApp.createCell( i );
     };
 
     /** @scope MyApp.grid */
