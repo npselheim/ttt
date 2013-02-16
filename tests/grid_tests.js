@@ -19,7 +19,7 @@ test( "cannot access cells directly", function() {
 	var cells = grid.cells;
 	deepEqual( $.isArray( cells ), false, "should not have access to private field cells" );
 	deepEqual( typeof cells, "undefined", "cells should be undefined" );
-})
+});
 
 test( "grid has 9 cells", function() {
 	expect( 2 );

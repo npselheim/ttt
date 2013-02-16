@@ -36,25 +36,25 @@ MyApp.grid = (function (  ) {
                 row = WIN_ROWS[ i ];
                 for ( j = 0; j < ROW_LENGTH; j += 1 ) {
                     sum += this.cells[ row[ j ] ].getValue();
-                }
+                };
                 if (sum === winSum) {
                     return row;
-                }
-            }
+                };
+            };
         },
 
         reset: function () {
             var i;
             for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
                 cells[ i ].reset();
-            }
+            };
         },
 
         showWin: function ( row ) {
             var i;
             for ( i = 0; i < ROW_LENGTH; i += 1 ) {
                 this.cells[ row[ i ] ].showWin();
-            }
+            };
         },
 
         update: function( cellIndex, mark ) {
