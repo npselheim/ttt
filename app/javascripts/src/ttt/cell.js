@@ -4,7 +4,7 @@
     marked with either an 'X' or an 'O'
     @class 
     */
-MyApp.createCell = function ( index ) {
+MyApp.createCell = function ( name, index ) {
 
     /** 
         a reference to the cell element in the document
@@ -20,10 +20,11 @@ MyApp.createCell = function ( index ) {
         */
         mark = '';
 
-    if ( index < 0 || index > 8 ) {
-        throw new Error( "index must be in range 0-8" );
-    }
-    $cellRef = $("td#cell" + index);
+    $cellRef = jQuery( "td#" + name );
+
+    if ( $cellRef.length === 0 ) return null;
+
+    if ( index < 0 || index > 8 ) return null;
    
     return {
         /**

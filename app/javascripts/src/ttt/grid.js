@@ -1,5 +1,5 @@
 
-/** @namespace
+/** 
 
            |       |
      cell0 | cell1 | cell2
@@ -13,6 +13,7 @@
      cell6 | cell7 | cell8
            |       | 
 
+    @namespace
  */
 MyApp.grid = (function (  ) {
 
@@ -47,7 +48,7 @@ MyApp.grid = (function (  ) {
             return $.extend( true, [], cells );
         },
 
-        getWinningRow: function ( mark ) {
+        findWinningRow: function ( mark ) {
             var i, j, sum, row, win = 3 * mark.charCodeAt( 0 );
             for ( i = 0; i < ARRAY_LENGTH; i += 1 ) {
                 sum = 0;

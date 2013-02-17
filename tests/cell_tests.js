@@ -1,13 +1,19 @@
 var cell4, cell5, $cell4,
-	 $fixture = $( "#qunit-fixture" );
+	 $fixture = jQuery( "#qunit-fixture" );
 
 module( "Cell Tests", {
 	setup: function() {
-		$fixture.append( '<table><tr><td id="cell4"></td><td id="cell5"></td></tr></table>' );
-		$cell4 = $( "td#cell4" );
-		cell4 = MyApp.createCell( 4 );
+		$fixture.append( 
+			"<table><tr>" +
+			"<td id='cell4'></td>" +
+			"<td id='cell5'></td>" +
+			"<td id='cell9'></td>" +
+			"</tr></table>" );
+		$cell4 = jQuery( "td#cell4" );
+		cell4 = MyApp.createCell( "cell4", 4 );
 	},
 	teardown: function() {
+		$fixture.empty();
 		cell4 = null;
 		cell5 = null;
 		$cell4 = null;
@@ -15,8 +21,9 @@ module( "Cell Tests", {
 });
 
 test( "cell can be created", function() {
-	expect( 1 );
-	deepEqual( typeof cell4, 'object', "Verify that cell is an object)" );
+	expect( 2 );
+	deepEqual( typeof cell4, "object", "Verify that cell is an object)" );
+	ok(  cell4 !== null, "should not be null" );
 });
 
 test( "New cell object is not marked", function() {
@@ -45,11 +52,11 @@ test( "can call showWin", function() {
 
 test( "reset unmarks the cell", function() {
 	expect( 3 );
-	cell4.setMark( 'O' );
+	cell4.setMark( "O" );
 	deepEqual( cell4.isMarked(), true, "cell is marked when mark is set" );
 	cell4.reset();
 	deepEqual( cell4.isMarked(), false, "cell should not be marked after reset" );
-	deepEqual( $( "#cell4" ).hasClass( "tokenNormal" ), true, "tokenNormal class not set after reset" );
+	deepEqual( jQuery( "td#cell4" ).hasClass( "tokenNormal" ), true, "tokenNormal class not set after reset" );
 });
 
 test( "get the mark from the cell", function() {
@@ -75,20 +82,25 @@ test( "cell is marked with only the first character", function() {
 	deepEqual( result, mark[ 0 ], "should be the first character" );
 });
 
-test( "index outside 0-8 throws an error", function() {
+test( "index outside 0-8 returns null", function() {
 	expect( 1 );
-	throws( function() {
-		var cell9 = MyApp.createCell( 9 );
-	}, "index out of 0-8 range throws Error exception");
+	var cell9 = MyApp.createCell( "cell9", 9 );
+	deepEqual( cell9, null, "index out of range returns null" );
 });
 
 test( "cell instances are independent", function() {
 	expect( 3 );
-	cell5 = MyApp.createCell( 5 );
+	cell5 = MyApp.createCell( "cell5", 5 );
 	cell4.setMark( 'X' );
 	cell5.setMark( 'O' );
 	deepEqual( cell4.getMark(), 'X', "cell4 is still X" );
 	cell4.reset();
 	deepEqual( cell4.isMarked(), false, "cell4 has been reset" );
 	deepEqual( cell5.getMark(), 'O', "cell5 is still O" );
+});
+
+test( "throw exception if cell not found in document", function() {
+	expect( 1 );
+	var cell3 = MyApp.createCell( "cell3", 3 );
+	deepEqual( cell3, null, "cell3 should not be found, should get null");
 });
