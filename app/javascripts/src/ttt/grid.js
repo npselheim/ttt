@@ -15,7 +15,7 @@
 
     @namespace
  */
-MyApp.grid = function (  ) {
+MyApp.createGrid = function (  ) {
 
     var cells = [],
         i = 0,
@@ -39,8 +39,6 @@ MyApp.grid = function (  ) {
 
     for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
         cells[ i ] = MyApp.createCell( "cell" + i, i );
-
-        // console.log( "cell" +i, cells[i] === null );
     };
 
     /** @scope MyApp.grid */
@@ -65,17 +63,17 @@ MyApp.grid = function (  ) {
             return null;
         },
 
-        reset: function () {
-            var i;
-            for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
-                cells[ i ].reset();
-            };
-        },
+        // reset: function () {
+        //     var i;
+        //     for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
+        //         cells[ i ].reset();
+        //     };
+        // },
 
         formatWinningRow: function ( row ) {
             var i;
             for ( i = 0; i < ROW_LENGTH; i += 1 ) {
-                this.cells[ row[ i ] ].showWin();
+                this.cells[ row[ i ] ].formatAsWinner();
             };
         },
 

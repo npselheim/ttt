@@ -50,14 +50,14 @@ test( "can call showWin", function() {
 	deepEqual( $cell4.hasClass( "tokenWin" ), true, "cell should have tokenWin class" );
 });
 
-test( "reset unmarks the cell", function() {
-	expect( 3 );
-	cell4.setMark( "O" );
-	deepEqual( cell4.isMarked(), true, "cell is marked when mark is set" );
-	cell4.reset();
-	deepEqual( cell4.isMarked(), false, "cell should not be marked after reset" );
-	deepEqual( jQuery( "td#cell4" ).hasClass( "tokenNormal" ), true, "tokenNormal class not set after reset" );
-});
+// test( "reset unmarks the cell", function() {
+// 	expect( 3 );
+// 	cell4.setMark( "O" );
+// 	deepEqual( cell4.isMarked(), true, "cell is marked when mark is set" );
+// 	cell4.reset();
+// 	deepEqual( cell4.isMarked(), false, "cell should not be marked after reset" );
+// 	deepEqual( jQuery( "td#cell4" ).hasClass( "tokenNormal" ), true, "tokenNormal class not set after reset" );
+// });
 
 test( "get the mark from the cell", function() {
 	expect( 1 );
@@ -91,12 +91,12 @@ test( "index outside 0-8 returns null", function() {
 test( "cell instances are independent", function() {
 	expect( 3 );
 	cell5 = MyApp.createCell( "cell5", 5 );
-	cell4.setMark( 'X' );
-	cell5.setMark( 'O' );
-	deepEqual( cell4.getMark(), 'X', "cell4 is still X" );
-	cell4.reset();
-	deepEqual( cell4.isMarked(), false, "cell4 has been reset" );
-	deepEqual( cell5.getMark(), 'O', "cell5 is still O" );
+	cell4.setMark( "X" );
+	cell5.setMark( "O" );
+	deepEqual( cell4.getMark(), "X", "cell4 is still X" );
+	cell4.setMark( "A" );
+	deepEqual( cell4.getMark(), "A", "cell4 has been changed to 'A'" );
+	deepEqual( cell5.getMark(), "O", "cell5 is still O" );
 });
 
 test( "throw exception if cell not found in document", function() {

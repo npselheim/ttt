@@ -30,14 +30,14 @@ test( "Can reference the grid object", function() {
 test( "cannot access cells directly", function() {
 	expect( 2 );
 	var cells = grid.cells;
-	deepEqual( $.isArray( cells ), false, "should not have access to private field cells" );
+	deepEqual( jQuery.isArray( cells ), false, "should not have access to private field cells" );
 	deepEqual( typeof cells, "undefined", "cells should be undefined" );
 });
 
 test( "grid has 9 cells", function() {
 	expect( 2 );
 	cells = grid.getCells();
-	deepEqual( $.isArray( cells ), true, "grid should return the array of cells" );
+	deepEqual( jQuery.isArray( cells ), true, "grid should return the array of cells" );
 	deepEqual( cells.length, 9, "grid should have 9 cells" );
 });
 
@@ -68,3 +68,12 @@ test( "cannot update cell with illegal mark", function() {
 		grid.update( 3, "A" )
 		}, "throws an exception if not 'X' or 'O'" );
 });
+
+test( "can find winning row", function() {
+	expect( 2 );
+	deepEqual( grid.findWinningRow( "X" ), null, "should not find winning row in blank grid" );
+	grid.update( 0, "X" );
+	grid.update( 1, "X" );
+	grid.update( 2, "X" );
+	deepEqual( grid.findWinningRow( "X" ), [0, 1, 2], "should find winning row for 'X'");
+})
