@@ -27,9 +27,9 @@ MyApp.createCell = function ( index ) {
    
     return {
         /**
-          * Marks the cell to record a player's move
-          * @ param {string} value of the mark to show in this cell
-          */
+            Marks the cell to record a player's move
+            @ param {string} value of the mark to show in this cell
+            */
         setMark: function (value) {
             if ( typeof value !== "string" ) return;
 
@@ -37,33 +37,33 @@ MyApp.createCell = function ( index ) {
         },
 
         /**
-          * Retrieves the mark in this cell
-          * @returns {String} the mark in this cell
-          */
+            Retrieves the mark in this cell
+            @returns {String} the mark in this cell
+            */
         getMark: function() {
             return mark;
         },
 
         /**
-          * Indicates the state of the cell, marked or not
-          * @returns {Boolean} true if the cell has been marked
-          */
+            Indicates the state of the cell, marked or not
+            @returns {Boolean} true if the cell has been marked
+            */
         isMarked: function () {
             return mark ? true : false;
         },
 
         /**
-          * Show that this cell is included in the winning 3-in-a-row.
-          * @returns nothing
-          */
-        showWin: function () {
+            Show that this cell is included in the winning 3-in-a-row.
+            @returns nothing
+            */
+        showAsWinner: function () {
             $cellRef.removeClass().addClass("tokenWin");
         },
 
         /**
-          * Reset this cell back to the initial unused state.
-          * @returns nothing
-          */
+            Reset this cell back to the initial unused state.
+            @returns nothing
+            */
         reset: function () {
             mark = '';
             $cellRef.removeClass().addClass("tokenNormal");

@@ -38,7 +38,7 @@ test( "non-string mark does not set the cell", function() {
 
 test( "can call showWin", function() {
 	expect( 2 );
-	cell4.showWin();
+	cell4.showAsWinner();
 	deepEqual( $cell4.hasClass( "tokenNormal" ), false, "cell should not have tokenNormal class" );
 	deepEqual( $cell4.hasClass( "tokenWin" ), true, "cell should have tokenWin class" );
 });
@@ -56,14 +56,14 @@ test( "get the mark from the cell", function() {
 	expect( 1 );
 	cell4.setMark( 'X' );
 	deepEqual( cell4.getMark(), 'X', "should get back the same mark" );
-})
+});
 
 test( "cannot access the mark directly", function() {
 	expect( 2 );
 	cell4.setMark( 'O' );
 	deepEqual( typeof cell4.mark, 'undefined', "should not see the private variable" );
-	deepEqual( cell4.getMark(), 'O', "but can retrieve the value from the private variable")
-})
+	deepEqual( cell4.getMark(), 'O', "but can retrieve the value from the private variable");
+});
 
 test( "cell is marked with only the first character", function() {
 	expect( 2 );
@@ -73,7 +73,7 @@ test( "cell is marked with only the first character", function() {
 	result = cell4.getMark();
 	deepEqual( result.length, 1, "should be only one character" );
 	deepEqual( result, mark[ 0 ], "should be the first character" );
-})
+});
 
 test( "index outside 0-8 throws an error", function() {
 	expect( 1 );
@@ -91,4 +91,4 @@ test( "cell instances are independent", function() {
 	cell4.reset();
 	deepEqual( cell4.isMarked(), false, "cell4 has been reset" );
 	deepEqual( cell5.getMark(), 'O', "cell5 is still O" );
-})
+});

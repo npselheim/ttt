@@ -1,5 +1,19 @@
 
-/** @namespace */
+/** @namespace
+
+           |       |
+     cell0 | cell1 | cell2
+           |       | 
+    -------+-------+-------
+           |       |
+     cell3 | cell4 | cell5
+           |       |
+    -------+-------+-------
+           |       |
+     cell6 | cell7 | cell8
+           |       | 
+
+ */
 MyApp.grid = (function (  ) {
 
     var cells = [],
@@ -16,7 +30,11 @@ MyApp.grid = (function (  ) {
         ],
         ARRAY_LENGTH = WIN_ROWS.length,
         ROW_LENGTH = 3,
-        CELLS_LENGTH = 9;
+        CELLS_LENGTH = 9,
+        getValue = function ( index ) {
+            var mark = cells[ index ].getMark();
+            return mark ? mark.charCodeAt( 0 ) : 0;
+        };
 
     for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
         cells[ i ] = MyApp.createCell( i );
@@ -29,18 +47,19 @@ MyApp.grid = (function (  ) {
             return $.extend( true, [], cells );
         },
 
-        checkForWin: function ( winSum ) {
-            var i, j, sum, row;
+        getWinningRow: function ( mark ) {
+            var i, j, sum, row, win = 3 * mark.charCodeAt( 0 );
             for ( i = 0; i < ARRAY_LENGTH; i += 1 ) {
                 sum = 0;
                 row = WIN_ROWS[ i ];
                 for ( j = 0; j < ROW_LENGTH; j += 1 ) {
-                    sum += this.cells[ row[ j ] ].getValue();
+                    sum += getValue( row[j] );
                 };
-                if (sum === winSum) {
-                    return row;
-                };
+                if ( sum === win ) return row;
             };
+
+            // no winning row found
+            return null;
         },
 
         reset: function () {
@@ -50,7 +69,7 @@ MyApp.grid = (function (  ) {
             };
         },
 
-        showWin: function ( row ) {
+        formatWinningRow: function ( row ) {
             var i;
             for ( i = 0; i < ROW_LENGTH; i += 1 ) {
                 this.cells[ row[ i ] ].showWin();
