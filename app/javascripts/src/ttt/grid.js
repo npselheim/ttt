@@ -15,7 +15,7 @@
 
     @namespace
  */
-MyApp.grid = (function (  ) {
+MyApp.grid = function (  ) {
 
     var cells = [],
         i = 0,
@@ -38,7 +38,9 @@ MyApp.grid = (function (  ) {
         };
 
     for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
-        cells[ i ] = MyApp.createCell( i );
+        cells[ i ] = MyApp.createCell( "cell" + i, i );
+
+        // console.log( "cell" +i, cells[i] === null );
     };
 
     /** @scope MyApp.grid */
@@ -90,4 +92,4 @@ MyApp.grid = (function (  ) {
             cells[ cellIndex ].setMark( mark );
         }
     };
-}());
+};

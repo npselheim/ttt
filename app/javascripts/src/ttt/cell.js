@@ -22,6 +22,8 @@ MyApp.createCell = function ( name, index ) {
 
     $cellRef = jQuery( "td#" + name );
 
+    console.log( name, $cellRef.length );
+
     if ( $cellRef.length === 0 ) return null;
 
     if ( index < 0 || index > 8 ) return null;

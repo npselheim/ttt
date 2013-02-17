@@ -2,10 +2,23 @@ var grid;
 
 module( "Grid Tests", {
 	setup: function() {
-		grid = MyApp.grid;
+		$fixture.append( 
+			"<table><tr>" +
+				"<td id='cell0'></td>" +
+				"<td id='cell1'></td>" +
+				"<td id='cell2'></td>" +
+				"<td id='cell3'></td>" +
+				"<td id='cell4'></td>" +
+				"<td id='cell5'></td>" +
+				"<td id='cell6'></td>" +
+				"<td id='cell7'></td>" +
+				"<td id='cell8'></td>" +
+			"</tr></table>" );
+		grid = MyApp.createGrid();
 	}, 
 	teardown: function() {
-		grid.reset();
+		grid = null;
+		$fixture.empty();
 	}
 });
 

@@ -5,18 +5,18 @@ module( "Cell Tests", {
 	setup: function() {
 		$fixture.append( 
 			"<table><tr>" +
-			"<td id='cell4'></td>" +
-			"<td id='cell5'></td>" +
-			"<td id='cell9'></td>" +
+				"<td id='cell4'></td>" +
+				"<td id='cell5'></td>" +
+				"<td id='cell9'></td>" +
 			"</tr></table>" );
 		$cell4 = jQuery( "td#cell4" );
 		cell4 = MyApp.createCell( "cell4", 4 );
 	},
 	teardown: function() {
-		$fixture.empty();
 		cell4 = null;
 		cell5 = null;
 		$cell4 = null;
+		$fixture.empty();
 	}
 });
 
