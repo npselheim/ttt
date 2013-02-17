@@ -45,7 +45,8 @@ MyApp.createGrid = function (  ) {
     return {
 
         getCells: function () {
-            return $.extend( true, [], cells );
+            // return a deep copy of the cells array
+            return jQuery.extend( true, [], cells );
         },
 
         findWinningRow: function ( mark ) {
@@ -71,9 +72,11 @@ MyApp.createGrid = function (  ) {
         // },
 
         formatWinningRow: function ( row ) {
-            var i;
-            for ( i = 0; i < ROW_LENGTH; i += 1 ) {
-                this.cells[ row[ i ] ].formatAsWinner();
+            var i, 
+                rowLength = row.length;
+
+            for ( i = 0; i < rowLength; i += 1 ) {
+                jQuery( "td#cell" + row[i] ).removeClass().addClass( "tokenWin" );
             };
         },
 

@@ -76,4 +76,18 @@ test( "can find winning row", function() {
 	grid.update( 1, "X" );
 	grid.update( 2, "X" );
 	deepEqual( grid.findWinningRow( "X" ), [0, 1, 2], "should find winning row for 'X'");
+});
+
+test( "can format winning row", function() {
+	expect( 9 );
+	grid.formatWinningRow( [ 2, 5, 8] );
+	deepEqual( jQuery( "td#cell0" ).hasClass("tokenWin"), false, "cell0 should not be a winner" );
+	deepEqual( jQuery( "td#cell1" ).hasClass("tokenWin"), false, "cell1 should not be a winner" );
+	deepEqual( jQuery( "td#cell2" ).hasClass("tokenWin"), true, "cell2 should be a winner" );
+	deepEqual( jQuery( "td#cell3" ).hasClass("tokenWin"), false, "cell3 should not be a winner" );
+	deepEqual( jQuery( "td#cell4" ).hasClass("tokenWin"), false, "cell4 should not be a winner" );
+	deepEqual( jQuery( "td#cell5" ).hasClass("tokenWin"), true, "cell5 should be a winner" );
+	deepEqual( jQuery( "td#cell6" ).hasClass("tokenWin"), false, "cell6 should not be a winner");
+	deepEqual( jQuery( "td#cell7" ).hasClass("tokenWin"), false, "cell7 should not be a winner" );
+	deepEqual( jQuery( "td#cell8" ).hasClass("tokenWin"), true, "cell8 should be a winner" );
 })

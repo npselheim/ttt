@@ -43,12 +43,12 @@ test( "non-string mark does not set the cell", function() {
 	deepEqual( cell4.isMarked(), false, "cell should not be marked by numeric value" );
 });
 
-test( "can call showWin", function() {
-	expect( 2 );
-	cell4.showAsWinner();
-	deepEqual( $cell4.hasClass( "tokenNormal" ), false, "cell should not have tokenNormal class" );
-	deepEqual( $cell4.hasClass( "tokenWin" ), true, "cell should have tokenWin class" );
-});
+// test( "can call showWin", function() {
+// 	expect( 2 );
+// 	cell4.showAsWinner();
+// 	deepEqual( $cell4.hasClass( "tokenNormal" ), false, "cell should not have tokenNormal class" );
+// 	deepEqual( $cell4.hasClass( "tokenWin" ), true, "cell should have tokenWin class" );
+// });
 
 // test( "reset unmarks the cell", function() {
 // 	expect( 3 );

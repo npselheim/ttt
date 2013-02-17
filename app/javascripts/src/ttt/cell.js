@@ -57,17 +57,17 @@ MyApp.createCell = function ( name, index ) {
             Show that this cell is included in the winning 3-in-a-row.
             @returns nothing
             */
-        showAsWinner: function () {
-            $cellRef.removeClass().addClass("tokenWin");
-        },
+        // showAsWinner: function () {
+        //     $cellRef.removeClass().addClass("tokenWin");
+        // },
 
         /**
             Reset this cell back to the initial unused state.
             @returns nothing
             */
-        reset: function () {
-            mark = '';
-            $cellRef.removeClass().addClass("tokenNormal");
-        }
+        // reset: function () {
+        //     mark = '';
+        //     $cellRef.removeClass().addClass("tokenNormal");
+        // }
     };
 };
