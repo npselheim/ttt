@@ -3,6 +3,7 @@
 	<head>
 		<link rel="stylesheet" href="stylesheets/tictactoe.css" />
 		<link rel="stylesheet" href="../lib/qunit-1.11.0.css" />
+		<script type="text/javascript" src="../lib/jquery-1.8.2.js"></script>
 	</head>
 	<body>
 		<div id="demo_header">
@@ -12,25 +13,25 @@
 			<div id="grid" class="grid">
 				<table>
 					<tr>
-						<td id="cell0">&nbsp;</td>
-						<td id="cell1">&nbsp;</td>
-						<td id="cell2">&nbsp;</td>
+						<td class="cell" id="cell0">&nbsp;</td>
+						<td class="cell" id="cell1">&nbsp;</td>
+						<td class="cell" id="cell2">&nbsp;</td>
 					</tr>
 					<tr>
-						<td id="cell3">&nbsp;</td>
-						<td id="cell4">&nbsp;</td>
-						<td id="cell5">&nbsp;</td>
+						<td class="cell" id="cell3">&nbsp;</td>
+						<td class="cell" id="cell4">&nbsp;</td>
+						<td class="cell" id="cell5">&nbsp;</td>
 					</tr>
 					<tr>
-						<td id="cell6">&nbsp;</td>
-						<td id="cell7">&nbsp;</td>
-						<td id="cell8">&nbsp;</td>
+						<td class="cell" id="cell6">&nbsp;</td>
+						<td class="cell" id="cell7">&nbsp;</td>
+						<td class="cell" id="cell8">&nbsp;</td>
 					</tr>
 					<tr>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="3" id="status">&nbsp;</td>
+						<td colspan="3" id="message">&nbsp;</td>
 					</tr>
 				</table>
 			</div>
@@ -51,23 +52,9 @@
 			<div>
 				<input type="button" value="Start" name="startBtn" id="startBtn" />		
 			</div>
-			<script type="text/javascript" src="../lib/jquery-1.8.2.js"</script>
-			<script type="text/javascript" src="javascripts/src/ttt/clickUtils.js"></script>
-			<script type="text/javascript" src="javascripts/src/ttt/token.js"></script>
+			<script type="text/javascript" src="javascripts/src/ttt/main.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/cell.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/grid.js"></script>
-			<script type="text/javascript" src="javascripts/src/ttt/player.js"></script>
-			<script type="text/javascript" src="javascripts/src/ttt/game.js"></script>
-			<script type="text/javascript" src="javascripts/src/ttt/tictactoe.js"></script>
 		</div>
-		<div id="qunit"></div>
-		<div id="qunit-fixture"></div>
-		<script src="../lib/qunit-1.11.0.js"></script>
-		<script>
-			test( "a basic test example", function() {
-				var value = "hllo";
-				equal( value, "hello", "We expect value to be hello" );
-			});
-		</script>
 	</body>	
 </html>

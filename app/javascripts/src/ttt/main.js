@@ -1,42 +1,74 @@
 var MyApp = MyApp || {};
 
 MyApp.ttt = function () {
-    'use strict';
+    "use strict";
 
-    var startBtn = $('startBtn'),
-        status = $('status'),
-        myGame, myGrid, myPlayers;
+    var $startBtn,
+        $message,
+        $grid,
+        mark,
+        grid,
 
-    // // set up utility functions
-    // if (typeof window.addEventListener === 'function') {
-    //     clickUtils.addListener = function (el, type, fn) {
-    //         el.addEventListener(type, fn, false);
-    //     };
-    //     clickUtils.removeListener = function (el, type, fn) {
-    //         el.removeEventListener(type, fn, false);
-    //     };
-    // } else if (typeof document.attachEvent === 'function') {    // IE
-    //     clickUtils.addListener = function (el, type, fn) {
-    //         el.attachEvent('on' + type, fn);
-    //     };
-    //     clickUtils.removeListener = function (el, type, fn) {
-    //         el.detachEvent('on' + type, fn);
-    //     };
-    // } else {    // older browsers
-    //     clickUtils.addListener = function (el, type, fn) {
-    //         el['on' + type] = fn;
-    //     };
-    //     clickUtils.removeListener = function (el, type, fn) {
-    //         el['on' + type] = null;
-    //     };
-    // }
+    init = function () {
+        $startBtn = jQuery( "input#startBtn" );
+        $grid = jQuery( "div#grid" );
+        $message = jQuery( "td#message" );
+        grid = MyApp.createGrid();
+        $startBtn.one( "click", start );
+        $message.text( "Start button is now activated" );
+    },
 
+    start = function () {
+        reset();
+        $grid.on( "click", processMove );
+        $message.text ( "Game started: X moves first" );
+        return false;
+    }, 
 
-    // // set click event for the start button
-    // myGrid = grid();
-    // myPlayers = [player('X'), player('O')];
-    // myGame = game(myGrid, myPlayers, status);
-    // // clickUtils.addListener(startBtn, 'click', myGame.start);
-    // myGame.start();
-    // status.innerHTML = "Ready to start";
+    processMove = function ( e ) {
+        // setup
+        var cell, $cell, row, index;
+        cell = e.target.id;
+        $cell = jQuery( "td#" + cell );
+        index = cell.charAt( 4 );
+
+        // reject a click on an occupied cell
+        if ( !grid.update( index, mark ) ) return false;
+
+        // show the player's move on the grid
+        $cell.text( mark );
+        
+        row = grid.findWinningRow( mark );
+        if ( row !== null ) {
+            // we have a winner!
+            grid.formatWinningRow( row );
+            $message.text( "We have a winner!" );
+            gameOver();
+            return false;
+        };
+
+        if ( grid.isFull() ) {
+            // we have a draw...
+            $message.text( "Draw! Nobody wins! Try again?" );
+            gameOver();
+            return false;
+        };
+
+        mark = ( mark === "X" ) ? "O" : "X";
+
+    },
+
+    reset = function () {
+        mark = "X";
+        jQuery( ".cell" ).html( "&nbsp;" );
+    },
+
+    gameOver = function () {
+        $grid.off( "click", processMove );
+        $startBtn.one( "click", start );
+    };
+
+    init();
 };
+
+jQuery( document ).ready( MyApp.ttt );

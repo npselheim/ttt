@@ -32,9 +32,19 @@ MyApp.createGrid = function (  ) {
         ARRAY_LENGTH = WIN_ROWS.length,
         ROW_LENGTH = 3,
         CELLS_LENGTH = 9,
-        getValue = function ( index ) {
+
+        getCellValue = function ( index ) {
             var mark = cells[ index ].getMark();
-            return mark ? mark.charCodeAt( 0 ) : 0;
+            return mark ? mark.charCodeAt( 0 ) : 0
+        },
+
+        getRowValue = function ( row ) {
+            var i, 
+                sum = 0;
+           for ( i = 0; i < row.length; i += 1 ) {
+                sum += getCellValue( row[ i ] );
+            };
+            return sum;
         };
 
     for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
@@ -50,13 +60,10 @@ MyApp.createGrid = function (  ) {
         },
 
         findWinningRow: function ( mark ) {
-            var i, j, sum, row, win = 3 * mark.charCodeAt( 0 );
+            var i, sum, row, win = 3 * mark.charCodeAt( 0 );
             for ( i = 0; i < ARRAY_LENGTH; i += 1 ) {
-                sum = 0;
                 row = WIN_ROWS[ i ];
-                for ( j = 0; j < ROW_LENGTH; j += 1 ) {
-                    sum += getValue( row[j] );
-                };
+                sum = getRowValue( row );               
                 if ( sum === win ) return row;
             };
 
@@ -64,33 +71,34 @@ MyApp.createGrid = function (  ) {
             return null;
         },
 
-        // reset: function () {
-        //     var i;
-        //     for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
-        //         cells[ i ].reset();
-        //     };
-        // },
-
         formatWinningRow: function ( row ) {
             var i, 
                 rowLength = row.length;
 
             for ( i = 0; i < rowLength; i += 1 ) {
-                jQuery( "td#cell" + row[i] ).removeClass().addClass( "tokenWin" );
+                jQuery( "td#cell" + row[i] ).addClass( "winner_cell" );
             };
         },
 
-        update: function( cellIndex, mark ) {
+        update: function ( cellIndex, mark ) {
 
             // if the cell is alreay marked, do nothing
-            if ( cells[ cellIndex ].isMarked() ) return;
+            if ( cells[ cellIndex ].isMarked() ) return false;
 
             // allow only "X" or "O"
-            if ( mark !== 'X' && mark !== 'O' ) {
+            if ( mark !== "X" && mark !== "O" ) {
                 throw new Error( "mark must be 'X' or 'O'" );
             };
 
             cells[ cellIndex ].setMark( mark );
+            return true;
+        },
+
+        isFull: function () {
+            var i;
+            for ( i = 0; i < CELLS_LENGTH; i +=1 )
+                if ( !cells[ i ].isMarked() ) return false;
+            return true;
         }
     };
 };
