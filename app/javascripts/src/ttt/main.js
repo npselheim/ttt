@@ -13,7 +13,7 @@ MyApp.ttt = function () {
         $startBtn = jQuery( "input#startBtn" );
         $grid = jQuery( "div#grid" );
         $message = jQuery( "td#message" );
-        grid = MyApp.createGrid();
+        // grid = MyApp.createGrid();
         $startBtn.one( "click", start );
         $message.text( "Start button is now activated" );
     },
@@ -60,7 +60,10 @@ MyApp.ttt = function () {
 
     reset = function () {
         mark = "X";
-        jQuery( ".cell" ).html( "&nbsp;" );
+        grid = MyApp.createGrid();
+        jQuery( ".cell" )
+            .removeClass( "winner_cell" )
+            .html( "&nbsp;" );
     },
 
     gameOver = function () {
