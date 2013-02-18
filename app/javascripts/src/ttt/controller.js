@@ -76,3 +76,5 @@ MyApp.controller = function () {
 
     init();
 };
+
+jQuery( document ).ready( MyApp.controller );
