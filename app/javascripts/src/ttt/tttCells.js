@@ -1,6 +1,7 @@
 MyApp.tttCells = function () {
 
     var cells = [],
+        i = 0,
 
         WIN_ROWS = [
             [0, 1, 2],
@@ -28,6 +29,11 @@ MyApp.tttCells = function () {
         };
         return sum;
     };
+
+    for ( i = 0; i < 9; i += 1 ) {
+        cells[ i ] = MyApp.createCell( "cell" + i, i );
+    };
+
 
     return this;
 };
