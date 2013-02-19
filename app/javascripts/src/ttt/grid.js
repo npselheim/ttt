@@ -116,7 +116,6 @@ MyApp.createGrid = function (  ) {
             var i,
                 move = 0;
             for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
-                // move += cells[ i ].isMarked() ? 1 : 0;
                 move += this.isMarked( i ) ? 1 : 0;
             };
             return move + 1;

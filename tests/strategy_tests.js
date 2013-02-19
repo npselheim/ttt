@@ -13,27 +13,42 @@ module( "Strategy Tests", {
 
 test( "get 1st move", function () {
 	expect( 1 );
-	deepEqual( strategy.getNextMove( grid ),
-		"cell0", "1st move should be cell0" );
+	deepEqual( strategy.getNextMove( grid ), 0, "1st move should be cell0" );
 });
 
 test( "get 3rd move", function () {
 	expect( 1 );
 	helper.gridSetup( grid, [ 0, 4 ] );
-	// grid.update( 0, "X" );
-	// grid.update( 4, "O" );
-	deepEqual( strategy.getNextMove( grid ),
-		"cell8", "3rd move should be cell8, if available" );
+	deepEqual( strategy.getNextMove( grid ), 8,
+		"3rd move should be cell8, if available" );
 });
 
 test( "get 3rd move, cell8 taken", function () {
 	expect( 1 );
 	helper.gridSetup( grid, [ 0, 8 ] );
-	// grid.update( 0, "X" );
-	// grid.update( 8, "O" );
-	deepEqual( strategy.getNextMove( grid ),
-		"cell2", "3rd move should be cell 2 if cell 8 not available" );
+	deepEqual( strategy.getNextMove( grid ), 2,
+		"3rd move should be cell 2 if cell 8 not available" );
 });
+
+test( "get 5th move, have to block", function () {
+	expect( 1 );
+	helper.gridSetup( grid, [ 0, 8, 4, 6 ] );
+	deepEqual( strategy.getNextMove( grid ), 7, "should be cell7 to block" );
+});
+
+test( "get 5th move, have a win", function () {
+	expect( 1 );
+	helper.gridSetup( grid, [ 0, 8, 2, 6 ] );
+	deepEqual( strategy.getNextMove( grid ), 1, "should be cell1 to win" );
+});
+
+test( "get 5th move, no win, no block", function () {
+	expect( 1 );
+	helper.gridSetup( grid, [ 0, 8, 6, 3 ] );
+	deepEqual( strategy.getNextMove( grid ), 2, "should take cell2" );
+});
+
+
 
 
 

@@ -9,10 +9,10 @@ MyApp.strategy = {
 		{
 			// "X" moves
 			case 1:
-				move = "cell0";
+				move = 0;
 				break;
 			case 3:
-				move = grid.isMarked( 8 ) ? "cell2" : "cell8";
+				move = grid.isMarked( 8 ) ? 2 : 8;
 				break;
 			case 5:
 				// if there's a winner, take it
@@ -24,7 +24,7 @@ MyApp.strategy = {
 				if (move !== null ) break;
 
 				// best move
-				move = grid.isMarked( 2 ) ? "cell6" : "cell2";
+				move = grid.isMarked( 2 ) ? 6 : 2;
 				break;
 			case 7:
 				// if there's a winner, take it
