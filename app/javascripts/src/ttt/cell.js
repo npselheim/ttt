@@ -5,6 +5,7 @@
     @class 
     */
 MyApp.createCell = function ( name, index ) {
+    // "use strict";
 
     /** 
         a reference to the cell element in the document

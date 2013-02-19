@@ -16,6 +16,7 @@
     @namespace
  */
 MyApp.createGrid = function (  ) {
+    // "use strict";
 
     var cells = [],
         i = 0,

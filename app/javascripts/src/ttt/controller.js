@@ -15,7 +15,6 @@ MyApp.controller = function () {
         $startBtn = jQuery( "input#startBtn" );
         $grid = jQuery( "div#grid" );
         $message = jQuery( "td#message" );
-        // grid = MyApp.createGrid();
         $startBtn.one( "click", start );
         $message.text( "Start button is now activated" );
     },
