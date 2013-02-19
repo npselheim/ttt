@@ -12,18 +12,18 @@ MyApp.createCell = function ( name, index ) {
         @type {Element}
         @private
         */
-    var $cellRef,
+    // var $cellRef,
 
     /** 
         the mark in this cell
         @type {String}
         @private
         */
-        mark = '';
+    var mark = '';
 
-    $cellRef = jQuery( "td#" + name );
+    // $cellRef = jQuery( "td#" + name );
 
-    if ( $cellRef.length === 0 ) return null;
+    // if ( $cellRef.length === 0 ) return null;
 
     if ( index < 0 || index > 8 ) return null;
    
