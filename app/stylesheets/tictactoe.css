@@ -67,3 +67,6 @@ table { border-collapse: collapse }
 .winner_cell {
 	color: red;
 }
+.gray-out {
+	color: gray;
+}

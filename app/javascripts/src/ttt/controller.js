@@ -1,5 +1,3 @@
-
-
 MyApp = {};
 
 MyApp.controller = function () {
@@ -8,6 +6,9 @@ MyApp.controller = function () {
     var $startBtn,
         $message,
         $grid,
+        $mode,
+        $xo,
+        mode,
         mark,
         grid,
 
@@ -15,16 +16,33 @@ MyApp.controller = function () {
         $startBtn = jQuery( "input#startBtn" );
         $grid = jQuery( "div#grid" );
         $message = jQuery( "td#message" );
+        $mode = jQuery( 'input[name="modeGroup"]' );
+        $xo = jQuery( 'input[name="xoGroup"]' );
+
         $startBtn.one( "click", start );
+        $mode.change( setMode );
         $message.text( "Start button is now activated" );
+    },
+
+    setMode = function () {
+        mode = jQuery( "#modeForm input:checked" ).val();
+
+        // disable X/O selection for 2-player mode
+        if ( mode == 2 ) {
+            $xo.prop( "disabled", true );
+            jQuery( "#xoForm" ).addClass( "gray-out" );
+        } else {
+            $xo.prop( "disabled", false );
+            jQuery( "#xoForm" ).removeClass( "gray-out" );
+        }
     },
 
     start = function () {
         reset();
-        $grid.on( "click", processMove );
+        $grid.click( processMove );
         $message.text ( "Game started: X moves first" );
         return false;
-    }, 
+    },
 
     processMove = function ( e ) {
         // setup
@@ -38,7 +56,7 @@ MyApp.controller = function () {
 
         // show the player's move on the grid
         $cell.text( mark );
-        
+
         row = grid.findWinningRow( mark );
         if ( row !== null ) {
             // we have a winner!

@@ -54,12 +54,3 @@ test( "if X has a corner, take the center on 2nd move", function () {
 	deepEqual( strategy.getNextMove ( grid ), 4,
 		"should take opposite corner" );
 });
-
-
-
-
-
-
-
-
-

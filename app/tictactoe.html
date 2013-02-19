@@ -41,8 +41,15 @@
 				want to hand off the mouse. Eventually I will implement a program player that will never lose, so users can try their skill against the computer.
 			</p>
 			<p>
-				Programming a Tic Tac Toe game is not difficult and is generally considered to be a high school level exercise. My objective here is to learn the JavaScript language and to try out  some best practices with respect to JavaScript design. 
+				Programming a Tic Tac Toe game is not difficult and is generally considered to be a high school level exercise. My objective here is to learn the JavaScript language and to try out  some best practices with respect to JavaScript design.
 			<div id="setup">
+				<form name="modeForm" id="modeForm">
+					Select the game mode:<br>
+					<input id="modeOne" name="modeGroup" type="radio" value="1" checked>one player</input>
+					<br>
+					<input id="modeTwo" name="modeGroup" type="radio" value="2">two players</input>
+				</form>
+				<br>
 				<form name="xoForm" id="xoForm">
 					Choose X or O (X always goes first):<br>
 					<input id="X" name="xoGroup" type="radio" value="X" checked >X</input><br/>
@@ -50,11 +57,12 @@
 				</form>
 			</div>
 			<div>
-				<input type="button" value="Start" name="startBtn" id="startBtn" />		
+				<br>
+				<input type="button" value="Start" name="startBtn" id="startBtn" />
 			</div>
 			<script type="text/javascript" src="javascripts/src/ttt/controller.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/cell.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/grid.js"></script>
 		</div>
-	</body>	
+	</body>
 </html>
