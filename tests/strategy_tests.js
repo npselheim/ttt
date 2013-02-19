@@ -23,15 +23,15 @@ test( "get 1st move", function () {
 		"cell0", "1st move should be cell0" );
 });
 
-test( "can determine number of moves", function() {
-	expect( 2 );
-	fakeCells[ 0 ].setMark( "X" );
-	deepEqual( strategy.getMoveNo( fakeCells ), 2, "Should be on move 2" );
-	fakeCells[ 2 ].setMark( "O" );
-	fakeCells[ 8 ].setMark( "X" );
-	fakeCells[ 4 ].setMark( "O" );
-	deepEqual( strategy.getMoveNo( fakeCells ), 5, "Should be on move 5" );
-})
+// test( "can determine number of moves", function() {
+	// expect( 2 );
+	// fakeCells[ 0 ].setMark( "X" );
+	// deepEqual( strategy.getMoveNo( fakeCells ), 2, "Should be on move 2" );
+	// fakeCells[ 2 ].setMark( "O" );
+	// fakeCells[ 8 ].setMark( "X" );
+	// fakeCells[ 4 ].setMark( "O" );
+	// deepEqual( strategy.getMoveNo( fakeCells ), 5, "Should be on move 5" );
+// })
 
 test( "get 3rd move", function () {
 	expect( 1 );

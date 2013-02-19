@@ -1,9 +1,9 @@
 MyApp.strategy = {
 
-	getNextMove: function ( cells ) {
+	getNextMove: function ( grid ) {
 		var move;
 
-		switch ( this.getMoveNo( cells ) )
+		switch ( grid.getMoveNo( cells ) )
 		{
 			case 1:
 				move = "cell0";
@@ -24,14 +24,14 @@ MyApp.strategy = {
 		return move;
 	},
 
-	getMoveNo: function ( cells ) {
-		var i,
-			move = 0;
-		for ( i = 0; i < 9; i += 1 ) {
-			move += cells[ i ].isMarked() ? 1 : 0;
-		};
-		return move + 1;
-	},
+	// getMoveNo: function ( cells ) {
+	// 	var i,
+	// 		move = 0;
+	// 	for ( i = 0; i < 9; i += 1 ) {
+	// 		move += cells[ i ].isMarked() ? 1 : 0;
+	// 	};
+	// 	return move + 1;
+	// },
 
 	findWin: function ( cells ) {
 

@@ -1,9 +1,9 @@
 
-/** 
+/**
 
            |       |
      cell0 | cell1 | cell2
-           |       | 
+           |       |
     -------+-------+-------
            |       |
      cell3 | cell4 | cell5
@@ -11,7 +11,7 @@
     -------+-------+-------
            |       |
      cell6 | cell7 | cell8
-           |       | 
+           |       |
 
     @namespace
  */
@@ -40,7 +40,7 @@ MyApp.createGrid = function (  ) {
         },
 
         getRowValue = function ( row ) {
-            var i, 
+            var i,
                 sum = 0;
            for ( i = 0; i < row.length; i += 1 ) {
                 sum += getCellValue( row[ i ] );
@@ -64,7 +64,7 @@ MyApp.createGrid = function (  ) {
             var i, sum, row, win = 3 * mark.charCodeAt( 0 );
             for ( i = 0; i < ARRAY_LENGTH; i += 1 ) {
                 row = WIN_ROWS[ i ];
-                sum = getRowValue( row );               
+                sum = getRowValue( row );
                 if ( sum === win ) return row;
             };
 
@@ -73,7 +73,7 @@ MyApp.createGrid = function (  ) {
         },
 
         formatWinningRow: function ( row ) {
-            var i, 
+            var i,
                 rowLength = row.length;
 
             for ( i = 0; i < rowLength; i += 1 ) {
@@ -100,6 +100,15 @@ MyApp.createGrid = function (  ) {
             for ( i = 0; i < CELLS_LENGTH; i +=1 )
                 if ( !cells[ i ].isMarked() ) return false;
             return true;
+        },
+
+        getMoveNo: function () {
+            var i,
+                move = 0;
+            for ( i = 0; i < 9; i += 1 ) {
+                move += cells[ i ].isMarked() ? 1 : 0;
+            };
+            return move + 1;
         }
     };
 };

@@ -112,3 +112,13 @@ test( "isFull returns true if all cells are marked", function () {
 	deepEqual( grid.isFull(), true, "marked grid should be full" );
 });
 
+test( "get the move number for the next move", function () {
+	expect( 2 );
+	grid.update( 0, "X" );
+	deepEqual( grid.getMoveNo(), 2, "Should be on move 2" );
+	grid.update( 2, "O" );
+	grid.update( 8, "X" );
+	grid.update( 4, "O" );
+	deepEqual( grid.getMoveNo(), 5, "Should be on move 5" );
+})
+
