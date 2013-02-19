@@ -5,6 +5,7 @@ MyApp.strategy = {
 
 		switch ( grid.getMoveNo() )
 		{
+			// "X" moves
 			case 1:
 				move = "cell0";
 				break;
@@ -12,8 +13,38 @@ MyApp.strategy = {
 				move = grid.isMarked( 8 ) ? "cell2" : "cell8";
 				break;
 			case 5:
-				// move = grid.findWin( "X" );
+				// if there's a winner, take it
+				move = grid.findWinningMoveFor( "X" );
+				if ( move !== null ) break;
+
+				// if "O" might win, block it
+				move = grid.findWinningMoveFor( "O" );
+				if (move !== null ) break;
+
+				// best move
 				move = grid.isMarked( 2 ) ? "cell6" : "cell2";
+				break;
+			case 7:
+				// if there's a winner, take it
+				move = grid.findWinningMoveFor( "X" );
+				if ( move !== null ) break;
+
+				// if "O" might win, block it
+				move = grid.findWinningMoveFor( "O" );
+				if (move !== null ) break;
+
+				// should never reach this point
+				move = grid.findFirstOpenCell();
+				break;
+			case 9:
+				// find the only cell left
+				move = grid.findFirstOpenCell();
+				break;
+
+			// "O" moves
+			case 2:
+
+
 		}
 
 

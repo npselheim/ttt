@@ -53,7 +53,7 @@ MyApp.createGrid = function (  ) {
                 row = WIN_ROWS[ i ];
                 sum = getRowValue( row );
                 if ( sum === value ) return row;
-            }
+            };
             return null;
         };
 
@@ -71,15 +71,6 @@ MyApp.createGrid = function (  ) {
 
         findWinningRow: function ( mark ) {
             return checkRowsForValue( 3 * mark.charCodeAt( 0 ) );
-            // var i, sum, row, win = 3 * mark.charCodeAt( 0 );
-            // for ( i = 0; i < WIN_ROWS_LENGTH; i += 1 ) {
-            //     row = WIN_ROWS[ i ];
-            //     sum = getRowValue( row );
-            //     if ( sum === win ) return row;
-            // };
-
-            // // no winning row found
-            // return null;
         },
 
         findWinningMoveFor: function ( mark ) {
@@ -137,5 +128,12 @@ MyApp.createGrid = function (  ) {
             return cells[ index ].isMarked();
         },
 
+        findFirstOpenCell: function () {
+            var i;
+            for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
+                if ( !cells[ i ].isMarked() ) return i;
+            }
+            return null;
+        }
     };
 };

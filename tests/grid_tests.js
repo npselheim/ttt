@@ -1,4 +1,5 @@
 var grid,
+	helper = MyApp.helper;
 	$fixture = jQuery( "#qunit-fixture" );
 
 module( "Grid Tests", {
@@ -100,27 +101,18 @@ test( "isFull returns false for empty grid", function () {
 
 test( "isFull returns true if all cells are marked", function () {
 	expect( 1 );
-	grid.update( 0, "X" );
-	grid.update( 1, "X" );
-	grid.update( 2, "X" );
-	grid.update( 3, "X" );
-	grid.update( 4, "X" );
-	grid.update( 5, "X" );
-	grid.update( 6, "X" );
-	grid.update( 7, "X" );
-	grid.update( 8, "X" );
+	// set up a full grid
+	helper.gridSetup( grid, [ 0, 4, 8, 1, 7, 6, 2, 5, 3 ])
 	deepEqual( grid.isFull(), true, "marked grid should be full" );
 });
 
 test( "get the move number for the next move", function () {
 	expect( 2 );
-	grid.update( 0, "X" );
-	deepEqual( grid.getMoveNo(), 2, "Should be on move 2" );
-	grid.update( 2, "O" );
-	grid.update( 8, "X" );
-	grid.update( 4, "O" );
+	deepEqual( grid.getMoveNo(), 1, "first move should be 1" );
+	// make 4 moves
+	helper.gridSetup( grid, [ 0, 2, 8, 4 ])
 	deepEqual( grid.getMoveNo(), 5, "Should be on move 5" );
-})
+});
 
 test( "find out if a cell is already marked", function () {
 	expect( 2 );
@@ -128,5 +120,21 @@ test( "find out if a cell is already marked", function () {
 		"should be nothing marked in an empty grid" );
 	grid.update( 4, "X" );
 	deepEqual ( grid.isMarked( 4 ), true, "cell4 should be marked now" );
-})
+});
 
+test( "find winning moves for 'X' and 'O'", function () {
+	expect( 3 );
+	deepEqual( grid.findWinningMoveFor( "X" ), null,
+		"no winning moves in an empty grid" );
+	helper.gridSetup( grid, [ 0, 2, 3, 4 ] );
+	deepEqual( grid.findWinningMoveFor( "X" ), 6, "should find cell6" );
+	deepEqual( grid.findWinningMoveFor( "O" ), 6, "should find cell6 ");
+});
+
+test( "find first open cell", function () {
+	expect( 2 );
+	deepEqual( grid.findFirstOpenCell(), 0,
+		"0 should be the first cell in an empty grid" );
+	helper.gridSetup( grid, [ 0, 1, 2, 3, 4, 6 ] );
+	deepEqual( grid.findFirstOpenCell(), 5, "should find cell5" );
+} )
