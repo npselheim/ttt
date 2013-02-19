@@ -3,7 +3,7 @@ var cell4, cell5, $cell4,
 
 module( "Cell Tests", {
 	setup: function() {
-		$fixture.append( 
+		$fixture.append(
 			"<table><tr>" +
 				"<td id='cell4'></td>" +
 				"<td id='cell5'></td>" +
@@ -40,7 +40,8 @@ test( "setting a mark marks the cell", function() {
 test( "non-string mark does not set the cell", function() {
 	expect( 1 );
 	cell4.setMark( 1 );
-	deepEqual( cell4.isMarked(), false, "cell should not be marked by numeric value" );
+	deepEqual( cell4.isMarked(), false,
+		"cell should not be marked by numeric value" );
 });
 
 // test( "can call showWin", function() {
@@ -61,15 +62,17 @@ test( "non-string mark does not set the cell", function() {
 
 test( "get the mark from the cell", function() {
 	expect( 1 );
-	cell4.setMark( 'X' );
-	deepEqual( cell4.getMark(), 'X', "should get back the same mark" );
+	cell4.setMark( "X" );
+	deepEqual( cell4.getMark(), "X", "should get back the same mark" );
 });
 
 test( "cannot access the mark directly", function() {
 	expect( 2 );
-	cell4.setMark( 'O' );
-	deepEqual( typeof cell4.mark, 'undefined', "should not see the private variable" );
-	deepEqual( cell4.getMark(), 'O', "but can retrieve the value from the private variable");
+	cell4.setMark( "O" );
+	deepEqual( typeof cell4.mark, "undefined",
+		"should not see the private variable" );
+	deepEqual( cell4.getMark(), "O",
+		"but can retrieve the value from the private variable");
 });
 
 test( "cell is marked with only the first character", function() {

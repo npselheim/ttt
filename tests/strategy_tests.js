@@ -1,4 +1,4 @@
-var strategy = MyApp.strategy, 
+var strategy = MyApp.strategy,
 	fakeCells = [];
 
 module( "Strategy Tests", {
@@ -19,7 +19,8 @@ module( "Strategy Tests", {
 
 test( "get 1st move", function () {
 	expect( 1 );
-	deepEqual( strategy.getNextMove( fakeCells ), "cell0", "1st move should be cell0" );
+	deepEqual( strategy.getNextMove( fakeCells ),
+		"cell0", "1st move should be cell0" );
 });
 
 test( "can determine number of moves", function() {
@@ -32,9 +33,19 @@ test( "can determine number of moves", function() {
 	deepEqual( strategy.getMoveNo( fakeCells ), 5, "Should be on move 5" );
 })
 
-// test( "get 3rd move", function () {
-// 	expect( 1 );
-// 	fakeCells[ 0 ].setMark( "X" );
-// 	deepEqual( strategy.getNextMove( fakeCells ), "cell8", "3rd move should be cell8, if available" );
-// });
+test( "get 3rd move", function () {
+	expect( 1 );
+	fakeCells[ 0 ].setMark( "X" );
+	fakeCells[ 4 ].setMark( "O" );
+	deepEqual( strategy.getNextMove( fakeCells ),
+		"cell8", "3rd move should be cell8, if available" );
+});
+
+test("get 3rd move, cell8 taken", function () {
+	expect( 1 );
+	fakeCells[ 0 ].setMark( "X" );
+	fakeCells[ 8 ].setMark( "O" );
+	deepEqual( strategy.getNextMove( fakeCells ),
+		"cell2", "3rd move should be cell 2 if cell 8 not available" );
+});
 
