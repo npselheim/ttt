@@ -125,10 +125,21 @@ MyApp.createGrid = function (  ) {
             return cells[ index ].isMarked();
         },
 
-        findFirstOpenCell: function () {
-            var i;
-            for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
-                if ( !this.isMarked( i ) ) return i;
+        findFirstOpenCell: function ( cells ) {
+            var i,
+                list,
+                len;
+
+            console.log( cells );
+            if ( typeof cells === "undefined" ) {
+                list = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ];
+            } else {
+                list = cells;
+            }
+
+            len = list.length;
+            for ( i = 0; i < len; i += 1 ) {
+                if ( !this.isMarked( list[ i ] ) ) return i;
             }
             return null;
         }

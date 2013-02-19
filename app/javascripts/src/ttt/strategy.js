@@ -44,11 +44,14 @@ MyApp.strategy = {
 					move = 0;
 				};
 				break;
+			case 4:
+				// take a side cell to force X to block
+				move = grid.findFirstOpenCell( [ 1, 3, 5, 7 ]) ;
 
 			// all other moves should be block, win, or find last
 			// remaining open cell
 			default:
-				move = findFirstOpenCell();
+				move = grid.findFirstOpenCell();
 		};
 
 		return move;

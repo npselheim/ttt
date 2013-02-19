@@ -11,6 +11,7 @@ MyApp.controller = function () {
         mode,
         mark,
         grid,
+        playerMark,
 
     init = function () {
         $startBtn = jQuery( "input#startBtn" );
@@ -21,26 +22,47 @@ MyApp.controller = function () {
 
         $startBtn.one( "click", start );
         $mode.change( setMode );
+        $xo.change( setPlayerMark );
+        $mode.change();
+        $xo.change();
         $message.text( "Start button is now activated" );
     },
 
     setMode = function () {
+        var $xoForm;
+
         mode = jQuery( "#modeForm input:checked" ).val();
+        $xoForm = jQuery( "#xoForm" );
 
         // disable X/O selection for 2-player mode
-        if ( mode == 2 ) {
+        if ( mode === "2" ) {
             $xo.prop( "disabled", true );
-            jQuery( "#xoForm" ).addClass( "gray-out" );
+            $xoForm.addClass( "gray-out" );
         } else {
             $xo.prop( "disabled", false );
-            jQuery( "#xoForm" ).removeClass( "gray-out" );
+            $xoForm.removeClass( "gray-out" );
         }
     },
 
+    setPlayerMark = function () {
+        var mark;
+        mark = jQuery( "#xoForm input:checked" ).val();
+        // internal player gets the opposite of user selection
+        playerMark = mark === "X" ? "O" : "X";
+    },
+
     start = function () {
+        console.log( "start ..." );
         reset();
+
+        if ( mode === "1" ) {
+            MyApp.player.setup( playerMark );
+        };
+
         $grid.click( processMove );
         $message.text ( "Game started: X moves first" );
+
+        $.publish( "grid-update", [ mark, grid ] );
         return false;
     },
 
@@ -75,7 +97,8 @@ MyApp.controller = function () {
 
         mark = ( mark === "X" ) ? "O" : "X";
         $message.text( "Now it's " + mark + "'s turn to move" );
-
+        $.publish( "grid-update", [ mark, grid ] );
+        return false;
     },
 
     reset = function () {
