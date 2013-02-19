@@ -1,32 +1,21 @@
 /**
-    Creates cell objects. A cell is one square on the 
+    Creates cell objects. A cell is one square on the
     tic-tac-toe board that starts out blank and can be
     marked with either an 'X' or an 'O'
-    @class 
+    @class
     */
 MyApp.createCell = function ( name, index ) {
-    // "use strict";
+    "use strict";
 
-    /** 
-        a reference to the cell element in the document
-        @type {Element}
-        @private
-        */
-    // var $cellRef,
-
-    /** 
+    /**
         the mark in this cell
         @type {String}
         @private
         */
     var mark = '';
 
-    // $cellRef = jQuery( "td#" + name );
-
-    // if ( $cellRef.length === 0 ) return null;
-
     if ( index < 0 || index > 8 ) return null;
-   
+
     return {
         /**
             Marks the cell to record a player's move

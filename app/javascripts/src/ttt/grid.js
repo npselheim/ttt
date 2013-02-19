@@ -16,7 +16,7 @@
     @namespace
  */
 MyApp.createGrid = function (  ) {
-    // "use strict";
+    "use strict";
 
     var cells = [],
         i = 0,
@@ -79,7 +79,7 @@ MyApp.createGrid = function (  ) {
             if ( row === null ) return null;
 
             for ( i = 0; i < 3; i += 1 ) {
-                if ( !cells[ row[ i ] ].isMarked() ) return row[ i ];
+                if ( !this.isMarked( row[ i ] ) ) return row[ i ];
             }
 
             throw new Error( "should have found an empty cell in " + row );
@@ -97,7 +97,7 @@ MyApp.createGrid = function (  ) {
         update: function ( cellIndex, mark ) {
 
             // if the cell is alreay marked, do nothing
-            if ( cells[ cellIndex ].isMarked() ) return false;
+            if ( this.isMarked( cellIndex ) ) return false;
 
             // allow only "X" or "O"
             if ( mark !== "X" && mark !== "O" ) {
@@ -109,17 +109,15 @@ MyApp.createGrid = function (  ) {
         },
 
         isFull: function () {
-            var i;
-            for ( i = 0; i < GRID_CELLS_LENGTH; i +=1 )
-                if ( !cells[ i ].isMarked() ) return false;
-            return true;
+            return this.findFirstOpenCell() === null ? true : false;
         },
 
         getMoveNo: function () {
             var i,
                 move = 0;
             for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
-                move += cells[ i ].isMarked() ? 1 : 0;
+                // move += cells[ i ].isMarked() ? 1 : 0;
+                move += this.isMarked( i ) ? 1 : 0;
             };
             return move + 1;
         },
@@ -131,7 +129,7 @@ MyApp.createGrid = function (  ) {
         findFirstOpenCell: function () {
             var i;
             for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
-                if ( !cells[ i ].isMarked() ) return i;
+                if ( !this.isMarked( i ) ) return i;
             }
             return null;
         }

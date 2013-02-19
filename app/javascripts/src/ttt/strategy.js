@@ -1,6 +1,8 @@
 MyApp.strategy = {
 
 	getNextMove: function ( grid ) {
+		"use strict";
+
 		var move;
 
 		switch ( grid.getMoveNo() )
