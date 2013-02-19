@@ -122,3 +122,11 @@ test( "get the move number for the next move", function () {
 	deepEqual( grid.getMoveNo(), 5, "Should be on move 5" );
 })
 
+test( "find out if a cell is already marked", function () {
+	expect( 2 );
+	deepEqual( grid.isMarked( 4 ), false,
+		"should be nothing marked in an empty grid" );
+	grid.update( 4, "X" );
+	deepEqual ( grid.isMarked( 4 ), true, "cell4 should be marked now" );
+})
+

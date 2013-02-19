@@ -3,17 +3,17 @@ MyApp.strategy = {
 	getNextMove: function ( grid ) {
 		var move;
 
-		switch ( grid.getMoveNo( cells ) )
+		switch ( grid.getMoveNo() )
 		{
 			case 1:
 				move = "cell0";
 				break;
 			case 3:
-				move = cells[ 8 ].isMarked() ? "cell2" : "cell8";
+				move = grid.isMarked( 8 ) ? "cell2" : "cell8";
 				break;
 			case 5:
 				move = findWin( cells );
-				move = cells[ 2 ].isMarked() ? "cell6" : "cell2";
+				move = grid.isMarked( 2 ) ? "cell6" : "cell2";
 		}
 
 

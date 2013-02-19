@@ -1,25 +1,27 @@
 var strategy = MyApp.strategy,
-	fakeCells = [];
+	grid;
 
 module( "Strategy Tests", {
 	setup: function () {
-		var i;
-	    for ( i = 0; i < 9; i += 1 ) {
-			// console.log( fakeCells.length );
-	        fakeCells[ i ] = MyApp.createCell( "cell" + i, i );
-	        // console.log( typeof fakeCells[ i ] );
-	    };
+		grid = MyApp.createGrid();
+		// var i;
+	 //    for ( i = 0; i < 9; i += 1 ) {
+		// 	// console.log( fakeCells.length );
+	 //        fakeCells[ i ] = MyApp.createCell( "cell" + i, i );
+	 //        // console.log( typeof fakeCells[ i ] );
+	 //    };
 	},
 	teardown: function () {
-		// console.log( fakeCells.length );
-		fakeCells = [];
-		// console.log( fakeCells.length );
+		grid = null;
+		// // console.log( fakeCells.length );
+		// fakeCells = [];
+		// // console.log( fakeCells.length );
 	}
 });
 
 test( "get 1st move", function () {
 	expect( 1 );
-	deepEqual( strategy.getNextMove( fakeCells ),
+	deepEqual( strategy.getNextMove( grid ),
 		"cell0", "1st move should be cell0" );
 });
 
@@ -35,17 +37,19 @@ test( "get 1st move", function () {
 
 test( "get 3rd move", function () {
 	expect( 1 );
-	fakeCells[ 0 ].setMark( "X" );
-	fakeCells[ 4 ].setMark( "O" );
-	deepEqual( strategy.getNextMove( fakeCells ),
+	grid.update( 0, "X" );
+	grid.update( 4, "O" );
+	deepEqual( strategy.getNextMove( grid ),
 		"cell8", "3rd move should be cell8, if available" );
 });
 
 test("get 3rd move, cell8 taken", function () {
 	expect( 1 );
-	fakeCells[ 0 ].setMark( "X" );
-	fakeCells[ 8 ].setMark( "O" );
-	deepEqual( strategy.getNextMove( fakeCells ),
+	grid.update( 0, "X" );
+	grid.update( 8, "O" );
+	deepEqual( strategy.getNextMove( grid ),
 		"cell2", "3rd move should be cell 2 if cell 8 not available" );
 });
+
+
 

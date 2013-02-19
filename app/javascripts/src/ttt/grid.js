@@ -109,6 +109,10 @@ MyApp.createGrid = function (  ) {
                 move += cells[ i ].isMarked() ? 1 : 0;
             };
             return move + 1;
+        },
+
+        isMarked: function ( index ) {
+            return cells[ index ].isMarked();
         }
     };
 };
