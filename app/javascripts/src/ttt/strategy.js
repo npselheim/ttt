@@ -12,7 +12,7 @@ MyApp.strategy = {
 				move = grid.isMarked( 8 ) ? "cell2" : "cell8";
 				break;
 			case 5:
-				move = findWin( cells );
+				// move = grid.findWin( "X" );
 				move = grid.isMarked( 2 ) ? "cell6" : "cell2";
 		}
 

@@ -43,12 +43,21 @@ test( "get 3rd move", function () {
 		"cell8", "3rd move should be cell8, if available" );
 });
 
-test("get 3rd move, cell8 taken", function () {
+test( "get 3rd move, cell8 taken", function () {
 	expect( 1 );
 	grid.update( 0, "X" );
 	grid.update( 8, "O" );
 	deepEqual( strategy.getNextMove( grid ),
 		"cell2", "3rd move should be cell 2 if cell 8 not available" );
+});
+
+test( "find winning move for 'X'", function () {
+	expect( 2 );
+	deepEqual( grid.findWinningMoveFor( "X" ), null,
+		"no winning moves in an empty grid" );
+	grid.update( 1, "X" );
+	grid.update( 4, "X" );
+	deepEqual( grid.findWinningMoveFor( "X"), 7, "should find cell7" );
 });
 
 

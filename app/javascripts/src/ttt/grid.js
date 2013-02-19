@@ -30,9 +30,8 @@ MyApp.createGrid = function (  ) {
             [0, 4, 8],
             [2, 4, 6]
         ],
-        ARRAY_LENGTH = WIN_ROWS.length,
-        ROW_LENGTH = 3,
-        CELLS_LENGTH = 9,
+        WIN_ROWS_LENGTH = WIN_ROWS.length,
+        GRID_CELLS_LENGTH = 9,
 
         getCellValue = function ( index ) {
             var mark = cells[ index ].getMark();
@@ -46,9 +45,19 @@ MyApp.createGrid = function (  ) {
                 sum += getCellValue( row[ i ] );
             };
             return sum;
+        },
+
+        checkRowsForValue = function ( value ) {
+            var i, row, sum;
+            for ( i = 0; i < WIN_ROWS_LENGTH; i += 1 ) {
+                row = WIN_ROWS[ i ];
+                sum = getRowValue( row );
+                if ( sum === value ) return row;
+            }
+            return null;
         };
 
-    for ( i = 0; i < CELLS_LENGTH; i += 1 ) {
+    for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
         cells[ i ] = MyApp.createCell( "cell" + i, i );
     };
 
@@ -61,15 +70,28 @@ MyApp.createGrid = function (  ) {
         },
 
         findWinningRow: function ( mark ) {
-            var i, sum, row, win = 3 * mark.charCodeAt( 0 );
-            for ( i = 0; i < ARRAY_LENGTH; i += 1 ) {
-                row = WIN_ROWS[ i ];
-                sum = getRowValue( row );
-                if ( sum === win ) return row;
-            };
+            return checkRowsForValue( 3 * mark.charCodeAt( 0 ) );
+            // var i, sum, row, win = 3 * mark.charCodeAt( 0 );
+            // for ( i = 0; i < WIN_ROWS_LENGTH; i += 1 ) {
+            //     row = WIN_ROWS[ i ];
+            //     sum = getRowValue( row );
+            //     if ( sum === win ) return row;
+            // };
 
-            // no winning row found
-            return null;
+            // // no winning row found
+            // return null;
+        },
+
+        findWinningMoveFor: function ( mark ) {
+            var i, row;
+            row = checkRowsForValue( 2 * mark.charCodeAt( 0 ) );
+            if ( row === null ) return null;
+
+            for ( i = 0; i < 3; i += 1 ) {
+                if ( !cells[ row[ i ] ].isMarked() ) return row[ i ];
+            }
+
+            throw new Error( "should have found an empty cell in " + row );
         },
 
         formatWinningRow: function ( row ) {
@@ -97,7 +119,7 @@ MyApp.createGrid = function (  ) {
 
         isFull: function () {
             var i;
-            for ( i = 0; i < CELLS_LENGTH; i +=1 )
+            for ( i = 0; i < GRID_CELLS_LENGTH; i +=1 )
                 if ( !cells[ i ].isMarked() ) return false;
             return true;
         },
@@ -105,7 +127,7 @@ MyApp.createGrid = function (  ) {
         getMoveNo: function () {
             var i,
                 move = 0;
-            for ( i = 0; i < 9; i += 1 ) {
+            for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
                 move += cells[ i ].isMarked() ? 1 : 0;
             };
             return move + 1;
@@ -113,6 +135,7 @@ MyApp.createGrid = function (  ) {
 
         isMarked: function ( index ) {
             return cells[ index ].isMarked();
-        }
+        },
+
     };
 };
