@@ -3,7 +3,7 @@ MyApp.strategy = {
 	getNextMove: function ( cells ) {
 		var move;
 
-		switch ( this.getMoveNo ( cells ) )
+		switch ( this.getMoveNo( cells ) )
 		{
 			case 1:
 				move = "cell0";

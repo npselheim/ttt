@@ -1,8 +1,9 @@
-var grid;
+var grid,
+	$fixture = jQuery( "#qunit-fixture" );
 
 module( "Grid Tests", {
 	setup: function() {
-		$fixture.append( 
+		$fixture.append(
 			"<table><tr>" +
 				"<td id='cell0'></td>" +
 				"<td id='cell1'></td>" +
@@ -15,7 +16,7 @@ module( "Grid Tests", {
 				"<td id='cell8'></td>" +
 			"</tr></table>" );
 		grid = MyApp.createGrid();
-	}, 
+	},
 	teardown: function() {
 		grid = null;
 		$fixture.empty();
