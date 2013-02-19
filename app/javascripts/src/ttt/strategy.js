@@ -5,68 +5,52 @@ MyApp.strategy = {
 
 		var move;
 
-		switch ( grid.getMoveNo() )
-		{
+		// if there's a winner, take it
+		move = grid.findWinningMoveFor( "X" );
+		if ( move !== null ) return move;
+
+		// if "O" might win, block it
+		move = grid.findWinningMoveFor( "O" );
+		if (move !== null ) return move;
+
+		switch ( grid.getMoveNo() ) {
+
 			// "X" moves
 			case 1:
+				// always take the top-left corner
 				move = 0;
 				break;
 			case 3:
+				// now try to get the opposite corner
+				// if not available, one of the other corners will do
 				move = grid.isMarked( 8 ) ? 2 : 8;
 				break;
 			case 5:
-				// if there's a winner, take it
-				move = grid.findWinningMoveFor( "X" );
-				if ( move !== null ) break;
-
-				// if "O" might win, block it
-				move = grid.findWinningMoveFor( "O" );
-				if (move !== null ) break;
-
-				// best move
+				// if we get this far and there's no win or block,
+				// one of the corners must be open - take it
 				move = grid.isMarked( 2 ) ? 6 : 2;
 				break;
-			case 7:
-				// if there's a winner, take it
-				move = grid.findWinningMoveFor( "X" );
-				if ( move !== null ) break;
 
-				// if "O" might win, block it
-				move = grid.findWinningMoveFor( "O" );
-				if (move !== null ) break;
-
-				// should never reach this point
-				move = grid.findFirstOpenCell();
-				break;
-			case 9:
-				// find the only cell left
-				move = grid.findFirstOpenCell();
-				break;
 
 			// "O" moves
 			case 2:
+				// if X has a corner, take the center
+				if ( grid.isMarked( 0 ) ||
+					 grid.isMarked( 2 ) ||
+					 grid.isMarked( 6 ) ||
+					 grid.isMarked( 8 ) ) {
+					move = 4;
+				} else {
+					move = 0;
+				};
+				break;
 
-
-		}
-
-
-
-
-
+			// all other moves should be block, win, or find last
+			// remaining open cell
+			default:
+				move = findFirstOpenCell();
+		};
 
 		return move;
-	},
-
-	// getMoveNo: function ( cells ) {
-	// 	var i,
-	// 		move = 0;
-	// 	for ( i = 0; i < 9; i += 1 ) {
-	// 		move += cells[ i ].isMarked() ? 1 : 0;
-	// 	};
-	// 	return move + 1;
-	// },
-
-	findWin: function ( cells ) {
-
 	}
 };

@@ -61,7 +61,8 @@ test( "cannot modify the cells in the grid", function () {
 	expect( 1 );
 	var cells = grid.getCells();
 	cells[ 1 ] = "A";
-	deepEqual( grid.getCells()[ 1 ].getMark(), "", "cell1 should be empty, not 'A'" );
+	deepEqual( grid.getCells()[ 1 ].getMark(), "",
+		"cell1 should be empty, not 'A'" );
 });
 
 test( "cannot update cell with illegal mark", function () {
@@ -73,25 +74,35 @@ test( "cannot update cell with illegal mark", function () {
 
 test( "can find winning row", function () {
 	expect( 2 );
-	deepEqual( grid.findWinningRow( "X" ), null, "should not find winning row in blank grid" );
-	grid.update( 0, "X" );
-	grid.update( 1, "X" );
-	grid.update( 2, "X" );
-	deepEqual( grid.findWinningRow( "X" ), [0, 1, 2], "should find winning row for 'X'");
+	deepEqual( grid.findWinningRow( "X" ), null,
+		"should not find winning row in blank grid" );
+	// set up a winning row for X
+	helper.gridSetup( grid, [ 0, 8, 2, 6, 1 ] );
+	deepEqual( grid.findWinningRow( "X" ), [0, 1, 2],
+		"should find winning row for 'X'");
 });
 
 test( "can format winning row", function () {
 	expect( 9 );
 	grid.formatWinningRow( [ 2, 5, 8] );
-	deepEqual( jQuery( "td#cell0" ).hasClass("winner_cell"), false, "cell0 should not be a winner" );
-	deepEqual( jQuery( "td#cell1" ).hasClass("winner_cell"), false, "cell1 should not be a winner" );
-	deepEqual( jQuery( "td#cell2" ).hasClass("winner_cell"), true, "cell2 should be a winner" );
-	deepEqual( jQuery( "td#cell3" ).hasClass("winner_cell"), false, "cell3 should not be a winner" );
-	deepEqual( jQuery( "td#cell4" ).hasClass("winner_cell"), false, "cell4 should not be a winner" );
-	deepEqual( jQuery( "td#cell5" ).hasClass("winner_cell"), true, "cell5 should be a winner" );
-	deepEqual( jQuery( "td#cell6" ).hasClass("winner_cell"), false, "cell6 should not be a winner");
-	deepEqual( jQuery( "td#cell7" ).hasClass("winner_cell"), false, "cell7 should not be a winner" );
-	deepEqual( jQuery( "td#cell8" ).hasClass("winner_cell"), true, "cell8 should be a winner" );
+	deepEqual( jQuery( "td#cell0" ).hasClass("winner_cell"), false,
+		"cell0 should not be a winner" );
+	deepEqual( jQuery( "td#cell1" ).hasClass("winner_cell"), false,
+		"cell1 should not be a winner" );
+	deepEqual( jQuery( "td#cell2" ).hasClass("winner_cell"), true,
+		"cell2 should be a winner" );
+	deepEqual( jQuery( "td#cell3" ).hasClass("winner_cell"), false,
+		"cell3 should not be a winner" );
+	deepEqual( jQuery( "td#cell4" ).hasClass("winner_cell"), false,
+		"cell4 should not be a winner" );
+	deepEqual( jQuery( "td#cell5" ).hasClass("winner_cell"), true,
+		"cell5 should be a winner" );
+	deepEqual( jQuery( "td#cell6" ).hasClass("winner_cell"), false,
+		"cell6 should not be a winner");
+	deepEqual( jQuery( "td#cell7" ).hasClass("winner_cell"), false,
+		"cell7 should not be a winner" );
+	deepEqual( jQuery( "td#cell8" ).hasClass("winner_cell"), true,
+		"cell8 should be a winner" );
 });
 
 test( "isFull returns false for empty grid", function () {
