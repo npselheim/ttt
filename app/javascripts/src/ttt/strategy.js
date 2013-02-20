@@ -3,14 +3,19 @@ MyApp.strategy = {
 	getNextMove: function ( grid ) {
 		"use strict";
 
-		var move;
+		var moveNo, move, myMark, opponent;
+
+		moveNo = grid.getMoveNo();
+
+		myMark = moveNo % 2 === 1 ? "X" : "O";
+		opponent = myMark === "X" ? "O" : "X";
 
 		// if there's a winner, take it
-		move = grid.findWinningMoveFor( "X" );
+		move = grid.findWinningMoveFor( myMark );
 		if ( move !== null ) return move;
 
-		// if "O" might win, block it
-		move = grid.findWinningMoveFor( "O" );
+		// if opponent might win, block it
+		move = grid.findWinningMoveFor( opponent );
 		if (move !== null ) return move;
 
 		switch ( grid.getMoveNo() ) {
