@@ -11,6 +11,7 @@ MyApp.controller = function () {
         mode,
         mark,
         grid,
+        player,
         playerMark,
 
     init = function () {
@@ -20,12 +21,13 @@ MyApp.controller = function () {
         $mode = jQuery( 'input[name="modeGroup"]' );
         $xo = jQuery( 'input[name="xoGroup"]' );
 
-        $startBtn.one( "click", start );
+        $startBtn.click( start );
         $mode.change( setMode );
         $xo.change( setPlayerMark );
         $mode.change();
         $xo.change();
         $message.text( "Start button is now activated" );
+        player = MyApp.player;
     },
 
     setMode = function () {
@@ -52,11 +54,10 @@ MyApp.controller = function () {
     },
 
     start = function () {
-        console.log( "start ..." );
         reset();
 
         if ( mode === "1" ) {
-            MyApp.player.setup( playerMark );
+            player.setup( playerMark );
         };
 
         $grid.click( processMove );
@@ -103,6 +104,7 @@ MyApp.controller = function () {
 
     reset = function () {
         mark = "X";
+        player.reset();
         grid = MyApp.createGrid();
         jQuery( ".cell" )
             .removeClass( "winner_cell" )
@@ -111,7 +113,7 @@ MyApp.controller = function () {
 
     gameOver = function () {
         $grid.off( "click", processMove );
-        $startBtn.one( "click", start );
+        // $startBtn.one( "click", start );
     };
 
     init();

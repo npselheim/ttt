@@ -17,9 +17,11 @@ MyApp.player =  {
 	},
 
 	setup: function( playerMark ) {
-
 		this.mark = playerMark;
-		console.log( playerMark, this.mark);
 		$.subscribe( "grid-update", this.makeMove("grid-update") );
+	},
+
+	reset: function () {
+		$.unsubscribe( "grid-update" );
 	}
 }
