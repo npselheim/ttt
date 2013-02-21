@@ -51,6 +51,11 @@ test( "get 5th move, no win, no block", function () {
 test( "if X has a corner, take the center on 2nd move", function () {
 	expect( 1 );
 	helper.gridSetup( grid, [ 0 ] );
-	deepEqual( strategy.getNextMove ( grid ), 4,
-		"should take opposite corner" );
+	deepEqual( strategy.getNextMove( grid ), 4, "should take the center" );
 });
+
+test( "2nd move, X doesn't have a corner", function () {
+	expect( 1 );
+	helper.gridSetup( grid, [ 1 ] );
+	deepEqual( strategy.getNextMove( grid ), 0, "should take the corner" );
+})

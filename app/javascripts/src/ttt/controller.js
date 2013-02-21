@@ -15,21 +15,28 @@ MyApp.controller = function () {
         playerMark,
 
     init = function () {
+        // initialize DOM references
         $startBtn = jQuery( "input#startBtn" );
         $grid = jQuery( "div#grid" );
         $message = jQuery( "td#message" );
         $mode = jQuery( 'input[name="modeGroup"]' );
         $xo = jQuery( 'input[name="xoGroup"]' );
 
+        // set up events
         $startBtn.click( start );
         $mode.change( setMode );
         $xo.change( setPlayerMark );
+
+        // trigger radio button events to initialize settings
         $mode.change();
         $xo.change();
-        $message.text( "Start button is now activated" );
+
+
+        $message.text( "Click the start buttonto play" );
         player = MyApp.player;
     },
 
+    // gets the value set by the mode radio buttons
     setMode = function () {
         var $xoForm;
 
@@ -46,6 +53,7 @@ MyApp.controller = function () {
         }
     },
 
+    // gets the value set by the one/two players radio buttons
     setPlayerMark = function () {
         var mark;
         mark = jQuery( "#xoForm input:checked" ).val();
@@ -54,6 +62,7 @@ MyApp.controller = function () {
     },
 
     start = function () {
+        // clean up any leftovers from a previous game
         reset();
 
         if ( mode === "1" ) {
@@ -68,8 +77,9 @@ MyApp.controller = function () {
     },
 
     processMove = function ( e ) {
-        // setup
         var cell, $cell, row, index;
+
+        // initialize variables
         cell = e.target.id;
         $cell = jQuery( "td#" + cell );
         index = cell.charAt( 4 );
@@ -80,6 +90,7 @@ MyApp.controller = function () {
         // show the player's move on the grid
         $cell.text( mark );
 
+        // check to see if anybody has won yet
         row = grid.findWinningRow( mark );
         if ( row !== null ) {
             // we have a winner!
@@ -89,6 +100,7 @@ MyApp.controller = function () {
             return false;
         };
 
+        // check to see if the game is drawn
         if ( grid.isFull() ) {
             // we have a draw...
             $message.text( "Draw! Nobody wins! Try again?" );
@@ -102,6 +114,7 @@ MyApp.controller = function () {
         return false;
     },
 
+    // clean up before starting a new game
     reset = function () {
         mark = "X";
         player.reset();
@@ -113,7 +126,6 @@ MyApp.controller = function () {
 
     gameOver = function () {
         $grid.off( "click", processMove );
-        // $startBtn.one( "click", start );
     };
 
     init();
