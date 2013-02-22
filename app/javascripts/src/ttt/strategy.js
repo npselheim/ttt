@@ -12,11 +12,15 @@ MyApp.strategy = {
 
 		// if there's a winner, take it
 		move = grid.findWinningMoveFor( myMark );
-		if ( move !== null ) return move;
+		if ( move !== null ) {
+			return move;
+		};
 
 		// if opponent might win, block it
 		move = grid.findWinningMoveFor( opponent );
-		if (move !== null ) return move;
+		if (move !== null ) {
+			return move;
+		};
 
 		switch ( grid.getMoveNo() ) {
 

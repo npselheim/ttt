@@ -33,71 +33,117 @@ MyApp.createGrid = function (  ) {
         WIN_ROWS_LENGTH = WIN_ROWS.length,
         GRID_CELLS_LENGTH = 9,
 
+        /**
+         * produces the value of a cell based on the character it contains
+         * @param  {number} index the index of the cell in the cells array
+         * @return {number} the value of the cell
+         */
         getCellValue = function ( index ) {
             var mark = cells[ index ].getMark();
             return mark ? mark.charCodeAt( 0 ) : 0
         },
 
+        /**
+         * produces the total sum value for multiple cells
+         * @param  {array of number} row an array of cell indexes identifying
+         * the cell values to be summed
+         * @return {number} the sum of the values of the specified cells
+         */
         getRowValue = function ( row ) {
-            var i,
-                sum = 0;
-           for ( i = 0; i < row.length; i += 1 ) {
-                sum += getCellValue( row[ i ] );
-            };
-            return sum;
+            return row.reduce( function( prev, cur, index, array ) {
+                return prev + getCellValue( cur );
+            }, 0 );
         },
 
+        /**
+         * Compares the provided value with the total row values of each
+         * possible winning row combination. If there's a match then an array
+         * of cell indexes representing the winning row is returned.
+         * @param  {number} value the value to match.
+         * @return {array} the indexes of the cells in the identified row, or
+         * null if no matching row is found
+         */
         checkRowsForValue = function ( value ) {
-            var i, row, sum;
-            for ( i = 0; i < WIN_ROWS_LENGTH; i += 1 ) {
-                row = WIN_ROWS[ i ];
-                sum = getRowValue( row );
-                if ( sum === value ) return row;
-            };
-            return null;
+            var result = WIN_ROWS.map( function( item, index, array ) {
+                return getRowValue( item );
+            }).indexOf( value );
+            return result < 0 ? null : WIN_ROWS[ result ];
         };
 
+    // initialilze the cells array
     for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
         cells[ i ] = MyApp.createCell( "cell" + i, i );
     };
 
-    /** @scope MyApp.grid */
     return {
 
+        /**
+         * Makes a deep copy of the cells array and returns the copy.
+         * @return {array} deep copy of the cells array
+         */
         getCells: function () {
             // return a deep copy of the cells array
             return jQuery.extend( true, [], cells );
         },
 
+        /**
+         * Examines the cells array to determine if any of the winnning row
+         * combinations all contain the same mark.
+         * @param  {string} mark the mark to look for in the cells array
+         * @return {array} the indexes of the cells in the identified row, or
+         * null if no winning row is found
+         */
         findWinningRow: function ( mark ) {
             return checkRowsForValue( 3 * mark.charCodeAt( 0 ) );
         },
 
+        /**
+         * Examines the cells array to determine if a winning move is available,
+         * identified as a winning row combination with two cells containing the
+         * target mark and one cell that is not marked.
+         * @param  {string} mark the mark to look for in the cells array
+         * @return {array} the index of the cell in the cells array that will
+         * win the game, or null if no winning move is found
+         */
         findWinningMoveFor: function ( mark ) {
-            var i, row;
+            var row;
             row = checkRowsForValue( 2 * mark.charCodeAt( 0 ) );
-            if ( row === null ) return null;
-
-            for ( i = 0; i < 3; i += 1 ) {
-                if ( !this.isMarked( row[ i ] ) ) return row[ i ];
-            }
-
-            throw new Error( "should have found an empty cell in " + row );
-        },
-
-        formatWinningRow: function ( row ) {
-            var i,
-                rowLength = row.length;
-
-            for ( i = 0; i < rowLength; i += 1 ) {
-                jQuery( "td#cell" + row[i] ).addClass( "winner_cell" );
+            if ( row === null ) {
+                return null;
             };
+
+            return row [
+                row.map( function( item, index, array ) {
+                    return getCellValue( item );
+                }).indexOf( 0 )
+            ];
         },
 
+        /**
+         * Adds a class attribute to each of the cells in the winning row.
+         * @param  {array} row the indexes of the cells
+         * @return nothing
+         */
+        formatWinningRow: function ( row ) {
+            row.forEach( function( item, index, array ) {
+                jQuery( "td#cell" + item ).addClass( "winner_cell" );
+            });
+        },
+
+        /**
+         * Record the user's move by applying the specified mark to the
+         * specified cell.
+         * @param  {number} cellIndex the index of the cell to mark
+         * @param  {string} mark the mark to place on the cell
+         * @return {boolean} true if the update is successful, false if the cell
+         * is already marked
+         */
         update: function ( cellIndex, mark ) {
 
             // if the cell is alreay marked, do nothing
-            if ( this.isMarked( cellIndex ) ) return false;
+            if ( this.isMarked( cellIndex ) ) {
+                return false;
+            };
 
             // allow only "X" or "O"
             if ( mark !== "X" && mark !== "O" ) {
@@ -108,39 +154,56 @@ MyApp.createGrid = function (  ) {
             return true;
         },
 
+        /**
+         * Indicates whether there are any more moves available on the game
+         * grid.
+         * @return {Boolean} true if the game grid is filled and no more moves
+         * are available.
+         */
         isFull: function () {
             return this.findFirstOpenCell() === null ? true : false;
         },
 
+        /**
+         * Get the current move number in the sequence of moves, where X makes
+         * move 1, O makes move 2, etc.
+         * @return {number} the current move number, i.e. the number of previous
+         * moves plus one.
+         */
         getMoveNo: function () {
-            var i,
-                move = 0;
-            for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
-                move += this.isMarked( i ) ? 1 : 0;
-            };
-            return move + 1;
+             return cells.reduce( function( prev, cur, index, array ) {
+                return prev + ( cur.isMarked() ? 1 : 0 );
+            }, 0 ) + 1;
         },
 
+        /**
+         * Indicates whether the specified cell contains a mark.
+         * @param  {number}  index the index of the cell in the cells array
+         * @return {Boolean} true if the cell is marked
+         */
         isMarked: function ( index ) {
             return cells[ index ].isMarked();
         },
 
-        findFirstOpenCell: function ( cells ) {
-            var i,
-                list,
-                len;
+        /**
+         * Finds the first cell in the list of cell indexes provided that
+         * does not contain a mark.
+         * @param  {arrray} cellList indexes of the cells to examine in the cells
+         * array
+         * @return {number} the index of the first umnarked cell found, or null
+         * if none found
+         */
+        findFirstOpenCell: function ( cellList ) {
+            var list,
+                cellNo;
 
-            if ( typeof cells === "undefined" ) {
-                list = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ];
-            } else {
-                list = cells;
-            }
+            list = cellList || [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ];
 
-            len = list.length;
-            for ( i = 0; i < len; i += 1 ) {
-                if ( !this.isMarked( list[ i ] ) ) return i;
-            }
-            return null;
+            cellNo = list.map( function( item, index, array ) {
+                return cells[ item ].isMarked();
+            }).indexOf( false );
+
+            return cellNo < 0 ? null : cellNo;
         }
     };
 };

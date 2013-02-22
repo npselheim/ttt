@@ -32,21 +32,24 @@ test( "Can reference the grid object", function () {
 test( "cannot access cells directly", function () {
 	expect( 2 );
 	var cells = grid.cells;
-	deepEqual( jQuery.isArray( cells ), false, "should not have access to private field cells" );
+	deepEqual( jQuery.isArray( cells ), false,
+		"should not have access to private field cells" );
 	deepEqual( typeof cells, "undefined", "cells should be undefined" );
 });
 
 test( "grid has 9 cells", function () {
 	expect( 2 );
 	cells = grid.getCells();
-	deepEqual( jQuery.isArray( cells ), true, "grid should return the array of cells" );
+	deepEqual( jQuery.isArray( cells ), true,
+		"grid should return the array of cells" );
 	deepEqual( cells.length, 9, "grid should have 9 cells" );
 });
 
 test( "Can mark a cell with 'X'", function () {
 	expect( 1 );
 	grid.update( 1, "X" );
-	deepEqual( grid.getCells()[ 1 ].getMark(), "X", "cell1 should contain an 'X'" );
+	deepEqual( grid.getCells()[ 1 ].getMark(), "X",
+		"cell1 should contain an 'X'" );
 });
 
 test( "returns a copy of the cells array", function () {
@@ -54,7 +57,8 @@ test( "returns a copy of the cells array", function () {
 	var cells = grid.getCells();
 	cells.shift();
 	deepEqual( cells.length, 8, "array should be shortened to 8 elements");
-	deepEqual( grid.getCells().length, 9, "grid array should remain unchanged" );
+	deepEqual( grid.getCells().length, 9,
+		"grid array should remain unchanged" );
 });
 
 test( "cannot modify the cells in the grid", function () {

@@ -85,7 +85,9 @@ MyApp.controller = function () {
         index = cell.charAt( 4 );
 
         // reject a click on an occupied cell
-        if ( !grid.update( index, mark ) ) return false;
+        if ( !grid.update( index, mark ) ) {
+            return false;
+        };
 
         // show the player's move on the grid
         $cell.text( mark );

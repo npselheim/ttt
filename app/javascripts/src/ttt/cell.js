@@ -1,8 +1,11 @@
-/**
-    Creates cell objects. A cell is one square on the
-    tic-tac-toe board that starts out blank and can be
-    marked with either an 'X' or an 'O'
-    @class
+   /**
+    * Creates cell objects. A cell represents one square on the tic-tec-toe
+    * board that starts out blank anc can be marked with a single ASCII
+    * character, typically 'X' or 'O'
+    * @param  {string} name should correspond to a DOM element
+    * @param  {number} index index of the cell in an array of cells representing
+    * the game grid
+    * @return {cell object}
     */
 MyApp.createCell = function ( name, index ) {
     "use strict";
@@ -14,7 +17,9 @@ MyApp.createCell = function ( name, index ) {
         */
     var mark = '';
 
-    if ( index < 0 || index > 8 ) return null;
+    if ( index < 0 || index > 8 ) {
+        return null;
+    };
 
     return {
         /**
@@ -22,7 +27,9 @@ MyApp.createCell = function ( name, index ) {
             @ param {string} value of the mark to show in this cell
             */
         setMark: function (value) {
-            if ( typeof value !== "string" ) return;
+            if ( typeof value !== "string" ) {
+                return;
+            };
 
             mark = value[0];
         },
