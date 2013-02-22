@@ -29,20 +29,26 @@
 						<td class="cell" id="cell8">&nbsp;</td>
 					</tr>
 					<tr>
-						<td></td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td colspan="3" id="message">&nbsp;</td>
 					</tr>
 				</table>
 			</div>
-			<h2>Tic Tac Toe demo</h2>
+			<h2>Tic-Tac-Toe Demo</h2>
 			<p>
-				For now, all you can do is play with yourself, or two people can play if they
-				want to hand off the mouse. Eventually I will implement a program player that will never lose, so users can try their skill against the computer.
+				Programming Tic-Tac-Toe is not difficult and is generally considered a high school level exercise. My objective here is to learn the JavaScript language and to try out some best practices with respect to JavaScript design.
 			</p>
-			<p>
-				Programming a Tic Tac Toe game is not difficult and is generally considered to be a high school level exercise. My objective here is to learn the JavaScript language and to try out  some best practices with respect to JavaScript design.
+			<ul>
+				<li>single global variable</li>
+				<li>keep html, css, and js separate</li>
+				<li>one class per file</li>
+				<li>unit tests with QUnit</li>
+				<li>documentation with JSDoc</li>
+				<li>use array idioms instead of for loops</li>
+				<li>pass JSLint</li>
+			</ul>
 			<div id="setup">
 				<form name="modeForm" id="modeForm">
 					Select the game mode:<br>
@@ -56,11 +62,13 @@
 					<input id="X" name="xoGroup" type="radio" value="X" checked >X</input><br/>
 					<input id="O" name="xoGroup" type="radio" value="O">O</input>
 				</form>
+				<input type="button" value="Start" name="startBtn" id="startBtn" />
 			</div>
-			<div>
+<!--			<div>
 				<br>
 				<input type="button" value="Start" name="startBtn" id="startBtn" />
 			</div>
+-->
 			<script type="text/javascript" src="javascripts/src/ttt/controller.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/cell.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/grid.js"></script>
