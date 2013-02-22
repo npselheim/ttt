@@ -1,3 +1,5 @@
+/*global MyApp, jQuery */
+
 
 /**
 
@@ -15,7 +17,7 @@
 
     @namespace
  */
-MyApp.createGrid = function (  ) {
+MyApp.createGrid = function () {
     "use strict";
 
     var cells = [],
@@ -30,7 +32,6 @@ MyApp.createGrid = function (  ) {
             [0, 4, 8],
             [2, 4, 6]
         ],
-        WIN_ROWS_LENGTH = WIN_ROWS.length,
         GRID_CELLS_LENGTH = 9,
 
         /**
@@ -38,9 +39,9 @@ MyApp.createGrid = function (  ) {
          * @param  {number} index the index of the cell in the cells array
          * @return {number} the value of the cell
          */
-        getCellValue = function ( index ) {
-            var mark = cells[ index ].getMark();
-            return mark ? mark.charCodeAt( 0 ) : 0
+        getCellValue = function (index) {
+            var mark = cells[index].getMark();
+            return mark ? mark.charCodeAt(0) : 0;
         },
 
         /**
@@ -49,10 +50,10 @@ MyApp.createGrid = function (  ) {
          * the cell values to be summed
          * @return {number} the sum of the values of the specified cells
          */
-        getRowValue = function ( row ) {
-            return row.reduce( function( prev, cur, index, array ) {
-                return prev + getCellValue( cur );
-            }, 0 );
+        getRowValue = function (row) {
+            return row.reduce(function (prev, cur, index, array) {
+                return prev + getCellValue(cur);
+            }, 0);
         },
 
         /**
@@ -63,17 +64,17 @@ MyApp.createGrid = function (  ) {
          * @return {array} the indexes of the cells in the identified row, or
          * null if no matching row is found
          */
-        checkRowsForValue = function ( value ) {
-            var result = WIN_ROWS.map( function( item, index, array ) {
-                return getRowValue( item );
-            }).indexOf( value );
-            return result < 0 ? null : WIN_ROWS[ result ];
+        checkRowsForValue = function (value) {
+            var result = WIN_ROWS.map(function (item, index, array) {
+                return getRowValue(item);
+            }).indexOf(value);
+            return result < 0 ? null : WIN_ROWS[result];
         };
 
     // initialilze the cells array
-    for ( i = 0; i < GRID_CELLS_LENGTH; i += 1 ) {
-        cells[ i ] = MyApp.createCell( "cell" + i, i );
-    };
+    for (i = 0; i < GRID_CELLS_LENGTH; i += 1) {
+        cells[i] = MyApp.createCell("cell" + i, i);
+    }
 
     return {
 
@@ -83,7 +84,7 @@ MyApp.createGrid = function (  ) {
          */
         getCells: function () {
             // return a deep copy of the cells array
-            return jQuery.extend( true, [], cells );
+            return jQuery.extend(true, [], cells);
         },
 
         /**
@@ -93,8 +94,8 @@ MyApp.createGrid = function (  ) {
          * @return {array} the indexes of the cells in the identified row, or
          * null if no winning row is found
          */
-        findWinningRow: function ( mark ) {
-            return checkRowsForValue( 3 * mark.charCodeAt( 0 ) );
+        findWinningRow: function (mark) {
+            return checkRowsForValue(3 * mark.charCodeAt(0));
         },
 
         /**
@@ -105,17 +106,17 @@ MyApp.createGrid = function (  ) {
          * @return {array} the index of the cell in the cells array that will
          * win the game, or null if no winning move is found
          */
-        findWinningMoveFor: function ( mark ) {
+        findWinningMoveFor: function (mark) {
             var row;
-            row = checkRowsForValue( 2 * mark.charCodeAt( 0 ) );
-            if ( row === null ) {
+            row = checkRowsForValue(2 * mark.charCodeAt(0));
+            if (row === null) {
                 return null;
-            };
+            }
 
-            return row [
-                row.map( function( item, index, array ) {
-                    return getCellValue( item );
-                }).indexOf( 0 )
+            return row[
+                row.map(function (item, index, array) {
+                    return getCellValue(item);
+                }).indexOf(0)
             ];
         },
 
@@ -124,9 +125,9 @@ MyApp.createGrid = function (  ) {
          * @param  {array} row the indexes of the cells
          * @return nothing
          */
-        formatWinningRow: function ( row ) {
-            row.forEach( function( item, index, array ) {
-                jQuery( "td#cell" + item ).addClass( "winner_cell" );
+        formatWinningRow: function (row) {
+            row.forEach(function (item, index, array) {
+                jQuery("td#cell" + item).addClass("winner_cell");
             });
         },
 
@@ -138,19 +139,19 @@ MyApp.createGrid = function (  ) {
          * @return {boolean} true if the update is successful, false if the cell
          * is already marked
          */
-        update: function ( cellIndex, mark ) {
+        update: function (cellIndex, mark) {
 
             // if the cell is alreay marked, do nothing
-            if ( this.isMarked( cellIndex ) ) {
+            if (this.isMarked(cellIndex)) {
                 return false;
-            };
+            }
 
             // allow only "X" or "O"
-            if ( mark !== "X" && mark !== "O" ) {
-                throw new Error( "mark must be 'X' or 'O'" );
-            };
+            if (mark !== "X" && mark !== "O") {
+                throw new Error("mark must be 'X' or 'O'");
+            }
 
-            cells[ cellIndex ].setMark( mark );
+            cells[cellIndex].setMark(mark);
             return true;
         },
 
@@ -171,9 +172,9 @@ MyApp.createGrid = function (  ) {
          * moves plus one.
          */
         getMoveNo: function () {
-             return cells.reduce( function( prev, cur, index, array ) {
-                return prev + ( cur.isMarked() ? 1 : 0 );
-            }, 0 ) + 1;
+            return cells.reduce(function (prev, cur, index, array) {
+                return prev + (cur.isMarked() ? 1 : 0);
+            }, 0) + 1;
         },
 
         /**
@@ -181,8 +182,8 @@ MyApp.createGrid = function (  ) {
          * @param  {number}  index the index of the cell in the cells array
          * @return {Boolean} true if the cell is marked
          */
-        isMarked: function ( index ) {
-            return cells[ index ].isMarked();
+        isMarked: function (index) {
+            return cells[index].isMarked();
         },
 
         /**
@@ -193,15 +194,15 @@ MyApp.createGrid = function (  ) {
          * @return {number} the index of the first umnarked cell found, or null
          * if none found
          */
-        findFirstOpenCell: function ( cellList ) {
+        findFirstOpenCell: function (cellList) {
             var list,
                 cellNo;
 
-            list = cellList || [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ];
+            list = cellList || [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-            cellNo = list.map( function( item, index, array ) {
-                return cells[ item ].isMarked();
-            }).indexOf( false );
+            cellNo = list.map(function (item, index, array) {
+                return cells[item].isMarked();
+            }).indexOf(false);
 
             return cellNo < 0 ? null : cellNo;
         }

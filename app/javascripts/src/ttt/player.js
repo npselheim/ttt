@@ -1,27 +1,36 @@
+/*global MyApp, jQuery, $ */
+
+
 MyApp.player =  {
 
-	mark: null,
+    mark: null,
 
-	makeMove: function ( name ) {
-		var that = this;
+    makeMove: function (name) {
+        "use strict";
 
-		return function( _, mark, grid ) {
-			var move;
+        var that = this;
 
-			if ( mark === that.mark ) {
-				move = MyApp.strategy.getNextMove( grid );
+        return function (x, mark, grid) {
+            var move;
 
-				jQuery( "td#cell" + move ).click();
-			};
-		};
-	},
+            if (mark === that.mark) {
+                move = MyApp.strategy.getNextMove(grid);
 
-	setup: function( playerMark ) {
-		this.mark = playerMark;
-		$.subscribe( "grid-update", this.makeMove("grid-update") );
-	},
+                jQuery("td#cell" + move).click();
+            }
+        };
+    },
 
-	reset: function () {
-		$.unsubscribe( "grid-update" );
-	}
-}
+    setup: function (playerMark) {
+        "use strict";
+
+        this.mark = playerMark;
+        $.subscribe("grid-update", this.makeMove("grid-update"));
+    },
+
+    reset: function () {
+        "use strict";
+
+        $.unsubscribe("grid-update");
+    }
+};

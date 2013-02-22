@@ -1,3 +1,6 @@
+/*global MyApp */
+/*jslint unparam: true */
+
    /**
     * Creates cell objects. A cell represents one square on the tic-tec-toe
     * board that starts out blank anc can be marked with a single ASCII
@@ -7,7 +10,7 @@
     * the game grid
     * @return {cell object}
     */
-MyApp.createCell = function ( name, index ) {
+MyApp.createCell = function (name, index) {
     "use strict";
 
     /**
@@ -17,9 +20,9 @@ MyApp.createCell = function ( name, index ) {
         */
     var mark = '';
 
-    if ( index < 0 || index > 8 ) {
+    if (index < 0 || index > 8) {
         return null;
-    };
+    }
 
     return {
         /**
@@ -27,9 +30,9 @@ MyApp.createCell = function ( name, index ) {
             @ param {string} value of the mark to show in this cell
             */
         setMark: function (value) {
-            if ( typeof value !== "string" ) {
+            if (typeof value !== "string") {
                 return;
-            };
+            }
 
             mark = value[0];
         },
@@ -38,7 +41,7 @@ MyApp.createCell = function ( name, index ) {
             Retrieves the mark in this cell
             @returns {String} the mark in this cell
             */
-        getMark: function() {
+        getMark: function () {
             return mark;
         },
 
