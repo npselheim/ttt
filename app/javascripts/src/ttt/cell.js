@@ -20,6 +20,8 @@ MyApp.createCell = function (name, index) {
         */
     var mark = '';
 
+    ;
+
     if (index < 0 || index > 8) {
         return null;
     }
@@ -51,6 +53,10 @@ MyApp.createCell = function (name, index) {
             */
         isMarked: function () {
             return mark ? true : false;
+        },
+
+        toString: function () {
+            return mark ? mark : ".";
         }
     };
 };

@@ -196,15 +196,32 @@ MyApp.createGrid = function () {
          */
         findFirstOpenCell: function (cellList) {
             var list,
-                cellNo;
+                pick;
 
             list = cellList || [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-            cellNo = list.map(function (item, index, array) {
+            pick = list.map(function (item, index, array) {
                 return cells[item].isMarked();
             }).indexOf(false);
 
-            return cellNo < 0 ? null : cellNo;
+            return pick < 0 ? null : list[pick];
+        },
+
+        // getXMoves: function () {
+        //     var xMoves = [];
+        //     cells.forEach(function (item, index, arrray) {
+        //         if (item.toString() === "X") {
+        //             xMoves.push(index);
+        //         }
+        //     });
+        //     return xMoves;
+        // },
+
+        toString: function () {
+            var marks = cells.map(function (item, index, array) {
+                return item.toString();
+            });
+            return marks.join(" ");
         }
     };
 };

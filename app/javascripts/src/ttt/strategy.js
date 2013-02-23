@@ -5,15 +5,15 @@ MyApp.strategy = {
     getNextMove: function (grid) {
         "use strict";
 
-        var moveNo, move, myMark, opponent;
-
-        moveNo = grid.getMoveNo();
-
-        myMark = moveNo % 2 === 1 ? "X" : "O";
-        opponent = myMark === "X" ? "O" : "X";
+        var CORNERS = [0, 2, 6, 8],
+            SIDES = [1, 3, 5, 7],
+            CENTER = 4,
+            moveNo = grid.getMoveNo(),
+            myMark = moveNo % 2 === 1 ? "X" : "O",
+            opponent = myMark === "X" ? "O" : "X",
+            move = grid.findWinningMoveFor(myMark);
 
         // if there's a winner, take it
-        move = grid.findWinningMoveFor(myMark);
         if (move !== null) {
             return move;
         }
@@ -28,14 +28,17 @@ MyApp.strategy = {
 
         // "X" moves
         case 1:
-            // always take the top-left corner
+            // always take a corner
+            // move = CORNER[Math.floor(Math.random()*4)];
             move = 0;
             break;
+
         case 3:
             // now try to get the opposite corner
             // if not available, one of the other corners will do
             move = grid.isMarked(8) ? 2 : 8;
             break;
+
         case 5:
             // if we get this far and there's no win or block,
             // one of the corners must be open - take it
@@ -45,19 +48,25 @@ MyApp.strategy = {
 
         // "O" moves
         case 2:
-            // if X has a corner, take the center
-            if (grid.isMarked(0) ||
-                    grid.isMarked(2) ||
-                    grid.isMarked(6) ||
-                    grid.isMarked(8)) {
-                move = 4;
+            // always take center, if available
+            if (!grid.isMarked(CENTER)) {
+                move = CENTER;
             } else {
-                move = 0;
+                // otherwise, take a corner
+                move = grid.findFirstOpenCell(CORNERS);
             }
             break;
+
         case 4:
-            // take a side cell to force X to block
-            move = grid.findFirstOpenCell([ 1, 3, 5, 7 ]);
+            // if X has a side, take a corner
+            if (SIDES.some(function (item, index, array) {
+                return grid.isMarked(item);
+            })) {
+                move = grid.findFirstOpenCell(CORNERS);
+            } else {
+                // take a side cell to force X to block
+                move = grid.findFirstOpenCell(SIDES);
+            }
             break;
 
         // all other moves should be block, win, or find last

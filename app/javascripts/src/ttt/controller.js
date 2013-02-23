@@ -5,11 +5,11 @@ var MyApp = {};
 MyApp.controller = function () {
     "use strict";
 
-    var $startBtn,
-        $message,
-        $grid,
-        $mode,
-        $xo,
+    var $startBtn = jQuery("input#startBtn"),
+        $grid = jQuery("div#grid"),
+        $message = jQuery("td#message"),
+        $mode = jQuery('input[name="modeGroup"]'),
+        $xo = jQuery('input[name="xoGroup"]'),
         mode,
         mark,
         grid,
@@ -17,12 +17,10 @@ MyApp.controller = function () {
         playerMark,
 
         processMove = function (e) {
-            var cell, $cell, row, index;
-
-            // initialize variables
-            cell = e.target.id;
-            $cell = jQuery("td#" + cell);
-            index = cell.charAt(4);
+            var cell = e.target.id,
+                $cell = jQuery("td#" + cell),
+                index = cell.charAt(4),
+                row = null;
 
             // reject a click on an occupied cell
             if (!grid.update(index, mark)) {
@@ -111,12 +109,6 @@ MyApp.controller = function () {
         },
 
         init = function () {
-            // initialize DOM references
-            $startBtn = jQuery("input#startBtn");
-            $grid = jQuery("div#grid");
-            $message = jQuery("td#message");
-            $mode = jQuery('input[name="modeGroup"]');
-            $xo = jQuery('input[name="xoGroup"]');
 
             // set up events
             $startBtn.click(start);

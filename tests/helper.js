@@ -1,12 +1,12 @@
 MyApp.helper = {
 
-	gridSetup: function ( grid, moves ) {
-		var mark;
+	gridSetup: function (grid, moves) {
+		var i,
+			mark = "X";
 
-		mark = "X";
-		for ( i = 0; i < moves.length; i += 1 ) {
-			grid.update( moves[ i ], mark );
-			mark = ( mark === "X" ) ? "O" : "X";
-		};
+		moves.forEach(function (item, index, array) {
+			grid.update(item, mark);
+			mark = (mark === "X") ? "O" : "X";
+		});
 	}
 }
