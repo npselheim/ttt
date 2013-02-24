@@ -35,7 +35,8 @@ test( "New cell object is not marked", function () {
 test( "setting a mark marks the cell", function () {
 	expect( 1 );
 	cell4.setMark( "A" );
-	deepEqual( cell4.isMarked(), true, "cell should be marked after mark is set" );
+	deepEqual( cell4.isMarked(), true,
+		"cell should be marked after mark is set" );
 });
 
 test( "non-string mark does not set the cell", function () {
@@ -83,7 +84,7 @@ test( "cell is marked with only the first character", function () {
 	cell4.setMark( mark );
 	result = cell4.getMark();
 	deepEqual( result.length, 1, "should be only one character" );
-	deepEqual( result, mark[ 0 ], "should be the first character" );
+	deepEqual( result, mark.substr(0, 1), "should be the first character" );
 });
 
 test( "index outside 0-8 returns null", function () {

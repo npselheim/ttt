@@ -29,14 +29,13 @@ MyApp.createCell = function (name, index) {
     return {
         /**
             Marks the cell to record a player's move
-            @ param {string} value of the mark to show in this cell
+            @ param {string} value value of the mark to show in this cell
             */
         setMark: function (value) {
             if (typeof value !== "string") {
                 return;
             }
-
-            mark = value[0];
+            mark = value.substr(0, 1);
         },
 
         /**
