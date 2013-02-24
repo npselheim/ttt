@@ -99,15 +99,8 @@ MyApp.createGrid = function () {
         findWinningMoveFor: function (mark) {
             var row;
             row = checkRowsForValue(2 * mark.charCodeAt(0));
-            if (row === null) {
-                return null;
-            }
 
-            return row[
-                row.map(function (item, index, array) {
-                    return cells[item].valueOf();
-                }).indexOf(0)
-            ];
+            return row === null ? null : this.findFirstOpenCell(row);
         },
 
         /**
@@ -197,21 +190,10 @@ MyApp.createGrid = function () {
             return pick < 0 ? null : list[pick];
         },
 
-        // getXMoves: function () {
-        //     var xMoves = [];
-        //     cells.forEach(function (item, index, arrray) {
-        //         if (item.toString() === "X") {
-        //             xMoves.push(index);
-        //         }
-        //     });
-        //     return xMoves;
-        // },
-
         toString: function () {
-            var marks = cells.map(function (item, index, array) {
+            return cells.map(function (item, index, array) {
                 return item.toString();
-            });
-            return marks.join(" ");
+            }).join(" ");
         }
     };
 };

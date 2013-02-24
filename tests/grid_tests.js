@@ -166,11 +166,3 @@ test("find first open cell, [2, 4, 6]", function() {
 	helper.gridSetup(grid, [2, 4, 6]);
 	deepEqual(grid.findFirstOpenCell([1, 3, 5, 7]), 1, "should pick cell1");
 });
-
-// test("get X moves", function() {
-// 	expect(2);
-// 	deepEqual(grid.getXMoves(), [],
-// 		"X hasn't moved yet, should be empty array");
-// 	helper.gridSetup(grid, [0, 4, 7]);
-// 	deepEqual(grid.getXMoves(), [0, 7], "should be 2 X moves");
-// });
