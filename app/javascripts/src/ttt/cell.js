@@ -57,6 +57,10 @@ MyApp.createCell = function (name, index) {
 
         toString: function () {
             return mark ? mark : ".";
+        },
+
+        valueOf: function() {
+            return mark ? mark.charCodeAt(0) : 0;
         }
     };
 };

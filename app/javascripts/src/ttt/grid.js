@@ -35,16 +35,6 @@ MyApp.createGrid = function () {
         GRID_CELLS_LENGTH = 9,
 
         /**
-         * produces the value of a cell based on the character it contains
-         * @param  {number} index the index of the cell in the cells array
-         * @return {number} the value of the cell
-         */
-        getCellValue = function (index) {
-            var mark = cells[index].getMark();
-            return mark ? mark.charCodeAt(0) : 0;
-        },
-
-        /**
          * produces the total sum value for multiple cells
          * @param  {array of number} row an array of cell indexes identifying
          * the cell values to be summed
@@ -52,7 +42,7 @@ MyApp.createGrid = function () {
          */
         getRowValue = function (row) {
             return row.reduce(function (prev, cur, index, array) {
-                return prev + getCellValue(cur);
+                return prev + cells[cur].valueOf();
             }, 0);
         },
 
@@ -115,7 +105,7 @@ MyApp.createGrid = function () {
 
             return row[
                 row.map(function (item, index, array) {
-                    return getCellValue(item);
+                    return cells[item].valueOf();
                 }).indexOf(0)
             ];
         },

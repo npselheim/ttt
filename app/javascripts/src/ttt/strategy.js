@@ -58,7 +58,7 @@ MyApp.strategy = {
             break;
 
         case 4:
-            // if X has a side, take a corner
+            // if X has a side or center, take a corner
             if (SIDES.some(function (item, index, array) {
                 return grid.isMarked(item);
             })) {
