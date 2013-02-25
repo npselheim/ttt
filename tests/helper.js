@@ -4,7 +4,7 @@ MyApp.helper = {
 		var i,
 			mark = "X";
 
-		moves.forEach(function (item, index, array) {
+		_(moves).forEach(function (item, index, array) {
 			grid.update(item, mark);
 			mark = (mark === "X") ? "O" : "X";
 		});

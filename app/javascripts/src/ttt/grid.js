@@ -41,23 +41,27 @@ MyApp.createGrid = function () {
          * @return {number} the sum of the values of the specified cells
          */
         getRowValue = function (row) {
-            return row.reduce(function (prev, cur, index, array) {
-                return prev + cells[cur].valueOf();
+           return _(row).reduce( function (memo, num) {
+                return memo + cells[num].valueOf();
             }, 0);
         },
 
         /**
          * Compares the provided value with the total row values of each
-         * possible winning row combination. If there's a match then an array
+         * possible winning combination. If there's a match then an array
          * of cell indexes representing the winning row is returned.
          * @param  {number} value the value to match.
          * @return {array} the indexes of the cells in the identified row, or
          * null if no matching row is found
          */
-        checkRowsForValue = function (value) {
-            var result = WIN_ROWS.map(function (item, index, array) {
-                return getRowValue(item);
-            }).indexOf(value);
+        checkRowsForValue = function (targetRowValue) {
+            var result = _.chain(WIN_ROWS)
+                        .map(function (item, index, array) {
+                            return getRowValue(item);
+                        })
+                        .indexOf(targetRowValue)
+                        .value();
+
             return result < 0 ? null : WIN_ROWS[result];
         };
 
@@ -85,6 +89,7 @@ MyApp.createGrid = function () {
          * null if no winning row is found
          */
         findWinningRow: function (mark) {
+            // console.log(mark, mark.charCodeAt(0));
             return checkRowsForValue(3 * mark.charCodeAt(0));
         },
 
@@ -97,9 +102,7 @@ MyApp.createGrid = function () {
          * win the game, or null if no winning move is found
          */
         findWinningMoveFor: function (mark) {
-            var row;
-            row = checkRowsForValue(2 * mark.charCodeAt(0));
-
+            var row = checkRowsForValue(2 * mark.charCodeAt(0));
             return row === null ? null : this.findFirstOpenCell(row);
         },
 
@@ -109,7 +112,7 @@ MyApp.createGrid = function () {
          * @return nothing
          */
         formatWinningRow: function (row) {
-            row.forEach(function (item, index, array) {
+            _(row).forEach(function (item, index, array) {
                 jQuery("td#cell" + item).addClass("winner_cell");
             });
         },
@@ -145,7 +148,7 @@ MyApp.createGrid = function () {
          * are available.
          */
         isFull: function () {
-            return this.findFirstOpenCell() === null ? true : false;
+            return this.findFirstOpenCell() < 0 ? true : false;
         },
 
         /**
@@ -155,7 +158,7 @@ MyApp.createGrid = function () {
          * moves plus one.
          */
         getMoveNo: function () {
-            return cells.reduce(function (prev, cur, index, array) {
+            return _(cells).reduce(function (prev, cur, index, array) {
                 return prev + (cur.isMarked() ? 1 : 0);
             }, 0) + 1;
         },
@@ -174,7 +177,7 @@ MyApp.createGrid = function () {
          * does not contain a mark.
          * @param  {arrray} cellList indexes of the cells to examine in the cells
          * array
-         * @return {number} the index of the first umnarked cell found, or null
+         * @return {number} the index of the first umnarked cell found, or -1
          * if none found
          */
         findFirstOpenCell: function (cellList) {
@@ -183,11 +186,11 @@ MyApp.createGrid = function () {
 
             list = cellList || [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-            pick = list.map(function (item, index, array) {
+            pick = _.chain(list).map(function (item, index, array) {
                 return cells[item].isMarked();
-            }).indexOf(false);
+            }).indexOf(false).value();
 
-            return pick < 0 ? null : list[pick];
+            return pick < 0 ? -1 : list[pick];
         },
 
         toString: function () {

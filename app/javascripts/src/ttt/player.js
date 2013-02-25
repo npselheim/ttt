@@ -14,9 +14,13 @@ MyApp.player =  {
             var move;
 
             if (mark === that.mark) {
-                move = MyApp.strategy.getNextMove(grid);
+                // setTimeout(function () {
+                    move = MyApp.strategy.getNextMove(grid);
+                // }, 500)
+                setTimeout(function () {
+                    jQuery("td#cell" + move).click();
+                }, 200);
 
-                jQuery("td#cell" + move).click();
             }
         };
     },

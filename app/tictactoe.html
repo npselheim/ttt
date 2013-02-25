@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="stylesheets/tictactoe.css" />
 		<link rel="stylesheet" href="../lib/qunit-1.11.0.css" />
 		<script type="text/javascript" src="../lib/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="../lib/underscore.js"></script>
 		<script type="text/javascript" src="../lib/tiny-pubsub.js"></script>
 	</head>
 	<body>
@@ -51,25 +52,24 @@
 			</ul>
 			<div id="setup">
 				<form name="modeForm" id="modeForm">
-					Select the game mode:<br>
-					<input id="modeOne" name="modeGroup" type="radio" value="1" checked>one player (against computer)</input>
-					<br>
-					<input id="modeTwo" name="modeGroup" type="radio" value="2">two players</input>
+					Select the game mode:<br />
+					<input id="modeOne" name="modeGroup" type="radio" value="1" checked />
+					one player (against computer)
+					<br />
+					<input id="modeTwo" name="modeGroup" type="radio" value="2" />
+					two players
 				</form>
-				<br>
+				<br />
 				<form name="xoForm" id="xoForm">
-					Choose X or O (X moves first):<br>
-					<input id="X" name="xoGroup" type="radio" value="X" checked >X</input><br/>
-					<input id="O" name="xoGroup" type="radio" value="O">O</input>
+					Choose X or O (X moves first):<br />
+					<input id="X" name="xoGroup" type="radio" value="X" checked />
+					X
+					<br />
+					<input id="O" name="xoGroup" type="radio" value="O" />
+					O
 				</form>
 				<input type="button" value="Start" name="startBtn" id="startBtn" />
 			</div>
-<!--			<div>
-				<br>
-				<input type="button" value="Start" name="startBtn" id="startBtn" />
-			</div>
--->
-			<script type="text/javascript" src="javascripts/src/ttt/compatibility.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/controller.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/cell.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/grid.js"></script>

@@ -59,7 +59,7 @@ MyApp.strategy = {
 
         case 4:
             // if X has a side or center, take a corner
-            if (SIDES.some(function (item, index, array) {
+            if (_(SIDES).some(function (item, index, array) {
                 return grid.isMarked(item);
             })) {
                 move = grid.findFirstOpenCell(CORNERS);
