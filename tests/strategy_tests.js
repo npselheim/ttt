@@ -4,7 +4,7 @@ var strategy = MyApp.strategy,
 
 module("Strategy Tests", {
 	setup: function () {
-		grid = MyApp.createGrid();
+		grid = new MyApp.Grid;
 	},
 	teardown: function () {
 		grid = null;

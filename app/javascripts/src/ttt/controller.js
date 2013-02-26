@@ -62,7 +62,7 @@ MyApp.controller = function () {
         reset = function () {
             mark = "X";
             player.reset();
-            grid = MyApp.createGrid();
+            grid = new MyApp.Grid;
             jQuery(".cell")
                 .removeClass("winner_cell")
                 .html("&nbsp;");
