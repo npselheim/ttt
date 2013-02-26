@@ -85,25 +85,25 @@ MyApp.controller = function () {
 
                 // gets the value set by the mode radio buttons
         setMode = function () {
-            var $xoForm;
+            var $markSelect;
 
-            mode = jQuery("#modeForm input:checked").val();
-            $xoForm = jQuery("#xoForm");
+            mode = jQuery("fieldset#modeSelect input:checked").val();
+            $markSelect = jQuery(".mark");
 
             // disable X/O selection for 2-player mode
             if (mode === "2") {
                 $xo.prop("disabled", true);
-                $xoForm.addClass("gray-out");
+                $markSelect.addClass("hidden");
             } else {
                 $xo.prop("disabled", false);
-                $xoForm.removeClass("gray-out");
+                $markSelect.removeClass("hidden");
             }
         },
 
         // gets the value set by the one/two players radio buttons
         setPlayerMark = function () {
             var mark;
-            mark = jQuery("#xoForm input:checked").val();
+            mark = jQuery("fieldset#markSelect input:checked").val();
             // internal player gets the opposite of user selection
             playerMark = mark === "X" ? "O" : "X";
         },
@@ -120,7 +120,7 @@ MyApp.controller = function () {
             $xo.change();
 
 
-            $message.text("Click the start button to play");
+            $message.text("Click the start button to play (or reset)");
             player = MyApp.player;
         };
 

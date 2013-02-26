@@ -1,14 +1,10 @@
-#demo_header {
+div#demo_header {
 	padding: 50px;
 	font-size: 1.5em;
 }
-#setup {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1em;
-}
-#ttt {
+div#ttt {
 	width: 800px;
-	height: 450px;
+	height: 520px;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	padding-left: 100px;
@@ -17,6 +13,7 @@
 .grid {
 	float: right;
 	padding: 30px;
+	margin-top: 50px;
 }
 table { border-collapse: collapse }
 .cell {
@@ -65,13 +62,21 @@ table { border-collapse: collapse }
 .winner_cell {
 	color: red;
 }
-.gray-out {
-	color: gray;
+.hidden {
+	visibility: hidden;
 }
-form {
+div#setup {
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 0.8em;
-	float: left;
 }
-.startBtn {
-	float: right;
+fieldset {
+	width: 24em;
 }
+#startBtn {
+	font-size: 1.5em;
+	margin-left: 6em;
+}
+label.mark {
+	font-size: 1.5em;
+}
+
