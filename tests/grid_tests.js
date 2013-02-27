@@ -1,26 +1,13 @@
-var grid,
+var grid = null,
 	helper = MyApp.helper;
 	$fixture = jQuery("#qunit-fixture");
 
 module("Grid Tests", {
 	setup: function() {
-		$fixture.append(
-			"<table><tr>" +
-				"<td id='cell0'></td>" +
-				"<td id='cell1'></td>" +
-				"<td id='cell2'></td>" +
-				"<td id='cell3'></td>" +
-				"<td id='cell4'></td>" +
-				"<td id='cell5'></td>" +
-				"<td id='cell6'></td>" +
-				"<td id='cell7'></td>" +
-				"<td id='cell8'></td>" +
-			"</tr></table>");
-		grid = new MyApp.Grid;
+		grid = MyApp.grid();
 	},
 	teardown: function() {
 		grid = null;
-		$fixture.empty();
 	}
 });
 
@@ -29,13 +16,13 @@ test("Can reference the grid object", function () {
 	deepEqual(typeof grid, "object", "grid should be an object");
 });
 
-// test("cannot access cells directly", function () {
-// 	expect(2);
-// 	var cells = grid.cells;
-// 	deepEqual(jQuery.isArray(cells), false,
-// 		"should not have access to private field cells");
-// 	deepEqual(typeof cells, "undefined", "cells should be undefined");
-// });
+test("cannot access cells directly", function () {
+	expect(2);
+	var cells = grid.cells;
+	deepEqual(jQuery.isArray(cells), false,
+		"should not have access to private field cells");
+	deepEqual(typeof cells, "undefined", "cells should be undefined");
+});
 
 test("grid has 9 cells", function () {
 	expect(2);
@@ -87,29 +74,6 @@ test("can find winning row", function () {
 	deepEqual(grid.findWinningRow("X"), [0, 1, 2],
 		"should find winning row for 'X'");
 	// console.log("------------------------------------");
-});
-
-test("can format winning row", function () {
-	expect(9);
-	grid.formatWinningRow([2, 5, 8]);
-	deepEqual(jQuery("td#cell0").hasClass("winner_cell"), false,
-		"cell0 should not be a winner");
-	deepEqual(jQuery("td#cell1").hasClass("winner_cell"), false,
-		"cell1 should not be a winner");
-	deepEqual(jQuery("td#cell2").hasClass("winner_cell"), true,
-		"cell2 should be a winner");
-	deepEqual(jQuery("td#cell3").hasClass("winner_cell"), false,
-		"cell3 should not be a winner");
-	deepEqual(jQuery("td#cell4").hasClass("winner_cell"), false,
-		"cell4 should not be a winner");
-	deepEqual(jQuery("td#cell5").hasClass("winner_cell"), true,
-		"cell5 should be a winner");
-	deepEqual(jQuery("td#cell6").hasClass("winner_cell"), false,
-		"cell6 should not be a winner");
-	deepEqual(jQuery("td#cell7").hasClass("winner_cell"), false,
-		"cell7 should not be a winner");
-	deepEqual(jQuery("td#cell8").hasClass("winner_cell"), true,
-		"cell8 should be a winner");
 });
 
 test("isFull returns false for empty grid", function () {
