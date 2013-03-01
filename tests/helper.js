@@ -8,5 +8,9 @@ MyApp.helper = {
 			grid.update(item, mark);
 			mark = (mark === "X") ? "O" : "X";
 		});
+	},
+
+	getNumberMarkedWith: function (mark) {
+		return jQuery("td:contains('" + mark + "')").length;
 	}
-}
+};

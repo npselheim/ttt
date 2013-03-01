@@ -2,7 +2,7 @@
 /*jslint unparam: true */
 
    /**
-    * Creates cell objects. A cell represents one square on the tic-tec-toe
+    * A cell represents one square on the tic-tec-toe
     * board that starts out blank anc can be marked with a single ASCII
     * character, typically 'X' or 'O'
     * @param  {string} name should correspond to a DOM element
@@ -10,9 +10,11 @@
     * the game grid
     * @return {cell object}
     */
-MyApp.createCell = function (name, index) {
+MyApp.Cell = function (name, index) {
     "use strict";
 
+<<<<<<< HEAD
+=======
     /**
         the mark in this cell
         @type {String}
@@ -22,44 +24,61 @@ MyApp.createCell = function (name, index) {
 
     ;
 
+>>>>>>> parent of 0849867... improve page layout and styling
     if (index < 0 || index > 8) {
-        return null;
+        throw new Error("invalid argument");
     }
 
-    return {
-        /**
-            Marks the cell to record a player's move
-            @ param {string} value value of the mark to show in this cell
-            */
-        setMark: function (value) {
-            if (typeof value !== "string") {
-                return;
-            }
-            mark = value.substr(0, 1);
-        },
+    this.mark = "";
+    this.name = name + index;
+};
 
-        /**
-            Retrieves the mark in this cell
-            @returns {String} the mark in this cell
-            */
-        getMark: function () {
-            return mark;
-        },
+MyApp.Cell.prototype = {
 
-        /**
-            Indicates the state of the cell, marked or not
-            @returns {Boolean} true if the cell has been marked
-            */
-        isMarked: function () {
-            return mark ? true : false;
-        },
+    constructor: MyApp.Cell,
 
-        toString: function () {
-            return mark ? mark : ".";
-        },
+    /**
+        Marks the cell to record a player's move
+        @ param {string} value value of the mark to show in this cell
+        */
+    setMark: function (value) {
+        "use strict";
 
-        valueOf: function() {
-            return mark ? mark.charCodeAt(0) : 0;
+        if (typeof value !== "string") {
+            return;
         }
-    };
+        this.mark = value.substr(0, 1);
+    },
+
+    /**
+        Retrieves the mark in this cell
+        @returns {String} the mark in this cell
+        */
+    getMark: function () {
+        "use strict";
+
+        return this.mark;
+    },
+
+    /**
+        Indicates the state of the cell, marked or not
+        @returns {Boolean} true if the cell has been marked
+        */
+    isMarked: function () {
+        "use strict";
+
+        return this.mark ? true : false;
+    },
+
+    toString: function () {
+        "use strict";
+
+        return this.mark || ".";
+    },
+
+    valueOf: function () {
+        "use strict";
+
+        return this.mark ? this.mark.charCodeAt(0) : 0;
+    }
 };

@@ -7,19 +7,19 @@ MyApp.controller = function () {
 
     var $startBtn = jQuery("input#startBtn"),
         $grid = jQuery("div#grid"),
-        $message = jQuery("td#message"),
         $mode = jQuery('input[name="modeGroup"]'),
         $xo = jQuery('input[name="xoGroup"]'),
-        mode,
+        // mode,
         mark,
-        grid,
-        player,
+        grid = null,
+        display =null,
+        player = MyApp.player,
         playerMark,
 
         processMove = function (e) {
-            var cell = e.target.id,
-                $cell = jQuery("td#" + cell),
-                index = cell.charAt(4),
+            // var cell = e.target.id,
+                // $cell = jQuery("td#" + cell),
+            var index = e.target.id.charAt(4),
                 row = null;
 
             // reject a click on an occupied cell
@@ -28,14 +28,15 @@ MyApp.controller = function () {
             }
 
             // show the player's move on the grid
-            $cell.text(mark);
+            // $cell.text(mark);
+            display.showMove(index, mark);
 
             // check to see if anybody has won yet
             row = grid.findWinningRow(mark);
             if (row !== null) {
                 // we have a winner!
-                grid.formatWinningRow(row);
-                $message.text("We have a winner!");
+                display.formatWinningRow(row);
+                display.showStatus("We have a winner!");
                 gameOver();
                 return false;
             }
@@ -43,13 +44,13 @@ MyApp.controller = function () {
             // check to see if the game is drawn
             if (grid.isFull()) {
                 // we have a draw...
-                $message.text("Draw! Nobody wins! Try again?");
+                display.showStatus("Draw! Nobody wins! Try again?");
                 gameOver();
                 return false;
             }
 
             mark = (mark === "X") ? "O" : "X";
-            $message.text("Now it's " + mark + "'s turn to move");
+            display.showStatus("Now it's " + mark + "'s turn to move");
             $.publish("grid-update", [mark, grid]);
             return false;
         },
@@ -61,28 +62,44 @@ MyApp.controller = function () {
         // clean up before starting a new game
         reset = function () {
             mark = "X";
+            display.reset();
             player.reset();
-            grid = MyApp.createGrid();
-            jQuery(".cell")
-                .removeClass("winner_cell")
-                .html("&nbsp;");
+            grid = MyApp.grid();
         },
 
         start = function () {
             // clean up any leftovers from a previous game
             reset();
 
-            if (mode === "1") {
+            if (display.getMode() === "1") {
                 player.setup(playerMark);
             }
 
             $grid.click(processMove);
-            $message.text("Game started: X moves first");
+            display.showStatus("Game started: X moves first");
 
             $.publish("grid-update", [ mark, grid ]);
             return false;
         },
 
+<<<<<<< HEAD
+        // // gets the value set by the mode radio buttons
+        // setMode = function () {
+        //     var $markSelect;
+
+        //     mode = jQuery("fieldset#modeSelect input:checked").val();
+        //     $markSelect = jQuery(".mark");
+
+        //     // disable X/O selection for 2-player mode
+        //     if (mode === "2") {
+        //         $xo.prop("disabled", true);
+        //         $markSelect.addClass("hidden");
+        //     } else {
+        //         $xo.prop("disabled", false);
+        //         $markSelect.removeClass("hidden");
+        //     }
+        // },
+=======
                 // gets the value set by the mode radio buttons
         setMode = function () {
             var $xoForm;
@@ -99,6 +116,7 @@ MyApp.controller = function () {
                 $xoForm.removeClass("gray-out");
             }
         },
+>>>>>>> parent of 0849867... improve page layout and styling
 
         // gets the value set by the one/two players radio buttons
         setPlayerMark = function () {
@@ -111,17 +129,24 @@ MyApp.controller = function () {
         init = function () {
 
             // set up events
-            $startBtn.click(start);
-            $mode.change(setMode);
-            $xo.change(setPlayerMark);
+            // $startBtn.click(start);
+            // $mode.change(display.setMode);
+            display = MyApp.display();
+            display.init(this);
+            // $xo.change(setPlayerMark);
 
             // trigger radio button events to initialize settings
-            $mode.change();
-            $xo.change();
+            // $mode.change();
+            // $xo.change();
 
 
+<<<<<<< HEAD
+            display.showStatus("Click the start button to play (or reset)");
+            // player = MyApp.player;
+=======
             $message.text("Click the start button to play");
             player = MyApp.player;
+>>>>>>> parent of 0849867... improve page layout and styling
         };
 
     init();

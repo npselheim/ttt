@@ -1,27 +1,27 @@
-/*global MyApp, jQuery */
+/*global MyApp, jQuery, _ */
 
 
 /**
-
-           |       |
-     cell0 | cell1 | cell2
-           |       |
-    -------+-------+-------
-           |       |
-     cell3 | cell4 | cell5
-           |       |
-    -------+-------+-------
-           |       |
-     cell6 | cell7 | cell8
-           |       |
-
-    @namespace
+ *
+ *
+ *         |       |
+ *   cell0 | cell1 | cell2
+ *         |       |
+ *  -------+-------+-------
+ *         |       |
+ *   cell3 | cell4 | cell5
+ *         |       |
+ *  -------+-------+-------
+ *         |       |
+ *   cell6 | cell7 | cell8
+ *         |       |
+ *   @namespace
  */
-MyApp.createGrid = function () {
+MyApp.grid = function () {
     "use strict";
 
-    var cells = [],
-        i = 0,
+    var i = 0,
+        cells = [],
         WIN_ROWS = [
             [0, 1, 2],
             [3, 4, 5],
@@ -32,7 +32,6 @@ MyApp.createGrid = function () {
             [0, 4, 8],
             [2, 4, 6]
         ],
-        GRID_CELLS_LENGTH = 9,
 
         /**
          * produces the total sum value for multiple cells
@@ -41,12 +40,12 @@ MyApp.createGrid = function () {
          * @return {number} the sum of the values of the specified cells
          */
         getRowValue = function (row) {
-           return _(row).reduce( function (memo, num) {
+            return _(row).reduce(function (memo, num) {
                 return memo + cells[num].valueOf();
             }, 0);
         },
 
-        /**
+       /**
          * Compares the provided value with the total row values of each
          * possible winning combination. If there's a match then an array
          * of cell indexes representing the winning row is returned.
@@ -56,18 +55,19 @@ MyApp.createGrid = function () {
          */
         checkRowsForValue = function (targetRowValue) {
             var result = _.chain(WIN_ROWS)
-                        .map(function (item, index, array) {
-                            return getRowValue(item);
-                        })
-                        .indexOf(targetRowValue)
-                        .value();
+                    .map(function (item, index, array) {
+                        return getRowValue(item);
+                    })
+                    .indexOf(targetRowValue)
+                    .value();
 
             return result < 0 ? null : WIN_ROWS[result];
         };
 
+
     // initialilze the cells array
-    for (i = 0; i < GRID_CELLS_LENGTH; i += 1) {
-        cells[i] = MyApp.createCell("cell" + i, i);
+    for (i = 0; i < 9; i += 1) {
+        cells.push(new MyApp.Cell("cell", i));
     }
 
     return {
@@ -89,7 +89,6 @@ MyApp.createGrid = function () {
          * null if no winning row is found
          */
         findWinningRow: function (mark) {
-            // console.log(mark, mark.charCodeAt(0));
             return checkRowsForValue(3 * mark.charCodeAt(0));
         },
 
@@ -107,17 +106,6 @@ MyApp.createGrid = function () {
         },
 
         /**
-         * Adds a class attribute to each of the cells in the winning row.
-         * @param  {array} row the indexes of the cells
-         * @return nothing
-         */
-        formatWinningRow: function (row) {
-            _(row).forEach(function (item, index, array) {
-                jQuery("td#cell" + item).addClass("winner_cell");
-            });
-        },
-
-        /**
          * Record the user's move by applying the specified mark to the
          * specified cell.
          * @param  {number} cellIndex the index of the cell to mark
@@ -126,7 +114,6 @@ MyApp.createGrid = function () {
          * is already marked
          */
         update: function (cellIndex, mark) {
-
             // if the cell is alreay marked, do nothing
             if (this.isMarked(cellIndex)) {
                 return false;
@@ -181,20 +168,16 @@ MyApp.createGrid = function () {
          * if none found
          */
         findFirstOpenCell: function (cellList) {
-            var list,
-                pick;
-
-            list = cellList || [0, 1, 2, 3, 4, 5, 6, 7, 8];
-
-            pick = _.chain(list).map(function (item, index, array) {
-                return cells[item].isMarked();
-            }).indexOf(false).value();
+            var list = cellList || [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                pick = _.chain(list).map(function (item, index, array) {
+                    return cells[item].isMarked();
+                }).indexOf(false).value();
 
             return pick < 0 ? -1 : list[pick];
         },
 
         toString: function () {
-            return cells.map(function (item, index, array) {
+            return _(cells).map(function (item, index, array) {
                 return item.toString();
             }).join(" ");
         }
