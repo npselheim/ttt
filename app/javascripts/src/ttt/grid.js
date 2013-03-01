@@ -124,7 +124,7 @@ MyApp.grid = function () {
                 throw new Error("mark must be 'X' or 'O'");
             }
 
-            cells[cellIndex].setMark(mark);
+            cells[cellIndex].mark = mark;
             return true;
         },
 

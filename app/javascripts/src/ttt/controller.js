@@ -82,7 +82,6 @@ MyApp.controller = function () {
             return false;
         },
 
-<<<<<<< HEAD
         // // gets the value set by the mode radio buttons
         // setMode = function () {
         //     var $markSelect;
@@ -99,8 +98,8 @@ MyApp.controller = function () {
         //         $markSelect.removeClass("hidden");
         //     }
         // },
-=======
-                // gets the value set by the mode radio buttons
+
+        // gets the value set by the mode radio buttons
         setMode = function () {
             var $xoForm;
 
@@ -116,7 +115,6 @@ MyApp.controller = function () {
                 $xoForm.removeClass("gray-out");
             }
         },
->>>>>>> parent of 0849867... improve page layout and styling
 
         // gets the value set by the one/two players radio buttons
         setPlayerMark = function () {
@@ -140,13 +138,10 @@ MyApp.controller = function () {
             // $xo.change();
 
 
-<<<<<<< HEAD
             display.showStatus("Click the start button to play (or reset)");
             // player = MyApp.player;
-=======
             $message.text("Click the start button to play");
             player = MyApp.player;
->>>>>>> parent of 0849867... improve page layout and styling
         };
 
     init();

@@ -34,10 +34,9 @@ test("grid has 9 cells", function () {
 
 test("Can mark a cell with 'X'", function () {
 	expect(2);
-	deepEqual(grid.getCells()[1].getMark(), "", "should be an empty string");
+	deepEqual(grid.getCells()[1].mark, "", "should be an empty string");
 	grid.update(1, "X");
-	deepEqual(grid.getCells()[1].getMark(), "X",
-		"cell1 should contain an 'X'");
+	deepEqual(grid.getCells()[1].mark, "X", "cell1 should contain an 'X'");
 });
 
 test("returns a copy of the cells array", function () {
@@ -53,7 +52,7 @@ test("cannot modify the cells in the grid", function () {
 	expect(1);
 	var cells = grid.getCells();
 	cells[1] = "A";
-	deepEqual(grid.getCells()[1].getMark(), "",
+	deepEqual(grid.getCells()[1].mark, "",
 		"cell1 should be empty, not 'A'");
 });
 
