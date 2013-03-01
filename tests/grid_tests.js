@@ -3,10 +3,10 @@ var grid = null,
 	$fixture = jQuery("#qunit-fixture");
 
 module("Grid Tests", {
-	setup: function() {
+	setup: function () {
 		grid = MyApp.grid();
 	},
-	teardown: function() {
+	teardown: function () {
 		grid = null;
 	}
 });
