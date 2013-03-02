@@ -1,9 +1,10 @@
-MyApp.Row = function (cell1, cell2, cell3) {
+MyApp.Row = function (cells, row) {
 	"use strict";
 
-	this.cell1 = cell1;
-	this.cell2 = cell2;
-	this.cell3 = cell3;
+	// console.log(cells, row);
+	this.cell1 = cells[row[0]];
+	this.cell2 = cells[row[1]];
+	this.cell3 = cells[row[2]];
 }
 
 MyApp.Row.prototype.isWinnerFor = function (mark) {

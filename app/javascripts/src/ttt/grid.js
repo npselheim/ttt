@@ -41,9 +41,7 @@ MyApp.grid = function () {
 
     // initialize the rows array
     _(WIN_ROWS).forEach(function (item, index, array) {
-        rows.push(
-            new MyApp.Row(cells[item[0]], cells[item[1]], cells[item[2]])
-        );
+        rows.push(new MyApp.Row(cells, item));
     });
 
     return {
