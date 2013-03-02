@@ -25,4 +25,13 @@ test("can detect winning row", function () {
 	cell2.mark = "X";
 	deepEqual(row0.isWinnerFor("O"), false, "should not be a winner for O");
 	deepEqual(row0.isWinnerFor("X"), true, "should be a winner now for X");
-})
+});
+
+test("can detect potential winning row", function () {
+	expect(2);
+	cell0.mark = "X";
+	cell1.mark = "X";
+	deepEqual(row0.isPotentialWinnerFor("X"), true, "should be potential");
+	cell2.mark = "O";
+	deepEqual(row0.isPotentialWinnerFor("X"), false, "no longer potential");
+});

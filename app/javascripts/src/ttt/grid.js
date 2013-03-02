@@ -22,6 +22,7 @@ MyApp.grid = function () {
 
     var i = 0,
         cells = [],
+        rows = [],
         WIN_ROWS = [
             [0, 1, 2],
             [3, 4, 5],
@@ -31,44 +32,19 @@ MyApp.grid = function () {
             [2, 5, 8],
             [0, 4, 8],
             [2, 4, 6]
-        ],
-
-        /**
-         * produces the total sum value for multiple cells
-         * @param  {array of number} row an array of cell indexes identifying
-         * the cell values to be summed
-         * @return {number} the sum of the values of the specified cells
-         */
-        getRowValue = function (row) {
-            return _(row).reduce(function (memo, num) {
-                return memo + cells[num].valueOf();
-            }, 0);
-        },
-
-       /**
-         * Compares the provided value with the total row values of each
-         * possible winning combination. If there's a match then an array
-         * of cell indexes representing the winning row is returned.
-         * @param  {number} value the value to match.
-         * @return {array} the indexes of the cells in the identified row, or
-         * null if no matching row is found
-         */
-        checkRowsForValue = function (targetRowValue) {
-            var result = _.chain(WIN_ROWS)
-                    .map(function (item, index, array) {
-                        return getRowValue(item);
-                    })
-                    .indexOf(targetRowValue)
-                    .value();
-
-            return result < 0 ? null : WIN_ROWS[result];
-        };
-
+        ];
 
     // initialilze the cells array
     for (i = 0; i < 9; i += 1) {
         cells.push(new MyApp.Cell("cell", i));
     }
+
+    // initialize the rows array
+    _(WIN_ROWS).forEach(function (item, index, array) {
+        rows.push(
+            new MyApp.Row(cells[item[0]], cells[item[1]], cells[item[2]])
+        );
+    });
 
     return {
 
@@ -82,15 +58,18 @@ MyApp.grid = function () {
         },
 
         /**
-         * Examines the cells array to determine if any of the winnning row
+         * Examines the rows array to determine if any of the winnning row
          * combinations all contain the same mark.
          * @param  {string} mark the mark to look for in the cells array
          * @return {array} the indexes of the cells in the identified row, or
          * null if no winning row is found
          */
-        findWinningRow: function (mark) {
-            return checkRowsForValue(3 * mark.charCodeAt(0));
-        },
+         findWinningRow: function (mark) {
+            var row = _(rows).find(function (row, index, array) {
+                return row.isWinnerFor(mark);
+            });
+            return row ? row.getCellIndexes() : null;
+       },
 
         /**
          * Examines the cells array to determine if a winning move is available,
@@ -100,9 +79,11 @@ MyApp.grid = function () {
          * @return {array} the index of the cell in the cells array that will
          * win the game, or null if no winning move is found
          */
-        findWinningMoveFor: function (mark) {
-            var row = checkRowsForValue(2 * mark.charCodeAt(0));
-            return row === null ? null : this.findFirstOpenCell(row);
+         findWinningMoveFor: function (mark) {
+            var row = _(rows).find(function (row, index, array) {
+                return row.isPotentialWinnerFor(mark);
+            });
+            return row ? this.findFirstOpenCell(row.getCellIndexes()) : null;
         },
 
         /**
@@ -162,7 +143,7 @@ MyApp.grid = function () {
         /**
          * Finds the first cell in the list of cell indexes provided that
          * does not contain a mark.
-         * @param  {arrray} cellList indexes of the cells to examine in the cells
+         * @param {arrray} cellList indexes of the cells to examine in the cells
          * array
          * @return {number} the index of the first umnarked cell found, or -1
          * if none found

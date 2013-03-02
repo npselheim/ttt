@@ -19,6 +19,7 @@ MyApp.Cell = function (name, index) {
 
     this.mark = "";
     this.name = name + index;
+    this.index = index;
 };
 
 /**
