@@ -21,8 +21,8 @@ MyApp.grid = function () {
     "use strict";
 
     var i = 0,
-        cells = [],
-        rows = [],
+        cells = null,
+        rows = null,
         WIN_ROWS = [
             [0, 1, 2],
             [3, 4, 5],
@@ -32,17 +32,24 @@ MyApp.grid = function () {
             [2, 5, 8],
             [0, 4, 8],
             [2, 4, 6]
-        ];
+        ],
 
-    // initialilze the cells array
-    for (i = 0; i < 9; i += 1) {
-        cells.push(new MyApp.Cell("cell", i));
-    }
+        init = function () {
+            rows =[];
+            cells = [];
 
-    // initialize the rows array
-    _(WIN_ROWS).forEach(function (item, index, array) {
-        rows.push(new MyApp.Row(cells, item));
-    });
+            // initialilze the cells array
+            for (i = 0; i < 9; i += 1) {
+                cells.push(new MyApp.Cell("cell", i));
+            }
+
+            // initialize the rows array
+            _(WIN_ROWS).forEach(function (item, index, array) {
+                rows.push(new MyApp.Row(cells, item));
+            });
+        };
+
+    init();
 
     return {
 
@@ -159,6 +166,10 @@ MyApp.grid = function () {
             return _(cells).map(function (item, index, array) {
                 return item.toString();
             }).join(" ");
+        },
+
+        reset: function() {
+            init();
         }
     };
-};
+}();

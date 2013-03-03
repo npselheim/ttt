@@ -1,13 +1,13 @@
 var strategy = MyApp.strategy,
 	helper = MyApp.helper;
-	grid;
+	grid = MyApp.grid;
 
 module("Strategy Tests", {
 	setup: function () {
-		grid = MyApp.grid();
+		grid.reset();
 	},
 	teardown: function () {
-		grid = null;
+		// grid = null;
 	}
 });
 

@@ -1,13 +1,12 @@
-var grid = null,
-	helper = MyApp.helper;
+var grid = MyApp.grid,
+	helper = MyApp.helper,
 	$fixture = jQuery("#qunit-fixture");
 
 module("Grid Tests", {
 	setup: function () {
-		grid = MyApp.grid();
+		grid.reset();
 	},
 	teardown: function () {
-		grid = null;
 	}
 });
 
@@ -52,8 +51,7 @@ test("cannot modify the cells in the grid", function () {
 	expect(1);
 	var cells = grid.getCells();
 	cells[1] = "A";
-	deepEqual(grid.getCells()[1].mark, "",
-		"cell1 should be empty, not 'A'");
+	deepEqual(grid.getCells()[1].mark, "", "cell1 should be empty, not 'A'");
 });
 
 test("cannot update cell with illegal mark", function () {
