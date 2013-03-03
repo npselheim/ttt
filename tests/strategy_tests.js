@@ -7,7 +7,6 @@ module("Strategy Tests", {
 		grid.reset();
 	},
 	teardown: function () {
-		// grid = null;
 	}
 });
 

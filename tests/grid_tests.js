@@ -66,11 +66,9 @@ test("can find winning row", function () {
 	deepEqual(grid.findWinningRow("X"), null,
 		"should not find winning row in blank grid");
 	// set up a winning row for X
-	// console.log("------------------------------------");
 	helper.gridSetup(grid, [0, 8, 2, 6, 1]);
 	deepEqual(grid.findWinningRow("X"), [0, 1, 2],
 		"should find winning row for 'X'");
-	// console.log("------------------------------------");
 });
 
 test("isFull returns false for empty grid", function () {
@@ -125,7 +123,6 @@ test("find first open cell, [0, 1, 2, 3, 4, 6]", function () {
 });
 
 test("find first open cell, [2, 4, 6]", function() {
-	// console.log("Grid Tests: find first open cell, [2, 4, 6]");
 	expect(1);
 	helper.gridSetup(grid, [2, 4, 6]);
 	deepEqual(grid.findFirstOpenCell([1, 3, 5, 7]), 1, "should pick cell1");

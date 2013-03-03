@@ -28,18 +28,15 @@ MyApp.Cell = function (name, index) {
     */
 MyApp.Cell.prototype.isMarked = function () {
     "use strict";
-
     return this.mark ? true : false;
 };
 
 MyApp.Cell.prototype.toString = function () {
     "use strict";
-
     return this.mark || ".";
 };
 
 MyApp.Cell.prototype.valueOf = function () {
     "use strict";
-
     return this.mark ? this.mark.charCodeAt(0) : 0;
 };
