@@ -1,15 +1,18 @@
 /*global MyApp, jQuery, $ */
 
 
-MyApp.player =  {
+MyApp.player = (function () {
+    "use strict";
 
-    mark: null,
+    var myMark = null,
+    strategy = MyApp.strategy;
 
-    makeMove: function (name) {
-        "use strict";
+    return {
 
-        var that = this;
+        makeMove: function (name) {
+            var that = this;
 
+<<<<<<< HEAD
         return function (x, mark, grid) {
             var move;
 
@@ -33,3 +36,24 @@ MyApp.player =  {
         $.unsubscribe("grid-update");
     }
 };
+=======
+            return function (x, moveMark, grid) {
+                var move;
+                if (moveMark === myMark) {
+                    move = strategy.getNextMove(grid);
+                    jQuery("td#cell" + move).click();
+                }
+            };
+        },
+
+        setup: function (playerMark) {
+            myMark = playerMark;
+            $.subscribe("grid-update", this.makeMove("grid-update"));
+        },
+
+        reset: function () {
+            $.unsubscribe("grid-update");
+        }
+    };
+}());
+>>>>>>> refs/heads/display

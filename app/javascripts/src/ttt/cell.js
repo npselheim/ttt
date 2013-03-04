@@ -16,6 +16,7 @@ MyApp.Cell = function (name, index) {
     if (index < 0 || index > 8) {
         throw new Error("invalid argument");
     }
+<<<<<<< HEAD
 
     this.mark = "";
     this.name = name + index;
@@ -70,3 +71,29 @@ MyApp.Cell.prototype = {
         return this.mark ? this.mark.charCodeAt(0) : 0;
     }
 };
+=======
+
+    this.mark = "";
+    this.name = name + index;
+    this.index = index;
+};
+
+/**
+    Indicates the state of the cell, marked or not
+    @returns {Boolean} true if the cell has been marked
+    */
+MyApp.Cell.prototype.isMarked = function () {
+    "use strict";
+    return this.mark ? true : false;
+};
+
+MyApp.Cell.prototype.toString = function () {
+    "use strict";
+    return this.mark || ".";
+};
+
+MyApp.Cell.prototype.valueOf = function () {
+    "use strict";
+    return this.mark ? this.mark.charCodeAt(0) : 0;
+};
+>>>>>>> refs/heads/display

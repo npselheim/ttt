@@ -17,11 +17,20 @@
  *         |       |
  *   @namespace
  */
+<<<<<<< HEAD
 MyApp.grid = function () {
     "use strict";
 
     var i = 0,
         cells = [],
+=======
+MyApp.grid = (function () {
+    "use strict";
+
+    var i = 0,
+        cells = null,
+        rows = null,
+>>>>>>> refs/heads/display
         WIN_ROWS = [
             [0, 1, 2],
             [3, 4, 5],
@@ -33,6 +42,7 @@ MyApp.grid = function () {
             [2, 4, 6]
         ],
 
+<<<<<<< HEAD
         /**
          * produces the total sum value for multiple cells
          * @param  {array of number} row an array of cell indexes identifying
@@ -69,6 +79,24 @@ MyApp.grid = function () {
     for (i = 0; i < 9; i += 1) {
         cells.push(new MyApp.Cell("cell", i));
     }
+=======
+        init = function () {
+            rows =[];
+            cells = [];
+
+            // initialilze the cells array
+            for (i = 0; i < 9; i += 1) {
+                cells.push(new MyApp.Cell("cell", i));
+            }
+
+            // initialize the rows array
+            _(WIN_ROWS).forEach(function (item, index, array) {
+                rows.push(new MyApp.Row(cells, item));
+            });
+        };
+
+    init();
+>>>>>>> refs/heads/display
 
     return {
 
@@ -82,15 +110,24 @@ MyApp.grid = function () {
         },
 
         /**
-         * Examines the cells array to determine if any of the winnning row
+         * Examines the rows array to determine if any of the winnning row
          * combinations all contain the same mark.
          * @param  {string} mark the mark to look for in the cells array
          * @return {array} the indexes of the cells in the identified row, or
          * null if no winning row is found
          */
+<<<<<<< HEAD
         findWinningRow: function (mark) {
             return checkRowsForValue(3 * mark.charCodeAt(0));
         },
+=======
+         findWinningRow: function (mark) {
+            var row = _(rows).find(function (row, index, array) {
+                return row.isWinnerFor(mark);
+            });
+            return row ? row.getCellIndexes() : null;
+       },
+>>>>>>> refs/heads/display
 
         /**
          * Examines the cells array to determine if a winning move is available,
@@ -100,9 +137,17 @@ MyApp.grid = function () {
          * @return {array} the index of the cell in the cells array that will
          * win the game, or null if no winning move is found
          */
+<<<<<<< HEAD
         findWinningMoveFor: function (mark) {
             var row = checkRowsForValue(2 * mark.charCodeAt(0));
             return row === null ? null : this.findFirstOpenCell(row);
+=======
+         findWinningMoveFor: function (mark) {
+            var row = _(rows).find(function (row, index, array) {
+                return row.isPotentialWinnerFor(mark);
+            });
+            return row ? this.findFirstOpenCell(row.getCellIndexes()) : null;
+>>>>>>> refs/heads/display
         },
 
         /**
@@ -124,7 +169,7 @@ MyApp.grid = function () {
                 throw new Error("mark must be 'X' or 'O'");
             }
 
-            cells[cellIndex].setMark(mark);
+            cells[cellIndex].mark = mark;
             return true;
         },
 
@@ -162,7 +207,7 @@ MyApp.grid = function () {
         /**
          * Finds the first cell in the list of cell indexes provided that
          * does not contain a mark.
-         * @param  {arrray} cellList indexes of the cells to examine in the cells
+         * @param {arrray} cellList indexes of the cells to examine in the cells
          * array
          * @return {number} the index of the first umnarked cell found, or -1
          * if none found
@@ -180,6 +225,14 @@ MyApp.grid = function () {
             return _(cells).map(function (item, index, array) {
                 return item.toString();
             }).join(" ");
+        },
+
+        reset: function() {
+            init();
         }
     };
+<<<<<<< HEAD
 };
+=======
+}());
+>>>>>>> refs/heads/display

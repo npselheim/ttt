@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var grid = null,
 	helper = MyApp.helper;
 	$fixture = jQuery("#qunit-fixture");
@@ -8,6 +9,17 @@ module("Grid Tests", {
 	},
 	teardown: function() {
 		grid = null;
+=======
+var grid = MyApp.grid,
+	helper = MyApp.helper,
+	$fixture = jQuery("#qunit-fixture");
+
+module("Grid Tests", {
+	setup: function () {
+		grid.reset();
+	},
+	teardown: function () {
+>>>>>>> refs/heads/display
 	}
 });
 
@@ -34,10 +46,13 @@ test("grid has 9 cells", function () {
 
 test("Can mark a cell with 'X'", function () {
 	expect(2);
+<<<<<<< HEAD
 	deepEqual(grid.getCells()[1].getMark(), "", "should be an empty string");
+=======
+	deepEqual(grid.getCells()[1].mark, "", "should be an empty string");
+>>>>>>> refs/heads/display
 	grid.update(1, "X");
-	deepEqual(grid.getCells()[1].getMark(), "X",
-		"cell1 should contain an 'X'");
+	deepEqual(grid.getCells()[1].mark, "X", "cell1 should contain an 'X'");
 });
 
 test("returns a copy of the cells array", function () {
@@ -53,8 +68,7 @@ test("cannot modify the cells in the grid", function () {
 	expect(1);
 	var cells = grid.getCells();
 	cells[1] = "A";
-	deepEqual(grid.getCells()[1].getMark(), "",
-		"cell1 should be empty, not 'A'");
+	deepEqual(grid.getCells()[1].mark, "", "cell1 should be empty, not 'A'");
 });
 
 test("cannot update cell with illegal mark", function () {
@@ -69,11 +83,13 @@ test("can find winning row", function () {
 	deepEqual(grid.findWinningRow("X"), null,
 		"should not find winning row in blank grid");
 	// set up a winning row for X
-	// console.log("------------------------------------");
 	helper.gridSetup(grid, [0, 8, 2, 6, 1]);
 	deepEqual(grid.findWinningRow("X"), [0, 1, 2],
 		"should find winning row for 'X'");
+<<<<<<< HEAD
 	// console.log("------------------------------------");
+=======
+>>>>>>> refs/heads/display
 });
 
 test("isFull returns false for empty grid", function () {
@@ -128,7 +144,6 @@ test("find first open cell, [0, 1, 2, 3, 4, 6]", function () {
 });
 
 test("find first open cell, [2, 4, 6]", function() {
-	// console.log("Grid Tests: find first open cell, [2, 4, 6]");
 	expect(1);
 	helper.gridSetup(grid, [2, 4, 6]);
 	deepEqual(grid.findFirstOpenCell([1, 3, 5, 7]), 1, "should pick cell1");

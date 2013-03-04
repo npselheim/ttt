@@ -2,9 +2,10 @@
 
 var MyApp = {};
 
-MyApp.controller = function () {
+MyApp.controller = (function () {
     "use strict";
 
+<<<<<<< HEAD
     var $startBtn = jQuery("input#startBtn"),
         $grid = jQuery("div#grid"),
         $mode = jQuery('input[name="modeGroup"]'),
@@ -19,6 +20,16 @@ MyApp.controller = function () {
         processMove = function (e) {
             // var cell = e.target.id,
                 // $cell = jQuery("td#" + cell),
+=======
+    var mark = null,
+        grid = null,
+        view =null,
+        player = null;
+
+    return {
+
+        processMove: function (e) {
+>>>>>>> refs/heads/display
             var index = e.target.id.charAt(4),
                 row = null;
 
@@ -28,6 +39,7 @@ MyApp.controller = function () {
             }
 
             // show the player's move on the grid
+<<<<<<< HEAD
             // $cell.text(mark);
             display.showMove(index, mark);
 
@@ -38,30 +50,51 @@ MyApp.controller = function () {
                 display.formatWinningRow(row);
                 display.showStatus("We have a winner!");
                 gameOver();
+=======
+            view.showMove(index, mark);
+
+            // check to see if anybody has won yet
+            row = grid.findWinningRow(mark);
+            if (row !== null) {     // we have a winner!
+                view.formatWinningRow(row);
+                view.showStatus("We have a winner!");
+                view.disableGrid();
+>>>>>>> refs/heads/display
                 return false;
             }
 
             // check to see if the game is drawn
+<<<<<<< HEAD
             if (grid.isFull()) {
                 // we have a draw...
                 display.showStatus("Draw! Nobody wins! Try again?");
                 gameOver();
+=======
+            if (grid.isFull()) {    // we have a draw...
+                view.showStatus("Draw! Nobody wins! Try again?");
+                view.disableGrid();
+>>>>>>> refs/heads/display
                 return false;
             }
 
             mark = (mark === "X") ? "O" : "X";
+<<<<<<< HEAD
             display.showStatus("Now it's " + mark + "'s turn to move");
+=======
+            view.showStatus("Now it's " + mark + "'s turn to move");
+>>>>>>> refs/heads/display
             $.publish("grid-update", [mark, grid]);
             return false;
         },
 
-        gameOver = function () {
-            $grid.off("click", processMove);
+        gameOver: function () {
+            $grid.off("click");
         },
 
-        // clean up before starting a new game
-        reset = function () {
+        start: function (e) {
+            // clean up any leftovers from a previous game
             mark = "X";
+<<<<<<< HEAD
             display.reset();
             player.reset();
             grid = MyApp.grid();
@@ -77,11 +110,24 @@ MyApp.controller = function () {
 
             $grid.click(processMove);
             display.showStatus("Game started: X moves first");
+=======
+            view.reset();
+            player.reset();
+            grid.reset();
+
+            if (view.getMode() === "1") {
+                player.setup(view.getPlayerMark());
+            }
+
+            view.enableGrid(e.data.ctlr.processMove);
+            view.showStatus("Game started: X moves first");
+>>>>>>> refs/heads/display
 
             $.publish("grid-update", [ mark, grid ]);
             return false;
         },
 
+<<<<<<< HEAD
         // // gets the value set by the mode radio buttons
         // setMode = function () {
         //     var $markSelect;
@@ -124,8 +170,21 @@ MyApp.controller = function () {
             display.showStatus("Click the start button to play (or reset)");
             // player = MyApp.player;
         };
+=======
+        init: function (aGrid, aView, aPlayer) {
+            grid = aGrid;
+            view = aView;
+            player = aPlayer;
 
-    init();
-};
+            view.reset();
+            jQuery("input#startBtn").click({ctlr: this}, this.start);
+>>>>>>> refs/heads/display
 
-jQuery(document).ready(MyApp.controller);
+            view.showStatus("Click the start button to play (or reset)");
+        }
+    };
+}());
+
+jQuery(document).ready(function () {
+    MyApp.controller.init(MyApp.grid, MyApp.view, MyApp.player);
+});
