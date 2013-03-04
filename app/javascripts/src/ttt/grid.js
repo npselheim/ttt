@@ -17,7 +17,7 @@
  *         |       |
  *   @namespace
  */
-MyApp.grid = function () {
+MyApp.grid = (function () {
     "use strict";
 
     var i = 0,
@@ -172,4 +172,4 @@ MyApp.grid = function () {
             init();
         }
     };
-}();
+}());

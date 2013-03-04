@@ -1,4 +1,4 @@
-var display = null,
+var view = MyApp.view,
     html = "<table><tr>" +
                 "<td class='cell' id='cell0'></td>" +
                 "<td class='cell' id='cell1'></td>" +
@@ -22,21 +22,19 @@ var display = null,
                 '<input type="button" value="Start" name="startBtn" id="startBtn" />' +
             '</form>';
 
-module("Display Tests", {
+module("view Tests", {
     setup: function () {
         $fixture.append(html);
-        display = MyApp.display();
+        view.reset();
     },
     teardown: function () {
-        display = null;
         $fixture.empty();
     }
 });
 
 test("can format winning row", function () {
     expect(9);
-    // $fixture.append(cellsHtml);
-    display.formatWinningRow([2, 5, 8]);
+    view.formatWinningRow([2, 5, 8]);
     deepEqual(jQuery("td#cell0").hasClass("winner_cell"), false,
         "cell0 should not be a winner");
     deepEqual(jQuery("td#cell1").hasClass("winner_cell"), false,
@@ -57,29 +55,24 @@ test("can format winning row", function () {
         "cell8 should be a winner");
 });
 
-test("can display a status message", function() {
+test("can view a status message", function() {
     expect(1);
-    // $fixture.append(cellsHtml);
     var msg = "This is a test message.",
         msgElement = jQuery("td#message");
-    display.showStatus(msg);
-    // console.log(msgElement);
+    view.showStatus(msg);
     deepEqual(msgElement.text(), msg, "should contain the test message");
 });
 
-test("reset should clear the display", function() {
+test("reset should clear the view", function() {
     expect(2);
-    // $fixture.append(cellsHtml);
     jQuery("td#cell0").text("X");
     jQuery("td#cell7").text("X");
     deepEqual(helper.getNumberMarkedWith("X"), 2, "should be two Xs");
-    display.reset();
+    view.reset();
     deepEqual(helper.getNumberMarkedWith("X"), 0, "should be cleared");
 });
 
-test("start button click displays status", function() {
-    expect(1);
-    // $fixture.append(formHtml);
-    display.init();
+// test("start button click views status", function() {
+//     expect(1);
 
-});
+// });

@@ -2,23 +2,17 @@
 
 var MyApp = {};
 
-MyApp.controller = function () {
+MyApp.controller = (function () {
     "use strict";
 
-    var $startBtn = jQuery("input#startBtn"),
-        $grid = jQuery("div#grid"),
-        $mode = jQuery('input[name="modeGroup"]'),
-        $xo = jQuery('input[name="xoGroup"]'),
-        // mode,
-        mark,
+    var mark = null,
         grid = null,
-        display =null,
-        player = MyApp.player,
-        playerMark,
+        view =null,
+        player = null;
 
-        processMove = function (e) {
-            // var cell = e.target.id,
-                // $cell = jQuery("td#" + cell),
+    return {
+
+        processMove: function (e) {
             var index = e.target.id.charAt(4),
                 row = null;
 
@@ -28,123 +22,65 @@ MyApp.controller = function () {
             }
 
             // show the player's move on the grid
-            // $cell.text(mark);
-            display.showMove(index, mark);
+            view.showMove(index, mark);
 
             // check to see if anybody has won yet
             row = grid.findWinningRow(mark);
-            if (row !== null) {
-                // we have a winner!
-                display.formatWinningRow(row);
-                display.showStatus("We have a winner!");
-                gameOver();
+            if (row !== null) {     // we have a winner!
+                view.formatWinningRow(row);
+                view.showStatus("We have a winner!");
+                view.disableGrid();
                 return false;
             }
 
             // check to see if the game is drawn
-            if (grid.isFull()) {
-                // we have a draw...
-                display.showStatus("Draw! Nobody wins! Try again?");
-                gameOver();
+            if (grid.isFull()) {    // we have a draw...
+                view.showStatus("Draw! Nobody wins! Try again?");
+                view.disableGrid();
                 return false;
             }
 
             mark = (mark === "X") ? "O" : "X";
-            display.showStatus("Now it's " + mark + "'s turn to move");
+            view.showStatus("Now it's " + mark + "'s turn to move");
             $.publish("grid-update", [mark, grid]);
             return false;
         },
 
-        gameOver = function () {
-            $grid.off("click", processMove);
+        gameOver: function () {
+            $grid.off("click");
         },
 
-        // clean up before starting a new game
-        reset = function () {
-            mark = "X";
-            display.reset();
-            player.reset();
-            grid = MyApp.grid();
-        },
-
-        start = function () {
+        start: function (e) {
             // clean up any leftovers from a previous game
-            reset();
+            mark = "X";
+            view.reset();
+            player.reset();
+            grid.reset();
 
-            if (display.getMode() === "1") {
-                player.setup(playerMark);
+            if (view.getMode() === "1") {
+                player.setup(view.getPlayerMark());
             }
 
-            $grid.click(processMove);
-            display.showStatus("Game started: X moves first");
+            view.enableGrid(e.data.ctlr.processMove);
+            view.showStatus("Game started: X moves first");
 
             $.publish("grid-update", [ mark, grid ]);
             return false;
         },
 
-        // // gets the value set by the mode radio buttons
-        // setMode = function () {
-        //     var $markSelect;
+        init: function (aGrid, aView, aPlayer) {
+            grid = aGrid;
+            view = aView;
+            player = aPlayer;
 
-        //     mode = jQuery("fieldset#modeSelect input:checked").val();
-        //     $markSelect = jQuery(".mark");
+            view.reset();
+            jQuery("input#startBtn").click({ctlr: this}, this.start);
 
-        //     // disable X/O selection for 2-player mode
-        //     if (mode === "2") {
-        //         $xo.prop("disabled", true);
-        //         $markSelect.addClass("hidden");
-        //     } else {
-        //         $xo.prop("disabled", false);
-        //         $markSelect.removeClass("hidden");
-        //     }
-        // },
+            view.showStatus("Click the start button to play (or reset)");
+        }
+    };
+}());
 
-        // gets the value set by the mode radio buttons
-        setMode = function () {
-            var $xoForm;
-
-            mode = jQuery("#modeForm input:checked").val();
-            $xoForm = jQuery("#xoForm");
-
-            // disable X/O selection for 2-player mode
-            if (mode === "2") {
-                $xo.prop("disabled", true);
-                $xoForm.addClass("gray-out");
-            } else {
-                $xo.prop("disabled", false);
-                $xoForm.removeClass("gray-out");
-            }
-        },
-
-        // gets the value set by the one/two players radio buttons
-        setPlayerMark = function () {
-            var mark;
-            mark = jQuery("#xoForm input:checked").val();
-            // internal player gets the opposite of user selection
-            playerMark = mark === "X" ? "O" : "X";
-        },
-
-        init = function () {
-
-            // set up events
-            // $startBtn.click(start);
-            // $mode.change(display.setMode);
-            display = MyApp.display();
-            display.init(this);
-            // $xo.change(setPlayerMark);
-
-            // trigger radio button events to initialize settings
-            // $mode.change();
-            // $xo.change();
-
-
-            display.showStatus("Click the start button to play (or reset)");
-            // player = MyApp.player;
-            $message.text("Click the start button to play");
-            player = MyApp.player;
-        };
-
-    init();
-};
-
-jQuery(document).ready(MyApp.controller);
+jQuery(document).ready(function () {
+    MyApp.controller.init(MyApp.grid, MyApp.view, MyApp.player);
+});

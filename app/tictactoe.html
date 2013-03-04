@@ -51,31 +51,34 @@
 				<li>pass JSLint</li>
 			</ul>
 			<div id="setup">
-				<form name="modeForm" id="modeForm">
-					Select the game mode:<br />
-					<input id="modeOne" name="modeGroup" type="radio" value="1" checked />
-					one player (against computer)
-					<br />
-					<input id="modeTwo" name="modeGroup" type="radio" value="2" />
-					two players
+				<form>
+					<fieldset class="radio" id="modeSelect">
+						<legend>Select the game mode</legend>
+						<input id="modeOne" name="modeGroup" type="radio" value="1" checked />
+						<label for="modeOne">one player (against computer)</label>
+						<input id="modeTwo" name="modeGroup" type="radio" value="2" />
+						<label for="modeTwo">two players</label>
+					</fieldset>
+					<br>
+					<fieldset class="radio mark" id="markSelect">
+						<legend>Choose X or O (X moves first)</legend>
+						<input id="X" name="xoGroup" type="radio" value="X" checked />
+						<label for="X" class="mark">X</label>
+						<input id="O" name="xoGroup" type="radio" value="O" />
+						<label for="O" class="mark">O</label>
+					</fieldset>
+					<br>
+					<input type="button" value="Start" name="startBtn" id="startBtn" />
 				</form>
-				<br />
-				<form name="xoForm" id="xoForm">
-					Choose X or O (X moves first):<br />
-					<input id="X" name="xoGroup" type="radio" value="X" checked />
-					X
-					<br />
-					<input id="O" name="xoGroup" type="radio" value="O" />
-					O
-				</form>
-				<input type="button" value="Start" name="startBtn" id="startBtn" />
 			</div>
 			<script type="text/javascript" src="javascripts/src/ttt/controller.js"></script>
+			<script type="text/javascript" src="javascripts/src/ttt/display.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/cell.js"></script>
+			<script type="text/javascript" src="javascripts/src/ttt/row.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/grid.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/strategy.js"></script>
 			<script type="text/javascript" src="javascripts/src/ttt/player.js"></script>
-			<script type="text/javascript" src="javascripts/src/ttt/display.js"></script>
+
 		</div>
 	</body>
 </html>
