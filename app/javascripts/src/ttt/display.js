@@ -1,3 +1,4 @@
+/*jslint nomen: true, indent: 4, maxlen: 80 */
 /*global MyApp, jQuery, _ */
 
 MyApp.view = (function () {

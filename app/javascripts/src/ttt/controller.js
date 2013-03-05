@@ -1,3 +1,4 @@
+/*jslint indent: 4, maxlen: 80 */
 /*global document, jQuery, $ */
 
 var MyApp = {};
@@ -5,9 +6,9 @@ var MyApp = {};
 MyApp.controller = (function () {
     "use strict";
 
-    var mark = null,
-        grid = null,
-        view =null,
+    var mark =  null,
+        grid =  null,
+        view =  null,
         player = null;
 
     return {
@@ -77,5 +78,6 @@ MyApp.controller = (function () {
 }());
 
 jQuery(document).ready(function () {
+    "use strict";
     MyApp.controller.init(MyApp.grid, MyApp.view, MyApp.player);
 });

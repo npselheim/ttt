@@ -1,5 +1,5 @@
+/*jslint indent: 4, maxlen: 80 */
 /*global MyApp */
-/*jslint unparam: true */
 
    /**
     * A cell represents one square on the tic-tec-toe

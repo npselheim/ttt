@@ -1,4 +1,5 @@
-/*global MyApp */
+/*jslint nomen: true, indent: 4, maxlen: 80 */
+/*global MyApp, _ */
 
 MyApp.strategy = {
 
@@ -60,8 +61,8 @@ MyApp.strategy = {
         case 4:
             // if X has a side or center, take a corner
             if (_(SIDES).some(function (item, index, array) {
-                return grid.isMarked(item);
-            })) {
+                    return grid.isMarked(item);
+                })) {
                 move = grid.findFirstOpenCell(CORNERS);
             } else {
                 // take a side cell to force X to block

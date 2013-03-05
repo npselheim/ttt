@@ -1,5 +1,5 @@
+/*jslint nomen: true, indent: 4, maxlen: 80 */
 /*global MyApp, jQuery, _ */
-
 
 /**
  *
@@ -36,7 +36,7 @@ MyApp.grid = (function () {
         ],
 
         init = function () {
-            rows =[];
+            rows = [];
             cells = [];
 
             // initialilze the cells array
@@ -72,14 +72,14 @@ MyApp.grid = (function () {
          * null if no winning row is found
          */
 
-         findWinningRow: function (mark) {
+        findWinningRow: function (mark) {
             var row = _(rows).find(function (row, index, array) {
                 return row.isWinnerFor(mark);
             });
             return row ? row.getCellIndexes() : null;
-       },
+        },
 
-         findWinningMoveFor: function (mark) {
+        findWinningMoveFor: function (mark) {
             var row = _(rows).find(function (row, index, array) {
                 return row.isPotentialWinnerFor(mark);
             });
@@ -163,7 +163,7 @@ MyApp.grid = (function () {
             }).join(" ");
         },
 
-        reset: function() {
+        reset: function () {
             init();
         }
     };

@@ -1,11 +1,11 @@
+/*jslint indent: 4, maxlen: 80 */
 /*global MyApp, jQuery, $ */
-
 
 MyApp.player = (function () {
     "use strict";
 
     var myMark = null,
-    strategy = MyApp.strategy;
+        strategy = MyApp.strategy;
 
     return {
 
