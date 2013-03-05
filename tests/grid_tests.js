@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-var grid = null,
-	helper = MyApp.helper;
-	$fixture = jQuery("#qunit-fixture");
-
-module("Grid Tests", {
-	setup: function() {
-		grid = MyApp.grid();
-	},
-	teardown: function() {
-		grid = null;
-=======
 var grid = MyApp.grid,
 	helper = MyApp.helper,
 	$fixture = jQuery("#qunit-fixture");
@@ -19,7 +7,6 @@ module("Grid Tests", {
 		grid.reset();
 	},
 	teardown: function () {
->>>>>>> refs/heads/display
 	}
 });
 
@@ -46,11 +33,7 @@ test("grid has 9 cells", function () {
 
 test("Can mark a cell with 'X'", function () {
 	expect(2);
-<<<<<<< HEAD
-	deepEqual(grid.getCells()[1].getMark(), "", "should be an empty string");
-=======
 	deepEqual(grid.getCells()[1].mark, "", "should be an empty string");
->>>>>>> refs/heads/display
 	grid.update(1, "X");
 	deepEqual(grid.getCells()[1].mark, "X", "cell1 should contain an 'X'");
 });
@@ -86,10 +69,6 @@ test("can find winning row", function () {
 	helper.gridSetup(grid, [0, 8, 2, 6, 1]);
 	deepEqual(grid.findWinningRow("X"), [0, 1, 2],
 		"should find winning row for 'X'");
-<<<<<<< HEAD
-	// console.log("------------------------------------");
-=======
->>>>>>> refs/heads/display
 });
 
 test("isFull returns false for empty grid", function () {

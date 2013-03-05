@@ -1,13 +1,5 @@
 /*global MyApp, jQuery, _ */
 
-<<<<<<< HEAD
-MyApp.display = function () {
-    "use strict";
-
-    var $message = jQuery("td#message"),
-        $xo = jQuery('input[name="xoGroup"]'),
-        mode;
-=======
 MyApp.view = (function () {
     "use strict";
 
@@ -44,7 +36,6 @@ MyApp.view = (function () {
             // internal player gets the opposite of user selection
             playerMark = mark === "X" ? "O" : "X";
         };
->>>>>>> refs/heads/display
 
     return {
 
@@ -60,56 +51,6 @@ MyApp.view = (function () {
         },
 
         showStatus: function (message) {
-<<<<<<< HEAD
-            var msg = $message.text(message);
-        },
-
-        reset: function () {
-            jQuery(".cell")
-                .removeClass("winner_cell")
-                .html("&nbsp;");
-        },
-
-        // gets the value set by the mode radio buttons
-        setMode: function () {
-            var $markSelect = jQuery(".mark");
-
-            mode = jQuery("fieldset#modeSelect input:checked").val();
-
-            // $markSelect = jQuery(".mark");
-
-            // disable X/O selection for 2-player mode
-            if (mode === "2") {
-                $xo.prop("disabled", true);
-                $markSelect.addClass("hidden");
-            } else {
-                $xo.prop("disabled", false);
-                $markSelect.removeClass("hidden");
-            }
-
-            return false;
-        },
-
-        getMode: function() {
-            return mode;
-        },
-
-        init: function(ctlr) {
-            var $mode = jQuery('input[name="modeGroup"]');
-            $mode.change(this.setMode);
-            $xo.change(ctlr.setPlayerMark);
-            jQuery("input#startBtn").click(ctlr.start);
-
-            $mode.change();
-            $xo.change();
-        },
-
-        showMove: function (index, mark) {
-            jQuery("td#cell" + index).text(mark);
-        }
-    };
-};
-=======
             $message.text(message);
         },
 
@@ -153,5 +94,5 @@ MyApp.view = (function () {
             $grid.off("click");
         }
     };
+
 }());
->>>>>>> refs/heads/display

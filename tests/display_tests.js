@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-var display = null,
-    html = "<table><tr>" +
-                    "<td class='cell' id='cell0'></td>" +
-                    "<td class='cell' id='cell1'></td>" +
-                    "<td class='cell' id='cell2'></td>" +
-                    "<td class='cell' id='cell3'></td>" +
-                    "<td class='cell' id='cell4'></td>" +
-                    "<td class='cell' id='cell5'></td>" +
-                    "<td class='cell' id='cell6'></td>" +
-                    "<td class='cell' id='cell7'></td>" +
-                    "<td class='cell' id='cell8'></td>" +
-                    "<td id='message'></td>" +
-                "</tr></table>" +
-                '<form><fieldset class="radio" id="modeSelect">' +
-                    '<input id="modeOne" name="modeGroup" type="radio" value="1" checked />' +
-                    '<input id="modeTwo" name="modeGroup" type="radio" value="2" />' +
-                    '</fieldset>' +
-                    '<fieldset class="radio mark" id="markSelect">' +
-                    '<input id="X" name="xoGroup" type="radio" value="X" checked />' +
-                    '<input id="O" name="xoGroup" type="radio" value="O" />' +
-                    '</fieldset>' +
-                    '<input type="button" value="Start" name="startBtn" id="startBtn" />' +
-                '</form>';
-
-module("Display Tests", {
-    setup: function () {
-        $fixture.append(html);
-        display = MyApp.display();
-    },
-    teardown: function () {
-        display = null;
-=======
 var view = MyApp.view,
     html = "<table><tr>" +
                 "<td class='cell' id='cell0'></td>" +
@@ -61,19 +28,13 @@ module("view Tests", {
         view.reset();
     },
     teardown: function () {
->>>>>>> refs/heads/display
         $fixture.empty();
     }
 });
 
 test("can format winning row", function () {
     expect(9);
-<<<<<<< HEAD
-    // $fixture.append(cellsHtml);
-    display.formatWinningRow([2, 5, 8]);
-=======
     view.formatWinningRow([2, 5, 8]);
->>>>>>> refs/heads/display
     deepEqual(jQuery("td#cell0").hasClass("winner_cell"), false,
         "cell0 should not be a winner");
     deepEqual(jQuery("td#cell1").hasClass("winner_cell"), false,
@@ -94,34 +55,6 @@ test("can format winning row", function () {
         "cell8 should be a winner");
 });
 
-<<<<<<< HEAD
-test("can display a status message", function() {
-    expect(1);
-    // $fixture.append(cellsHtml);
-    var msg = "This is a test message.",
-        msgElement = jQuery("td#message");
-    display.showStatus(msg);
-    // console.log(msgElement);
-    deepEqual(msgElement.text(), msg, "should contain the test message");
-});
-
-test("reset should clear the display", function() {
-    expect(2);
-    // $fixture.append(cellsHtml);
-    jQuery("td#cell0").text("X");
-    jQuery("td#cell7").text("X");
-    deepEqual(helper.getNumberMarkedWith("X"), 2, "should be two Xs");
-    display.reset();
-    deepEqual(helper.getNumberMarkedWith("X"), 0, "should be cleared");
-});
-
-test("start button click displays status", function() {
-    expect(1);
-    // $fixture.append(formHtml);
-    display.init();
-
-});
-=======
 test("can view a status message", function() {
     expect(1);
     var msg = "This is a test message.",
@@ -141,6 +74,4 @@ test("reset should clear the view", function() {
 
 // test("start button click views status", function() {
 //     expect(1);
-
 // });
->>>>>>> refs/heads/display

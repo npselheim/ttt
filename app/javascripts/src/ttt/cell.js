@@ -16,62 +16,6 @@ MyApp.Cell = function (name, index) {
     if (index < 0 || index > 8) {
         throw new Error("invalid argument");
     }
-<<<<<<< HEAD
-
-    this.mark = "";
-    this.name = name + index;
-};
-
-MyApp.Cell.prototype = {
-
-    constructor: MyApp.Cell,
-
-    /**
-        Marks the cell to record a player's move
-        @ param {string} value value of the mark to show in this cell
-        */
-    setMark: function (value) {
-        "use strict";
-
-        if (typeof value !== "string") {
-            return;
-        }
-        this.mark = value.substr(0, 1);
-    },
-
-    /**
-        Retrieves the mark in this cell
-        @returns {String} the mark in this cell
-        */
-    getMark: function () {
-        "use strict";
-
-        return this.mark;
-    },
-
-    /**
-        Indicates the state of the cell, marked or not
-        @returns {Boolean} true if the cell has been marked
-        */
-    isMarked: function () {
-        "use strict";
-
-        return this.mark ? true : false;
-    },
-
-    toString: function () {
-        "use strict";
-
-        return this.mark || ".";
-    },
-
-    valueOf: function () {
-        "use strict";
-
-        return this.mark ? this.mark.charCodeAt(0) : 0;
-    }
-};
-=======
 
     this.mark = "";
     this.name = name + index;
@@ -96,4 +40,3 @@ MyApp.Cell.prototype.valueOf = function () {
     "use strict";
     return this.mark ? this.mark.charCodeAt(0) : 0;
 };
->>>>>>> refs/heads/display
