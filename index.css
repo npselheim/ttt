@@ -1,0 +1,31 @@
+#banner {
+	height: 100px;
+	background-color: lightyellow;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+#banner h1 {
+	font-family: Arial, helvetica, sans-serif;
+	font-size: 1.5em;
+	font-weight: normal;
+	padding-top: 30px;
+	padding-left: 50px;
+}
+#banner h1 span.caps {
+	font-size: 1.6em;
+}
+#contentWrapper {
+	position: relative;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+#rightSidebar {
+	position: absolute;
+	background-color: lightblue;
+	right: 0;
+	top: 0;
+	width: 300px;
+}
+#mainContent {
+	margin-right: 310px;
+}

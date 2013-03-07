@@ -1,6 +1,11 @@
 /*jslint indent: 4, maxlen: 80 */
 /*global document, jQuery, $ */
 
+/**
+ * MyApp is the single global variable that contains all the objects for
+ * the tic-tac-toe application.
+ * @type {Object}
+ */
 var MyApp = {};
 
 MyApp.controller = (function () {
