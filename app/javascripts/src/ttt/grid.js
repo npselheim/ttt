@@ -1,5 +1,9 @@
+// javascripts/src/ttt/grid.js
+
 /*jslint nomen: true, indent: 4, maxlen: 80 */
 /*global MyApp, jQuery, _ */
+
+var MyApp = MyApp || {};
 
 /**
  *
@@ -36,6 +40,9 @@ MyApp.grid = (function () {
         ],
 
         init = function () {
+
+            // console.log("grid init");
+
             rows = [];
             cells = [];
 
@@ -165,6 +172,8 @@ MyApp.grid = (function () {
 
         reset: function () {
             init();
+
+            // console.log(this.toString());
         }
     };
 

@@ -1,5 +1,9 @@
+// javascripts/src/ttt/player.js
+
 /*jslint indent: 4, maxlen: 80 */
 /*global MyApp, jQuery, $ */
+
+var MyApp = MyApp || {};
 
 MyApp.player = (function () {
     "use strict";
@@ -15,7 +19,7 @@ MyApp.player = (function () {
                 var move;
                 if (moveMark === myMark) {
                     move = strategy.getNextMove(grid);
-                    jQuery("td#cell" + move).click();
+                    jQuery("#cell" + move).click();
                 }
             };
         },

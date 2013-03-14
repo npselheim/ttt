@@ -1,0 +1,62 @@
+body {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+    background: #eaeaea url('bg.png');
+    color: #4d4d4d;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.banner {
+   background: #fff;
+    background: rgba(255, 255, 255, 0.9);
+    margin: 130px 0 40px 0;
+    border: 1px solid #ccc;
+    position: relative;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+                0 25px 50px 0 rgba(0, 0, 0, 0.15);
+}
+
+.banner h1 {
+   position: absolute;
+    top: -120px;
+    width: 100%;
+    font-size: 70px;
+    font-weight: bold;
+    text-align: center;
+    color: #b3b3b3;
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+}
+.contentWrapper {
+	position: relative;
+	margin-left: 50px;
+	margin-right: 50px;
+	background: #fff;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+                0 25px 50px 0 rgba(0, 0, 0, 0.15);
+}
+.rightSidebar {
+	position: absolute;
+	background-color: lightblue;
+	right: 0;
+	top: 0;
+	width: 300px;
+}
+.mainContent {
+	margin-right: 310px;
+}

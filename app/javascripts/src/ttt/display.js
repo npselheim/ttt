@@ -1,14 +1,18 @@
+// javascripts/src/ttt/display.js
+
 /*jslint nomen: true, indent: 4, maxlen: 80 */
 /*global MyApp, jQuery, _ */
+
+var MyApp = MyApp || {};
 
 MyApp.view = (function () {
     "use strict";
 
-    var $message =  null,
-        $xo =       null,
-        $mode =     null,
-        $grid =     null,
-        mode =      null,
+    var $message =   null,
+        $xo =        null,
+        $mode =      null,
+        $grid =      null,
+        mode =       null,
         playerMark = null,
 
         // gets the value set by the mode radio buttons
@@ -47,7 +51,7 @@ MyApp.view = (function () {
          */
         formatWinningRow: function (row) {
             _(row).forEach(function (item, index, array) {
-                jQuery("td#cell" + item).addClass("winner_cell");
+                jQuery("#cell" + item).addClass("winner_cell");
             });
         },
 
@@ -60,10 +64,13 @@ MyApp.view = (function () {
         },
 
         reset: function () {
+
+            // console.log("view reset");
+
             $mode = jQuery('input[name="modeGroup"]');
             $xo = jQuery('input[name="xoGroup"]');
-            $message = jQuery('td#message');
-            $grid = jQuery("div#grid");
+            $message = jQuery('.message');
+            $grid = jQuery(".grid");
 
             jQuery(".cell")
                 .removeClass("winner_cell")
@@ -80,7 +87,7 @@ MyApp.view = (function () {
         },
 
         showMove: function (index, mark) {
-            jQuery("td#cell" + index).text(mark);
+            jQuery("#cell" + index).text(mark);
         },
 
         getPlayerMark: function () {

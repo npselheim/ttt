@@ -1,8 +1,8 @@
-div#demo_header {
+.demo_header {
 	padding: 50px;
 	font-size: 1.5em;
 }
-div#ttt {
+.ttt {
 	width: 800px;
 	height: 520px;
 	border-top: 1px solid black;
@@ -51,7 +51,7 @@ table { border-collapse: collapse }
 	border-top: 3px solid black;
 	border-left: 3px solid black;
 }
-#message {
+.message {
 	background-color: lightblue;
 	font-weight: normal;
 	font-style: italic;
@@ -65,14 +65,14 @@ table { border-collapse: collapse }
 .hidden {
 	visibility: hidden;
 }
-div#setup {
+.setup {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 0.8em;
 }
 fieldset {
 	width: 24em;
 }
-#startBtn {
+.startBtn {
 	font-size: 1.5em;
 	margin-left: 6em;
 }

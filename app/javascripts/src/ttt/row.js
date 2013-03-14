@@ -1,5 +1,9 @@
+// javascripts/src/ttt/row.js
+
 /*jslint nomen: true, indent: 4, maxlen: 80 */
 /*global MyApp, _ */
+
+var MyApp = MyApp || {};
 
 MyApp.Row = function (cells, row) {
     "use strict";

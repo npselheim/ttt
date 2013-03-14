@@ -1,5 +1,9 @@
+// javascripts/src/ttt/cell.js
+
 /*jslint indent: 4, maxlen: 80 */
 /*global MyApp */
+
+var MyApp = MyApp || {};
 
 /**
  * A cell represents one square on the tic-tec-toe

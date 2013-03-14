@@ -1,3 +1,5 @@
+// javascripts/src/ttt/controller.js
+
 /*jslint indent: 4, maxlen: 80 */
 /*global document, jQuery, $ */
 
@@ -6,7 +8,7 @@
  * the tic-tac-toe application.
  * @type {Object}
  */
-var MyApp = {};
+var MyApp = MyApp || {};
 
 MyApp.controller = (function () {
     "use strict";
@@ -19,6 +21,8 @@ MyApp.controller = (function () {
     return {
 
         processMove: function (e) {
+
+            // console.log("processMove");
 
             var index = e.target.id.charAt(4),
                 row = null;
@@ -54,6 +58,9 @@ MyApp.controller = (function () {
         },
 
         start: function (e) {
+
+            // console.log("start");
+
             // clean up any leftovers from a previous game
             mark = "X";
             view.reset();
@@ -71,12 +78,15 @@ MyApp.controller = (function () {
         },
 
         init: function (aGrid, aView, aPlayer) {
+
+            // console.log("controller init");
+
             grid = aGrid;
             view = aView;
             player = aPlayer;
 
             view.reset();
-            jQuery("input#startBtn").click({ctlr: this}, this.start);
+            jQuery(".startBtn").click({ctlr: this}, this.start);
             view.showStatus("Click the start button to play (or reset)");
         }
     };
